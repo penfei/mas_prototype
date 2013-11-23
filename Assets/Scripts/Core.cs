@@ -20,6 +20,7 @@ public class Core : Photon.MonoBehaviour {
 	
 	public void OnGUI()
     {
+		Debug.Log("Боря - вака");
         if (GUI.Button (new Rect(10,10,100,30),"Return to Loby"))
         {
             PhotonNetwork.LeaveRoom();
