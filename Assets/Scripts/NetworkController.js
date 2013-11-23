@@ -35,7 +35,6 @@ class NetworkController extends Photon.MonoBehaviour{
     {
         if (stream.isWriting)
         {
-        	Debug.Log("1111");
             stream.SendNext(transform.position);
             stream.SendNext(transform.rotation); 
             stream.SendNext(Input.GetAxis("Horizontal")); 
