@@ -23,4 +23,5 @@ MonoBehaviour:
   - InstantiateRpc
   - OnAwakeRPC
   - DestroyRpc
+  - SendStartGame
   DisableAutoOpenWizard: 0

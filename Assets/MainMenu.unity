@@ -67,7 +67,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 12}
-  - 114: {fileID: 26}
+  - 114: {fileID: 7}
+  - 114: {fileID: 11}
+  - 114: {fileID: 8}
   m_Layer: 0
   m_Name: Scripts
   m_TagString: Untagged
@@ -75,6 +77,42 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &7
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 6}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd4358f70945b384894e986e275cb924, type: 3}
+  m_Name: 
+  userName: 
+  data: {fileID: 0}
+  scrollPos: {x: 0, y: 0}
+  scrollPosGame: {x: 0, y: 0}
+  connected: 0
+  complete: 0
+  gamesCount: 0
+--- !u!114 &8
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 6}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  subId: 1
+  ownerId: 0
+  group: 0
+  prefixBackup: -1
+  observed: {fileID: 0}
+  synchronization: 0
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  instantiationId: 0
 --- !u!1 &9
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,6 +148,26 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &11
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 6}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ef7a36d1b2e0fb46b187d61e61ca2f0, type: 3}
+  m_Name: 
+  player:
+    userName: 
+    userId: 
+  otherPlayer:
+    userName: 
+    userId: 
+    fullName: 
+  session:
+    sessionId: 0
+    levelName: 
 --- !u!4 &12
 Transform:
   m_ObjectHideFlags: 0
@@ -227,16 +285,6 @@ Behaviour:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 10}
   m_Enabled: 1
---- !u!114 &26
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 6}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a02ce27e88b39fa428538620fe0335e3, type: 3}
-  m_Name: 
 --- !u!196 &30
 NavMeshSettings:
   m_ObjectHideFlags: 0

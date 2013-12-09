@@ -16,9 +16,9 @@ public class WorkerMenu : MonoBehaviour
 
     private bool connectFailed = false;
 
-    public static readonly string SceneNameMenu = "DemoWorker-Scene";
+    public static readonly string SceneNameMenu = "MainMenu";
 
-    public static readonly string SceneNameGame = "test";
+    public static readonly string SceneNameGame = "Tutorial";
 
     public void Awake()
     {
