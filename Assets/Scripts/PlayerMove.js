@@ -26,7 +26,7 @@ class PlayerMove extends Photon.MonoBehaviour{
 	}
 		
 	function Update ()
-	{
+	{	
 		movementManagement(motor.inputX, motor.inputY, motor.inputSneak, motor.inputJump);
 	//	AudioManagement();
 	}

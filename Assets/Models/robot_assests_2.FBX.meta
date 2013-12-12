@@ -1,0 +1,284 @@
+fileFormatVersion: 2
+guid: a33b7401a11b2084f8958427c92a05e8
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: Body1
+    100002: Body2
+    100004: Body3
+    100006: Hand002
+    100008: Hand003
+    100010: Left_Hand_002
+    100012: Left_Hand_1
+    100014: LeftHand
+    100016: LeftHandDown
+    100018: LeftHandDown 1
+    100020: LeftHandDown001
+    100022: LeftHandDown002
+    100024: LeftHandDown003
+    100026: LeftHandUp
+    100028: LeftHandUp 1
+    100030: LeftHandUp001
+    100032: LeftHandUp002
+    100034: LeftHandUp003
+    100036: LeftShoulder
+    100038: LeftShoulder001
+    100040: LeftShoulder002
+    100042: rdmobj00_031
+    100044: rdmobj01_021
+    100046: rdmobj02_017
+    100048: RightHand
+    100050: RightHandDown
+    100052: RightHandUp
+    100054: RightShoulder
+    100056: //RootNode
+    100058: LeftShoulder 1
+    100060: LeftShoulder004
+    100062: BodyDownAsset1
+    100064: LeftFoot1Asset1
+    100066: LeftFoot2Asset1
+    100068: LeftFoot3Asset1
+    100070: LeftFootAsset1
+    100072: LeftFootDownAsset1
+    100074: LeftFootUpAsset1
+    100076: LeftHandAssest1
+    100078: LeftHandDownAsset1
+    100080: LeftShoulderAssest1
+    100082: RghtFootDownAsset1
+    100084: RightFoot1Asset1
+    100086: RightFoot2Asset1
+    100088: RightFoot3Asset1
+    100090: RightFootAsset1
+    100092: RightFootUpAsset1
+    100094: RightHandAsset1
+    100096: RightHandDownAsset1
+    100098: RightShoulderAsset1
+    100100: Object001
+    100102: RightFootAsset1 1
+    400000: Body1
+    400002: Body2
+    400004: Body3
+    400006: Hand002
+    400008: Hand003
+    400010: Left_Hand_002
+    400012: Left_Hand_1
+    400014: LeftHand
+    400016: LeftHandDown
+    400018: LeftHandDown 1
+    400020: LeftHandDown001
+    400022: LeftHandDown002
+    400024: LeftHandDown003
+    400026: LeftHandUp
+    400028: LeftHandUp 1
+    400030: LeftHandUp001
+    400032: LeftHandUp002
+    400034: LeftHandUp003
+    400036: LeftShoulder
+    400038: LeftShoulder001
+    400040: LeftShoulder002
+    400042: rdmobj00_031
+    400044: rdmobj01_021
+    400046: rdmobj02_017
+    400048: RightHand
+    400050: RightHandDown
+    400052: RightHandUp
+    400054: RightShoulder
+    400056: //RootNode
+    400058: LeftShoulder 1
+    400060: LeftShoulder004
+    400062: BodyDownAsset1
+    400064: LeftFoot1Asset1
+    400066: LeftFoot2Asset1
+    400068: LeftFoot3Asset1
+    400070: LeftFootAsset1
+    400072: LeftFootDownAsset1
+    400074: LeftFootUpAsset1
+    400076: LeftHandAssest1
+    400078: LeftHandDownAsset1
+    400080: LeftShoulderAssest1
+    400082: RghtFootDownAsset1
+    400084: RightFoot1Asset1
+    400086: RightFoot2Asset1
+    400088: RightFoot3Asset1
+    400090: RightFootAsset1
+    400092: RightFootUpAsset1
+    400094: RightHandAsset1
+    400096: RightHandDownAsset1
+    400098: RightShoulderAsset1
+    400100: Object001
+    400102: RightFootAsset1 1
+    2300000: Body2
+    2300002: Body3
+    2300004: Left_Hand_002
+    2300006: Left_Hand_1
+    2300008: LeftHandDown 1
+    2300010: LeftHandDown001
+    2300012: LeftHandDown002
+    2300014: LeftHandDown003
+    2300016: LeftHandUp 1
+    2300018: LeftHandUp001
+    2300020: LeftHandUp002
+    2300022: LeftHandUp003
+    2300024: LeftShoulder
+    2300026: LeftShoulder001
+    2300028: LeftShoulder002
+    2300030: rdmobj00_031
+    2300032: rdmobj01_021
+    2300034: RightShoulder
+    2300036: LeftShoulder 1
+    2300038: LeftShoulder004
+    2300040: BodyDownAsset1
+    2300042: LeftFoot1Asset1
+    2300044: LeftFoot2Asset1
+    2300046: LeftFoot3Asset1
+    2300048: LeftFootAsset1
+    2300050: LeftFootDownAsset1
+    2300052: LeftFootUpAsset1
+    2300054: LeftHandAssest1
+    2300056: LeftHandDownAsset1
+    2300058: LeftShoulderAssest1
+    2300060: RghtFootDownAsset1
+    2300062: RightFoot1Asset1
+    2300064: RightFoot2Asset1
+    2300066: RightFoot3Asset1
+    2300068: RightFootAsset1
+    2300070: RightFootUpAsset1
+    2300072: RightHandAsset1
+    2300074: RightHandDownAsset1
+    2300076: RightShoulderAsset1
+    2300078: Object001
+    2300080: RightFootAsset1 1
+    3300000: Body2
+    3300002: Body3
+    3300004: Left_Hand_002
+    3300006: Left_Hand_1
+    3300008: LeftHandDown 1
+    3300010: LeftHandDown001
+    3300012: LeftHandDown002
+    3300014: LeftHandDown003
+    3300016: LeftHandUp 1
+    3300018: LeftHandUp001
+    3300020: LeftHandUp002
+    3300022: LeftHandUp003
+    3300024: LeftShoulder
+    3300026: LeftShoulder001
+    3300028: LeftShoulder002
+    3300030: rdmobj00_031
+    3300032: rdmobj01_021
+    3300034: RightShoulder
+    3300036: LeftShoulder 1
+    3300038: LeftShoulder004
+    3300040: BodyDownAsset1
+    3300042: LeftFoot1Asset1
+    3300044: LeftFoot2Asset1
+    3300046: LeftFoot3Asset1
+    3300048: LeftFootAsset1
+    3300050: LeftFootDownAsset1
+    3300052: LeftFootUpAsset1
+    3300054: LeftHandAssest1
+    3300056: LeftHandDownAsset1
+    3300058: LeftShoulderAssest1
+    3300060: RghtFootDownAsset1
+    3300062: RightFoot1Asset1
+    3300064: RightFoot2Asset1
+    3300066: RightFoot3Asset1
+    3300068: RightFootAsset1
+    3300070: RightFootUpAsset1
+    3300072: RightHandAsset1
+    3300074: RightHandDownAsset1
+    3300076: RightShoulderAsset1
+    3300078: Object001
+    3300080: RightFootAsset1 1
+    4300000: rdmobj00_031
+    4300002: rdmobj01_021
+    4300004: Body2
+    4300006: Body3
+    4300008: Left_Hand_1
+    4300010: LeftShoulder
+    4300012: LeftShoulder001
+    4300014: LeftHandUp001
+    4300016: LeftHandUp
+    4300018: LeftHandDown001
+    4300020: LeftHandDown
+    4300022: LeftShoulder002
+    4300024: RightShoulder
+    4300026: LeftHandUp002
+    4300028: LeftHandUp003
+    4300030: LeftHandDown002
+    4300032: LeftHandDown003
+    4300034: Left_Hand_002
+    4300036: LeftShoulder004
+    4300038: LeftHandAssest1
+    4300040: LeftShoulderAssest1
+    4300042: LeftHandDownAsset1
+    4300044: RightHandDownAsset1
+    4300046: RightHandAsset1
+    4300048: RightShoulderAsset1
+    4300050: LeftFootUpAsset1
+    4300052: RightFootUpAsset1
+    4300054: BodyDownAsset1
+    4300056: LeftFootAsset1
+    4300058: RightFootAsset1
+    4300060: RghtFootDownAsset1
+    4300062: LeftFootDownAsset1
+    4300064: LeftFoot1Asset1
+    4300066: RightFoot1Asset1
+    4300068: LeftFoot2Asset1
+    4300070: RightFoot2Asset1
+    4300072: LeftFoot3Asset1
+    4300074: RightFoot3Asset1
+    4300076: Object001
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 2
+  userData: 
