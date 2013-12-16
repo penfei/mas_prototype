@@ -3,8 +3,11 @@
 import Photon.MonoBehaviour;
  
 class NetworkController extends Photon.MonoBehaviour{
-	var cam:GameObject;
+	var cameraContainer:GameObject;
+	var cameraObject:GameObject;
 	
+	enum CharacterType { Body, Head};
+	var type:CharacterType = CharacterType.Body;
 	private var motor : CharacterMotor;
 	private var correctPlayerPos:Vector3 = Vector3.zero; //We lerp towards this
     private var correctPlayerRot:Quaternion = Quaternion.identity; //We lerp towards this
@@ -12,22 +15,27 @@ class NetworkController extends Photon.MonoBehaviour{
 	private var h = 0f;
 	private var sneak = false;
 	private var jump = false;
+	private var core:Core;
 	
 	function Awake () {
 		motor = GetComponent(CharacterMotor);
+		core = GameObject.Find("Administration").GetComponent(Core);
 	}
 	
 	function Start(){
+		if(type == CharacterType.Body){
+		   core.body = gameObject;
+		}
+		if(type == CharacterType.Head){
+		   core.head = gameObject;
+		}     
 		if (photonView.isMine)
 	    {
-	           
+	       
 	    }
 	    else
-	    {           
-	        gameObject.GetComponent(CharacterMotor).canControl = false;	
-			gameObject.GetComponent(MouseLook).sensitivityX = 0;
-			gameObject.GetComponent(CharacterMotor).movement.gravity = 0;
-			Destroy(cam);
+	    {        
+	        gameObject.GetComponent(CharacterMotor).movement.gravity = 0;
 		}
 	}
 
@@ -55,8 +63,18 @@ class NetworkController extends Photon.MonoBehaviour{
 
     function Update()
     {
+   		cameraContainer.active = (photonView.isMine && core.isHead) || (!photonView.isMine && core.isBody);
+		cameraObject.active = (photonView.isMine && core.isHead) || (!photonView.isMine && core.isBody);
+		gameObject.GetComponent(CharacterMotor).canControl = photonView.isMine && core.isBody;
         if (!photonView.isMine)
         {
+       		gameObject.GetComponent(MouseLook).sensitivityX = 0;
+       		if(core.isHead){
+            	if(core.isConnected){
+            		gameObject.GetComponent(MouseLook).sensitivityX = 15;
+            	} 
+            }
+          	cameraObject.GetComponent(MouseLook).sensitivityY = 0;
             transform.position = Vector3.Lerp(transform.position, correctPlayerPos, Time.deltaTime * 5);
             transform.rotation = Quaternion.Lerp(transform.rotation, correctPlayerRot, Time.deltaTime * 5);
             motor.inputJump = jump;
@@ -78,6 +96,13 @@ class NetworkController extends Photon.MonoBehaviour{
 			motor.inputSneak = Input.GetButton("Sneak");;
             motor.inputX = Input.GetAxis("Horizontal");
             motor.inputY = Input.GetAxis("Vertical");
+            if(core.isBody){
+            	if(core.isConnected){
+            		gameObject.GetComponent(MouseLook).sensitivityX = 0;
+            	} else {
+            		gameObject.GetComponent(MouseLook).sensitivityX = 15;
+            	}
+            }
 		}
 		
 	}

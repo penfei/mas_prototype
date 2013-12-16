@@ -122,7 +122,6 @@ class StartMenu extends Photon.MonoBehaviour{
 	        }
 	        
 	        GUILayout.Space(15);
-	        Debug.Log(gamesCount);
 	        if (gamesCount > 1)
 	        {	
 	            this.scrollPosGame = GUILayout.BeginScrollView(this.scrollPosGame);

@@ -874,7 +874,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400114}
   m_Layer: 0
-  m_Name: Cam
+  m_Name: BodyCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2613,7 +2613,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff8374ba9f73b5b44a7f817fd8d45215, type: 3}
   m_Name: 
-  cam: {fileID: 100114}
+  cameraContainer: {fileID: 100114}
+  cameraObject: {fileID: 100162}
+  type: 0
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1

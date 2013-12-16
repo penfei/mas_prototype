@@ -208,6 +208,7 @@ GameObject:
   - 114: {fileID: 1237461683}
   - 114: {fileID: 1237461684}
   - 114: {fileID: 1237461682}
+  - 114: {fileID: 1237461685}
   m_Layer: 0
   m_Name: Administration
   m_TagString: GameController
@@ -263,8 +264,30 @@ MonoBehaviour:
   m_Name: 
   isHead: 0
   isBody: 0
+  isConnected: 0
   bodyPrefab: {fileID: 400024, guid: 47307749915104c40b48899f32d58b4a, type: 2}
   headPrefab: {fileID: 400002, guid: 153449d80d7a6ae4ea990320461ef7d9, type: 2}
+  body: {fileID: 0}
+  head: {fileID: 0}
+--- !u!114 &1237461685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1237461681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  subId: 1
+  ownerId: 0
+  group: 0
+  prefixBackup: -1
+  observed: {fileID: 0}
+  synchronization: 0
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  instantiationId: 0
 --- !u!4 &1237461687
 Transform:
   m_ObjectHideFlags: 0

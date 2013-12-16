@@ -25,4 +25,8 @@ MonoBehaviour:
   - DestroyRpc
   - SendStartGame
   - SendNewGame
+  - InitHead
+  - InitBody
+  - Connection
+  - Disconnection
   DisableAutoOpenWizard: 0

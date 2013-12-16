@@ -3,11 +3,16 @@
 import Photon.MonoBehaviour;
  
 class Core extends Photon.MonoBehaviour{ 
-	var isHead = false;
-	var isBody = false;
+	public var isHead = false;
+	public var isBody = false;
+	
+	var isConnected = false;
 	
 	var bodyPrefab:Transform;
 	var headPrefab:Transform;
+	
+	public var body:GameObject;
+	public var head:GameObject;
 
 	function Awake()
     {
@@ -27,14 +32,30 @@ class Core extends Photon.MonoBehaviour{
         }
 		if(!isHead && !isBody){
 			if (GUI.Button (new Rect(10,50,100,30),"Head")){
-				isHead = true;
-				PhotonNetwork.Instantiate(this.headPrefab.name, transform.position, Quaternion.identity, 0);
+				InitHead(null);
+				photonView.RPC("InitBody", PhotonTargets.Others);
 			}
 			if (GUI.Button (new Rect(10,90,100,30),"Body")){
-				isBody = true;
-				PhotonNetwork.Instantiate(this.bodyPrefab.name, transform.position, Quaternion.identity, 0);
+				InitBody(null);
+				photonView.RPC("InitHead", PhotonTargets.Others);
 			}
 		}
+    }
+    
+    @RPC
+    function InitHead(info:PhotonMessageInfo)
+    {
+    	isHead = true;
+		PhotonNetwork.Instantiate(this.headPrefab.name, transform.position, Quaternion.identity, 0);
+		GameObject.Find("Camera").active = false;
+    }
+    
+    @RPC
+    function InitBody(info:PhotonMessageInfo)
+    {
+    	isBody = true;
+		PhotonNetwork.Instantiate(this.bodyPrefab.name, transform.position, Quaternion.identity, 0);
+		GameObject.Find("Camera").active = false;
     }
 	
 	function OnMasterClientSwitched(player:PhotonPlayer)
@@ -70,7 +91,7 @@ class Core extends Photon.MonoBehaviour{
     {
         Debug.Log("OnPlayerDisconneced: " + player);
         
-        Application.LoadLevel(Levels.Menu);
+       PhotonNetwork.LeaveRoom();
     }
 
     function OnFailedToConnectToPhoton()
@@ -78,5 +99,22 @@ class Core extends Photon.MonoBehaviour{
         Debug.Log("OnFailedToConnectToPhoton");
      
         Application.LoadLevel(Levels.Menu);
+    }
+    
+    function Update()
+    {
+    	if(isBody && !isConnected && Input.GetButton("Action")){
+    		photonView.RPC("Connection", PhotonTargets.All);
+    	}
+    }
+    
+    @RPC
+    public function Connection():void{
+    	isConnected = true;
+    }
+    
+    @RPC
+    public function Disconnection():void{
+    	isConnected = false;
     }
 }
