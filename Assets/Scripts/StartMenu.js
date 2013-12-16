@@ -122,7 +122,7 @@ class StartMenu extends Photon.MonoBehaviour{
 	        }
 	        
 	        GUILayout.Space(15);
-	        
+	        Debug.Log(gamesCount);
 	        if (gamesCount > 1)
 	        {	
 	            this.scrollPosGame = GUILayout.BeginScrollView(this.scrollPosGame);
@@ -149,9 +149,16 @@ class StartMenu extends Photon.MonoBehaviour{
     }
     
     @RPC
+    function SendNewGame(info:PhotonMessageInfo)
+    {
+    	gamesCount++;
+		PlayerPrefs.SetInt("games_with_" + data.otherPlayer.fullName, gamesCount);
+   		SendStartGame(gamesCount - 1, info);
+    }
+    
+    @RPC
     function SendStartGame(gameId:int, info:PhotonMessageInfo)
     {
-   		Debug.Log(gameId);
         data.InitSession(gameId);
 		data.Save();
 		PhotonNetwork.LoadLevel(data.session.levelName);
@@ -173,9 +180,7 @@ class StartMenu extends Photon.MonoBehaviour{
 	}
 	
 	function NewGame(){
-		gamesCount++;
-		PlayerPrefs.SetInt("games_with_" + data.otherPlayer.fullName, gamesCount);
-		StartGame(gamesCount - 1);
+		photonView.RPC("SendNewGame", PhotonTargets.All);
 	}
 	
 	function StartGame(gameId:int):void{

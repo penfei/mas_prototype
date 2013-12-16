@@ -69,6 +69,8 @@ class Core extends Photon.MonoBehaviour{
     function OnPhotonPlayerDisconnected(player:PhotonPlayer)
     {
         Debug.Log("OnPlayerDisconneced: " + player);
+        
+        Application.LoadLevel(Levels.Menu);
     }
 
     function OnFailedToConnectToPhoton()

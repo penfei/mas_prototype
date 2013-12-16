@@ -8,6 +8,7 @@ class UserData {
 	var userId:String;
 	
 	public function Init():void{
+//		PlayerPrefs.DeleteAll();
 		userId = PlayerPrefs.GetString("user_id");
 		if (String.IsNullOrEmpty(userId))
 	    {
@@ -20,6 +21,7 @@ class UserData {
 	public function SetUserName(userName:String){
 		this.userName = userName;
 		PlayerPrefs.SetString("user_name", userName);
+//		userName = "Waka";
 		if (!String.IsNullOrEmpty(userName))
 	    {
 	    	PhotonNetwork.playerName = userName + "&" + userId;
@@ -37,8 +39,6 @@ class OtherPlayerData {
 		var arr:String[] = data.Split("&"[0]);
 		this.userName = arr[0];
 		this.userId = arr[1];
-//		Debug.Log(userName);
-//		Debug.Log(userId);
 	}
 }
 
