@@ -5,12 +5,16 @@ import Photon.MonoBehaviour;
 class NetworkController extends Photon.MonoBehaviour{
 	var cameraContainer:GameObject;
 	var cameraObject:GameObject;
+	public var boneForHead:GameObject;
+	public var boneForHeadCamera:GameObject;
+	var smooth = 20f;
 	
 	enum CharacterType { Body, Head};
 	var type:CharacterType = CharacterType.Body;
+	
 	private var motor : CharacterMotor;
-	private var correctPlayerPos:Vector3 = Vector3.zero; //We lerp towards this
-    private var correctPlayerRot:Quaternion = Quaternion.identity; //We lerp towards this
+	private var correctPlayerPos:Vector3 = Vector3.zero; 
+    private var correctPlayerRot:Quaternion = Quaternion.identity; 
     private var v = 0f;
 	private var h = 0f;
 	private var sneak = false;
@@ -28,7 +32,9 @@ class NetworkController extends Photon.MonoBehaviour{
 		}
 		if(type == CharacterType.Head){
 		   core.head = gameObject;
-		}     
+		   cameraObject.GetComponent(AudioListener).enabled = true;
+		}
+		                    
 		if (photonView.isMine)
 	    {
 	       
@@ -48,7 +54,12 @@ class NetworkController extends Photon.MonoBehaviour{
             stream.SendNext(Input.GetAxis("Horizontal")); 
             stream.SendNext(Input.GetAxis("Vertical"));  
             stream.SendNext(Input.GetButton("Sneak")); 
-            stream.SendNext(Input.GetButton("Jump"));  
+            stream.SendNext(Input.GetButton("Jump"));
+            var bodyRotCorrect:Quaternion = Quaternion.identity;
+            if(core.body != null){
+            	bodyRotCorrect = core.body.transform.rotation;
+            }
+            stream.SendNext(bodyRotCorrect);  
         }
         else
         {
@@ -57,7 +68,11 @@ class NetworkController extends Photon.MonoBehaviour{
             h = stream.ReceiveNext();
             v = stream.ReceiveNext();
             sneak = stream.ReceiveNext();
-            jump = stream.ReceiveNext();
+            jump = stream.ReceiveNext();            
+            var bodyRotCorrect2:Quaternion = stream.ReceiveNext();
+            if(type == CharacterType.Head && core.body != null){
+            	core.bodyCorrectPlayerRot = bodyRotCorrect2;
+            }
         }
     }
 
@@ -66,22 +81,32 @@ class NetworkController extends Photon.MonoBehaviour{
    		cameraContainer.active = (photonView.isMine && core.isHead) || (!photonView.isMine && core.isBody);
 		cameraObject.active = (photonView.isMine && core.isHead) || (!photonView.isMine && core.isBody);
 		gameObject.GetComponent(CharacterMotor).canControl = photonView.isMine && core.isBody;
+		
         if (!photonView.isMine)
         {
-       		gameObject.GetComponent(MouseLook).sensitivityX = 0;
-       		if(core.isHead){
-            	if(core.isConnected){
-            		gameObject.GetComponent(MouseLook).sensitivityX = 15;
-            	} 
+       		gameObject.GetComponent(MouseLook).canRotation = core.isHead && core.isConnected;
+          	cameraObject.GetComponent(MouseLook).canRotation = false;
+          	if(type != CharacterType.Head || !core.isConnected){
+            	transform.position = Vector3.Lerp(transform.position, correctPlayerPos, Time.deltaTime * smooth);
+            } 
+            if(type != CharacterType.Body || !core.isConnected){
+            	transform.rotation = Quaternion.Lerp(transform.rotation, correctPlayerRot, Time.deltaTime * smooth);
             }
-          	cameraObject.GetComponent(MouseLook).sensitivityY = 0;
-            transform.position = Vector3.Lerp(transform.position, correctPlayerPos, Time.deltaTime * 5);
-            transform.rotation = Quaternion.Lerp(transform.rotation, correctPlayerRot, Time.deltaTime * 5);
             motor.inputJump = jump;
             motor.inputSneak = sneak;
             motor.inputX = h;
             motor.inputY = v;
         } else{
+       		gameObject.GetComponent(MouseLook).canRotation = true;
+       		if(type == CharacterType.Body && core.isConnected){
+            	transform.rotation = Quaternion.Lerp(transform.rotation, core.bodyCorrectPlayerRot, Time.deltaTime * smooth);
+            	gameObject.GetComponent(MouseLook).canRotation = false;
+            }
+            if(type == CharacterType.Head && core.isConnected){
+    			transform.position = core.body.GetComponent(NetworkController).boneForHead.transform.position;
+    			transform.rotation = core.body.GetComponent(NetworkController).boneForHead.transform.rotation;
+    			gameObject.GetComponent(MouseLook).canRotation = false;
+            }
 	        var directionVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 			if (directionVector != Vector3.zero) {
 				var directionLength = directionVector.magnitude;
@@ -96,14 +121,6 @@ class NetworkController extends Photon.MonoBehaviour{
 			motor.inputSneak = Input.GetButton("Sneak");;
             motor.inputX = Input.GetAxis("Horizontal");
             motor.inputY = Input.GetAxis("Vertical");
-            if(core.isBody){
-            	if(core.isConnected){
-            		gameObject.GetComponent(MouseLook).sensitivityX = 0;
-            	} else {
-            		gameObject.GetComponent(MouseLook).sensitivityX = 15;
-            	}
-            }
 		}
-		
 	}
 }

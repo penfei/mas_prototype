@@ -13,6 +13,8 @@ class Core extends Photon.MonoBehaviour{
 	
 	public var body:GameObject;
 	public var head:GameObject;
+	
+	var bodyCorrectPlayerRot:Quaternion = Quaternion.identity;
 
 	function Awake()
     {
@@ -111,6 +113,14 @@ class Core extends Photon.MonoBehaviour{
     @RPC
     public function Connection():void{
     	isConnected = true;
+    	head.transform.position = body.GetComponent(NetworkController).boneForHead.transform.position;
+    	head.transform.rotation = body.GetComponent(NetworkController).boneForHead.transform.rotation;
+    	head.transform.parent = body.GetComponent(NetworkController).boneForHead.transform;
+    	
+    	head.GetComponent(NetworkController).cameraObject.transform.position = body.GetComponent(NetworkController).boneForHeadCamera.transform.position;
+    	head.GetComponent(NetworkController).cameraObject.transform.rotation = body.GetComponent(NetworkController).boneForHeadCamera.transform.rotation;
+    	head.GetComponent(NetworkController).cameraObject.transform.parent = body.GetComponent(NetworkController).boneForHeadCamera.transform;
+    	head.GetComponent(CharacterController).enabled = false;
     }
     
     @RPC

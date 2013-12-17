@@ -269,6 +269,7 @@ MonoBehaviour:
   headPrefab: {fileID: 400002, guid: 153449d80d7a6ae4ea990320461ef7d9, type: 2}
   body: {fileID: 0}
   head: {fileID: 0}
+  bodyCorrectPlayerRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!114 &1237461685
 MonoBehaviour:
   m_ObjectHideFlags: 0
