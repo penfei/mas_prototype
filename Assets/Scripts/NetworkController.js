@@ -7,7 +7,7 @@ class NetworkController extends Photon.MonoBehaviour{
 	var cameraObject:GameObject;
 	public var boneForHead:GameObject;
 	public var boneForHeadCamera:GameObject;
-	var smooth = 20f;
+	var smooth = 15f;
 	
 	enum CharacterType { Body, Head};
 	var type:CharacterType = CharacterType.Body;
