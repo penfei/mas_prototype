@@ -3,6 +3,8 @@
 #pragma downcast
 
 // Does this script currently respond to input?
+var enabledScript : boolean = true;
+
 var canControl : boolean = true;
 
 var useFixedUpdate : boolean = true;
@@ -312,31 +314,35 @@ private function UpdateFunction () {
 }
 
 function FixedUpdate () {
-	if (movingPlatform.enabled) {
-		if (movingPlatform.activePlatform != null) {
-			if (!movingPlatform.newPlatform) {
-				var lastVelocity : Vector3 = movingPlatform.platformVelocity;
-				
-				movingPlatform.platformVelocity = (
-					movingPlatform.activePlatform.localToWorldMatrix.MultiplyPoint3x4(movingPlatform.activeLocalPoint)
-					- movingPlatform.lastMatrix.MultiplyPoint3x4(movingPlatform.activeLocalPoint)
-				) / Time.deltaTime;
+	if(enabledScript){
+		if (movingPlatform.enabled) {
+			if (movingPlatform.activePlatform != null) {
+				if (!movingPlatform.newPlatform) {
+					var lastVelocity : Vector3 = movingPlatform.platformVelocity;
+					
+					movingPlatform.platformVelocity = (
+						movingPlatform.activePlatform.localToWorldMatrix.MultiplyPoint3x4(movingPlatform.activeLocalPoint)
+						- movingPlatform.lastMatrix.MultiplyPoint3x4(movingPlatform.activeLocalPoint)
+					) / Time.deltaTime;
+				}
+				movingPlatform.lastMatrix = movingPlatform.activePlatform.localToWorldMatrix;
+				movingPlatform.newPlatform = false;
 			}
-			movingPlatform.lastMatrix = movingPlatform.activePlatform.localToWorldMatrix;
-			movingPlatform.newPlatform = false;
+			else {
+				movingPlatform.platformVelocity = Vector3.zero;	
+			}
 		}
-		else {
-			movingPlatform.platformVelocity = Vector3.zero;	
-		}
+		
+		if (useFixedUpdate)
+			UpdateFunction();
 	}
-	
-	if (useFixedUpdate)
-		UpdateFunction();
 }
 
 function Update () {
-	if (!useFixedUpdate)
-		UpdateFunction();
+	if(enabledScript){
+		if (!useFixedUpdate)
+			UpdateFunction();
+	}
 }
 
 private function ApplyInputVelocityChange (velocity : Vector3) {	
@@ -462,7 +468,7 @@ private function ApplyGravityAndJumping (velocity : Vector3) {
 }
 
 function OnControllerColliderHit (hit : ControllerColliderHit) {
-	if (hit.normal.y > 0 && hit.normal.y > groundNormal.y && hit.moveDirection.y < 0) {
+	if (hit.normal.y > 0 && hit.normal.y > groundNormal.y && hit.moveDirection.y < 0 && enabledScript) {
 		if ((hit.point - movement.lastHitPoint).sqrMagnitude > 0.001 || lastGroundNormal == Vector3.zero)
 			groundNormal = hit.normal;
 		else

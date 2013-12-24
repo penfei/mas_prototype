@@ -2647,6 +2647,7 @@ MonoBehaviour:
   cameraObject: {fileID: 100162}
   boneForHead: {fileID: 100154}
   boneForHeadCamera: {fileID: 100180}
+  smooth: 15
   type: 0
 --- !u!114 &11400010
 MonoBehaviour:

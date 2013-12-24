@@ -11,6 +11,9 @@ class Core extends Photon.MonoBehaviour{
 	var bodyPrefab:Transform;
 	var headPrefab:Transform;
 	
+	var bodyStartPosition:Transform;
+	var headStartPosition:Transform;
+	
 	public var body:GameObject;
 	public var head:GameObject;
 	
@@ -48,7 +51,7 @@ class Core extends Photon.MonoBehaviour{
     function InitHead(info:PhotonMessageInfo)
     {
     	isHead = true;
-		PhotonNetwork.Instantiate(this.headPrefab.name, transform.position, Quaternion.identity, 0);
+		PhotonNetwork.Instantiate(this.headPrefab.name, headStartPosition.position, headStartPosition.rotation, 0);
 		GameObject.Find("Camera").active = false;
     }
     
@@ -56,7 +59,7 @@ class Core extends Photon.MonoBehaviour{
     function InitBody(info:PhotonMessageInfo)
     {
     	isBody = true;
-		PhotonNetwork.Instantiate(this.bodyPrefab.name, transform.position, Quaternion.identity, 0);
+		PhotonNetwork.Instantiate(this.bodyPrefab.name, bodyStartPosition.position, bodyStartPosition.rotation, 0);
 		GameObject.Find("Camera").active = false;
     }
 	
@@ -106,7 +109,7 @@ class Core extends Photon.MonoBehaviour{
     function Update()
     {
     	if(isBody && !isConnected && Input.GetButton("Action")){
-    		photonView.RPC("Connection", PhotonTargets.All);
+//    		photonView.RPC("Connection", PhotonTargets.All);
     	}
     }
     

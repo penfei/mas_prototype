@@ -19,20 +19,26 @@ class NetworkController extends Photon.MonoBehaviour{
 	private var h = 0f;
 	private var sneak = false;
 	private var jump = false;
+	private var action = false;
 	private var core:Core;
+	public var leftHandController:LeftHandController;
 	
 	function Awake () {
 		motor = GetComponent(CharacterMotor);
 		core = GameObject.Find("Administration").GetComponent(Core);
+		if(type == CharacterType.Body){
+			leftHandController = GetComponentInChildren(LeftHandController);
+		}
 	}
 	
 	function Start(){
+		motor.enabledScript = photonView.isMine && type == CharacterType.Body;
 		if(type == CharacterType.Body){
 		   core.body = gameObject;
 		}
 		if(type == CharacterType.Head){
-		   core.head = gameObject;
-		   cameraObject.GetComponent(AudioListener).enabled = true;
+		   	core.head = gameObject;
+		   	cameraObject.GetComponent(AudioListener).enabled = true;			
 		}
 		                    
 		if (photonView.isMine)
@@ -40,8 +46,12 @@ class NetworkController extends Photon.MonoBehaviour{
 	       
 	    }
 	    else
-	    {        
-	        gameObject.GetComponent(CharacterMotor).movement.gravity = 0;
+	    {   
+	        if(type == CharacterType.Head){
+	        	GetComponent(SphereCollider).enabled = false;
+				rigidbody.useGravity = false;
+	        }
+//	        gameObject.GetComponent(CharacterMotor).movement.gravity = 0;
 		}
 	}
 
@@ -55,6 +65,7 @@ class NetworkController extends Photon.MonoBehaviour{
             stream.SendNext(Input.GetAxis("Vertical"));  
             stream.SendNext(Input.GetButton("Sneak")); 
             stream.SendNext(Input.GetButton("Jump"));
+            stream.SendNext(Input.GetButton("Action"));
             var bodyRotCorrect:Quaternion = Quaternion.identity;
             if(core.body != null){
             	bodyRotCorrect = core.body.transform.rotation;
@@ -68,13 +79,29 @@ class NetworkController extends Photon.MonoBehaviour{
             h = stream.ReceiveNext();
             v = stream.ReceiveNext();
             sneak = stream.ReceiveNext();
-            jump = stream.ReceiveNext();            
+            jump = stream.ReceiveNext();
+            action = stream.ReceiveNext();            
             var bodyRotCorrect2:Quaternion = stream.ReceiveNext();
             if(type == CharacterType.Head && core.body != null){
             	core.bodyCorrectPlayerRot = bodyRotCorrect2;
             }
         }
     }
+    
+    function FixedUpdate () {
+    	if(photonView.isMine && type == CharacterType.Head && core.body != null){
+	    	var con:LeftHandController = core.body.GetComponent(NetworkController).leftHandController;
+			if(con.ikActive && con.targetFirst && con.inRadius){
+				GetComponent(ImpulsController).AddImpulse(con.leftHand);
+			}
+		} 
+	}
+	
+	function activateCharacterController(value:boolean){
+		GetComponent(CharacterMotor).enabledScript = value;
+		GetComponent(SphereCollider).enabled = !value;
+		rigidbody.useGravity = !value;
+	}
 
     function Update()
     {
@@ -96,6 +123,9 @@ class NetworkController extends Photon.MonoBehaviour{
             motor.inputSneak = sneak;
             motor.inputX = h;
             motor.inputY = v;
+            if(leftHandController != null){
+			   leftHandController.ikActive = action;
+			}
         } else{
        		gameObject.GetComponent(MouseLook).canRotation = true;
        		if(type == CharacterType.Body && core.isConnected){
@@ -121,6 +151,10 @@ class NetworkController extends Photon.MonoBehaviour{
 			motor.inputSneak = Input.GetButton("Sneak");;
             motor.inputX = Input.GetAxis("Horizontal");
             motor.inputY = Input.GetAxis("Vertical");
+            
+            if(leftHandController != null){
+			   leftHandController.ikActive = Input.GetButton("Action");
+			}
 		}
 	}
 }
