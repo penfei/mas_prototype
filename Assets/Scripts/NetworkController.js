@@ -91,7 +91,7 @@ class NetworkController extends Photon.MonoBehaviour{
     function FixedUpdate () {
     	if(photonView.isMine && type == CharacterType.Head && core.body != null){
 	    	var con:LeftHandController = core.body.GetComponent(NetworkController).leftHandController;
-			if(con.ikActive && con.targetFirst && con.inRadius){
+			if(con.ikActive && con.targetFirst && con.inRadius && !core.isConnected){
 				GetComponent(ImpulsController).AddImpulse(con.leftHand);
 			}
 		} 
@@ -154,6 +154,9 @@ class NetworkController extends Photon.MonoBehaviour{
             
             if(leftHandController != null){
 			   leftHandController.ikActive = Input.GetButton("Action");
+			   if(leftHandController.CanConnection() && core.CanConnection()){
+			       core.RPCConnection();
+			   }
 			}
 		}
 	}

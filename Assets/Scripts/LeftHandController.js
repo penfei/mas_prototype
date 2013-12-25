@@ -13,6 +13,7 @@ class LeftHandController extends MonoBehaviour{
 	public var smoothDown = 2f;
 	public var smoothTarget = 10f;
 	public var offset = 0f;
+	public var distanceConnection = 1;
 	
 	public var handWeight = 0f;
 	public var handWeightMax = 0.9f;
@@ -39,11 +40,15 @@ class LeftHandController extends MonoBehaviour{
 		avatar.SetBool("Connect", ikActive);
 	}
 	
+	public function CanConnection():boolean{
+		if(targetObject == null){
+			return false;
+		}
+		return Vector3.Distance(targetObject.transform.position, leftHand.transform.position) < distanceConnection;
+	}
+	
 	function OnAnimatorIK(layerIndex:int)
 	{	
-		if(targetObject == null){
-			targetObject = core.head;
-		}
 		if((ikActive || handWeight > 0) && layerIndex == 1)
 		{	
 			var target:Vector3 = targetObject.transform.position;
@@ -86,6 +91,9 @@ class LeftHandController extends MonoBehaviour{
     }
     
     function FixedUpdate(){
+    	if(targetObject == null){
+			targetObject = core.head;
+		}
     	if(ikActive || handWeight > 0){
 	    	targetInSight = false;
 			targetFirst = false;

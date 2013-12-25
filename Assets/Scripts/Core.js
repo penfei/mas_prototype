@@ -108,9 +108,15 @@ class Core extends Photon.MonoBehaviour{
     
     function Update()
     {
-    	if(isBody && !isConnected && Input.GetButton("Action")){
-//    		photonView.RPC("Connection", PhotonTargets.All);
-    	}
+  	
+    }
+    
+    public function CanConnection():boolean{
+    	return isBody && !isConnected && Input.GetButton("Action");
+    }
+    
+    public function RPCConnection(){
+    	photonView.RPC("Connection", PhotonTargets.All);
     }
     
     @RPC
