@@ -31,13 +31,13 @@ GameObject:
   m_Component:
   - 4: {fileID: 400002}
   - 114: {fileID: 11400000}
-  - 114: {fileID: 11400004}
   - 143: {fileID: 14300000}
   - 114: {fileID: 11400008}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400014}
   - 54: {fileID: 5400000}
   - 135: {fileID: 13500000}
+  - 114: {fileID: 11400016}
   m_Layer: 0
   m_Name: HeadPlayer
   m_TagString: toChange
@@ -211,28 +211,11 @@ MonoBehaviour:
   ownerId: 0
   group: 0
   prefixBackup: -1
-  observed: {fileID: 11400004}
-  synchronization: 1
+  observed: {fileID: 11400016}
+  synchronization: 3
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   instantiationId: -1
---- !u!114 &11400004
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff8374ba9f73b5b44a7f817fd8d45215, type: 3}
-  m_Name: 
-  cameraContainer: {fileID: 100000}
-  cameraObject: {fileID: 100000}
-  boneForHead: {fileID: 0}
-  boneForHeadCamera: {fileID: 0}
-  smooth: 15
-  type: 1
-  leftHandController: {fileID: 0}
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -349,6 +332,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3af183d4b339f4abd91825b65b2672, type: 3}
   m_Name: 
   impulsStrengh: 4
+  impulsUpStrengh: 100
+--- !u!114 &11400016
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bef2050028a88141a90aef6981c4190, type: 3}
+  m_Name: 
+  cameraContainer: {fileID: 100000}
+  cameraObject: {fileID: 100000}
+  smooth: 15
+  type: 1
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1

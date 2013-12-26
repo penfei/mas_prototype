@@ -1093,7 +1093,7 @@ GameObject:
   - 114: {fileID: 11400006}
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400000}
-  - 114: {fileID: 11400012}
+  - 114: {fileID: 11400002}
   m_Layer: 0
   m_Name: BodyPlayer_0.01
   m_TagString: toChange
@@ -6011,11 +6011,28 @@ MonoBehaviour:
   ownerId: 0
   group: 0
   prefixBackup: -1
-  observed: {fileID: 11400012}
+  observed: {fileID: 11400002}
   synchronization: 3
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   instantiationId: -1
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 462736f94ac0ff344a66a473b3af1dc2, type: 3}
+  m_Name: 
+  cameraContainer: {fileID: 100010}
+  cameraObject: {fileID: 100012}
+  smooth: 15
+  type: 0
+  leftHandController: {fileID: 0}
+  boneForHead: {fileID: 100352}
+  boneForHeadCamera: {fileID: 100016}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6118,6 +6135,7 @@ MonoBehaviour:
   smoothDown: 10
   smoothTarget: 8
   offset: 0
+  distanceConnection: 1
   handWeight: 0
   handWeightMax: 1
   angleRightLimit: 90
@@ -6130,23 +6148,6 @@ MonoBehaviour:
   rightObject: {fileID: 100290}
   targetObject: {fileID: 0}
   leftHand: {fileID: 100402}
---- !u!114 &11400012
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100188}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff8374ba9f73b5b44a7f817fd8d45215, type: 3}
-  m_Name: 
-  cameraContainer: {fileID: 100010}
-  cameraObject: {fileID: 100012}
-  boneForHead: {fileID: 100352}
-  boneForHeadCamera: {fileID: 100016}
-  smooth: 15
-  type: 0
-  leftHandController: {fileID: 0}
 --- !u!114 &11400014
 MonoBehaviour:
   m_ObjectHideFlags: 1

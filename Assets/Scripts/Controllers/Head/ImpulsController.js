@@ -18,5 +18,5 @@ function AddImpulse (target:GameObject) {
 }
 
 function AddUpImpulse () {
-	rigidbody.AddForce(transform.up * impulsUpStrengh );
+	rigidbody.AddForce(transform.up * impulsUpStrengh);
 }
