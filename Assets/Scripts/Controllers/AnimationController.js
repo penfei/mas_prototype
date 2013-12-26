@@ -2,7 +2,7 @@
 
 import Photon.MonoBehaviour;
 
-class PlayerMove extends Photon.MonoBehaviour{
+class AnimationController extends Photon.MonoBehaviour{
 	private var anim:Animator;
 	private var hash:HashIds;
 	var player:GameObject;

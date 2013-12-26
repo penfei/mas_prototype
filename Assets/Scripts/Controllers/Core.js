@@ -122,7 +122,7 @@ class Core extends Photon.MonoBehaviour{
     public function CanConnection():boolean{
    		if(!isBody) return false;
     	return !isConnected && Input.GetButton("Action")
-    	&& Time.time > timeAction + actionTimeOffset && body.GetComponent(NetworkController).leftHandController.CanConnection();
+    	&& Time.time > timeAction + actionTimeOffset && body.GetComponent(PlayerController).leftHandController.CanConnection();
     }
     
     public function CanDisconnection():boolean{
@@ -146,13 +146,13 @@ class Core extends Photon.MonoBehaviour{
     public function Connection():void{
     	timeAction = Time.time;
     	isConnected = true;
-    	head.transform.position = body.GetComponent(NetworkController).boneForHead.transform.position;
-    	head.transform.rotation = body.GetComponent(NetworkController).boneForHead.transform.rotation;
-    	head.transform.parent = body.GetComponent(NetworkController).boneForHead.transform;
+    	head.transform.position = body.GetComponent(PlayerController).boneForHead.transform.position;
+    	head.transform.rotation = body.GetComponent(PlayerController).boneForHead.transform.rotation;
+    	head.transform.parent = body.GetComponent(PlayerController).boneForHead.transform;
     	
-    	head.GetComponent(NetworkController).cameraObject.transform.position = body.GetComponent(NetworkController).boneForHeadCamera.transform.position;
-    	head.GetComponent(NetworkController).cameraObject.transform.rotation = body.GetComponent(NetworkController).boneForHeadCamera.transform.rotation;
-    	head.GetComponent(NetworkController).cameraObject.transform.parent = body.GetComponent(NetworkController).boneForHeadCamera.transform;
+    	head.GetComponent(PlayerController).cameraObject.transform.position = body.GetComponent(PlayerController).boneForHeadCamera.transform.position;
+    	head.GetComponent(PlayerController).cameraObject.transform.rotation = body.GetComponent(PlayerController).boneForHeadCamera.transform.rotation;
+    	head.GetComponent(PlayerController).cameraObject.transform.parent = body.GetComponent(PlayerController).boneForHeadCamera.transform;
     	head.GetComponent(CharacterController).enabled = false;
     }
     
@@ -175,10 +175,10 @@ class Core extends Photon.MonoBehaviour{
     	head.transform.parent = null;
     	head.transform.rotation.x = 0;
     	head.transform.rotation.z = 0;
-    	head.GetComponent(NetworkController).cameraObject.transform.position = head.transform.position;
-   		head.GetComponent(NetworkController).cameraObject.transform.parent = head.transform;
-   		head.GetComponent(NetworkController).cameraObject.transform.rotation.y = 0;
-    	head.GetComponent(NetworkController).cameraObject.transform.rotation.z = 0;
+    	head.GetComponent(PlayerController).cameraObject.transform.position = head.transform.position;
+   		head.GetComponent(PlayerController).cameraObject.transform.parent = head.transform;
+   		head.GetComponent(PlayerController).cameraObject.transform.rotation.y = 0;
+    	head.GetComponent(PlayerController).cameraObject.transform.rotation.z = 0;
    		head.GetComponent(CharacterController).enabled = true;
     }
 }

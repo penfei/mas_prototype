@@ -1,6 +1,6 @@
 #pragma strict
 
-class CameraController extends Photon.MonoBehaviour{
+class HeadCameraController extends Photon.MonoBehaviour{
 
 	private var correctCameraRot:Quaternion = Quaternion.identity;
 	

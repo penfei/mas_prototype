@@ -2,7 +2,7 @@
 
 import Photon.MonoBehaviour;
  
-class NetworkController extends Photon.MonoBehaviour{
+class PlayerController extends Photon.MonoBehaviour{
 	var cameraContainer:GameObject;
 	var cameraObject:GameObject;
 	public var boneForHead:GameObject;
@@ -90,7 +90,7 @@ class NetworkController extends Photon.MonoBehaviour{
     
     function FixedUpdate () {
     	if(photonView.isMine && type == CharacterType.Head && core.body != null){
-	    	var con:LeftHandController = core.body.GetComponent(NetworkController).leftHandController;
+	    	var con:LeftHandController = core.body.GetComponent(PlayerController).leftHandController;
 			if(con.ikActive && con.targetFirst && con.inRadius && !core.isConnected){
 				GetComponent(ImpulsController).AddImpulse(con.leftHand);
 			}
@@ -133,8 +133,8 @@ class NetworkController extends Photon.MonoBehaviour{
             	gameObject.GetComponent(MouseLook).canRotation = false;
             }
             if(type == CharacterType.Head && core.isConnected){
-    			transform.position = core.body.GetComponent(NetworkController).boneForHead.transform.position;
-    			transform.rotation = core.body.GetComponent(NetworkController).boneForHead.transform.rotation;
+    			transform.position = core.body.GetComponent(PlayerController).boneForHead.transform.position;
+    			transform.rotation = core.body.GetComponent(PlayerController).boneForHead.transform.rotation;
     			gameObject.GetComponent(MouseLook).canRotation = false;
             }
 	        var directionVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
@@ -154,9 +154,6 @@ class NetworkController extends Photon.MonoBehaviour{
             
             if(leftHandController != null){
 			   leftHandController.ikActive = Input.GetButton("Action");
-//			   if(leftHandController.CanConnection() && core.CanConnection()){
-//			       core.RPCConnection();
-//			   }
 			}
 		}
 	}
