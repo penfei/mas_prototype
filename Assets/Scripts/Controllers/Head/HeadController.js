@@ -25,7 +25,7 @@ class HeadController extends PlayerController{
         stream.SendNext(bodyRotCorrect);  
 	}
 	
-	protected function PlayerStreamOther(stream:PhotonStream, info:PhotonMessageInfo) {
+	override protected function PlayerStreamOther(stream:PhotonStream, info:PhotonMessageInfo) {
 		super.PlayerStreamOther(stream, info);
 		            
         var bodyRotCorrect:Quaternion = stream.ReceiveNext();
