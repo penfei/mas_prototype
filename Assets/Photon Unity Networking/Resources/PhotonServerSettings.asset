@@ -29,4 +29,6 @@ MonoBehaviour:
   - InitBody
   - Connection
   - Disconnection
+  - DisconnectionFromHead
+  - DisconnectionFromBody
   DisableAutoOpenWizard: 0
