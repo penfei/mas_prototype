@@ -154,9 +154,9 @@ class NetworkController extends Photon.MonoBehaviour{
             
             if(leftHandController != null){
 			   leftHandController.ikActive = Input.GetButton("Action");
-			   if(leftHandController.CanConnection() && core.CanConnection()){
-			       core.RPCConnection();
-			   }
+//			   if(leftHandController.CanConnection() && core.CanConnection()){
+//			       core.RPCConnection();
+//			   }
 			}
 		}
 	}

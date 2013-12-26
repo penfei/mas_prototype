@@ -7,6 +7,7 @@ class Core extends Photon.MonoBehaviour{
 	public var isBody = false;
 	
 	var isConnected = false;
+	var actionTimeOffset = 2f;
 	
 	var bodyPrefab:Transform;
 	var headPrefab:Transform;
@@ -16,6 +17,8 @@ class Core extends Photon.MonoBehaviour{
 	
 	public var body:GameObject;
 	public var head:GameObject;
+	
+	private var timeAction = 0f;
 	
 	var bodyCorrectPlayerRot:Quaternion = Quaternion.identity;
 
@@ -108,19 +111,40 @@ class Core extends Photon.MonoBehaviour{
     
     function Update()
     {
-  	
+   		if(CanConnection()){
+  			RPCConnection();
+  		}
+  		if(CanDisconnection()){
+  			RPCDisconnection();
+  		}
     }
     
     public function CanConnection():boolean{
-    	return isBody && !isConnected && Input.GetButton("Action");
+   		if(!isBody) return false;
+    	return !isConnected && Input.GetButton("Action")
+    	&& Time.time > timeAction + actionTimeOffset && body.GetComponent(NetworkController).leftHandController.CanConnection();
+    }
+    
+    public function CanDisconnection():boolean{
+    	return isConnected && Input.GetButton("Action") && Time.time > timeAction + actionTimeOffset;
     }
     
     public function RPCConnection(){
     	photonView.RPC("Connection", PhotonTargets.All);
     }
     
+    public function RPCDisconnection(){
+    	if(isBody){
+    		photonView.RPC("DisconnectionFromBody", PhotonTargets.All);
+    	}
+    	if(isHead){
+    		photonView.RPC("DisconnectionFromHead", PhotonTargets.All);
+    	}
+    }
+    
     @RPC
     public function Connection():void{
+    	timeAction = Time.time;
     	isConnected = true;
     	head.transform.position = body.GetComponent(NetworkController).boneForHead.transform.position;
     	head.transform.rotation = body.GetComponent(NetworkController).boneForHead.transform.rotation;
@@ -133,7 +157,28 @@ class Core extends Photon.MonoBehaviour{
     }
     
     @RPC
+    public function DisconnectionFromHead():void{
+    	Disconnection();
+    	if(isHead){
+    		head.GetComponent(ImpulsController).AddUpImpulse();
+    	}
+    }
+    
+    @RPC
+    public function DisconnectionFromBody():void{
+    	Disconnection();
+    }
+    
     public function Disconnection():void{
+    	timeAction = Time.time;
     	isConnected = false;
+    	head.transform.parent = null;
+    	head.transform.rotation.x = 0;
+    	head.transform.rotation.z = 0;
+    	head.GetComponent(NetworkController).cameraObject.transform.position = head.transform.position;
+   		head.GetComponent(NetworkController).cameraObject.transform.parent = head.transform;
+   		head.GetComponent(NetworkController).cameraObject.transform.rotation.y = 0;
+    	head.GetComponent(NetworkController).cameraObject.transform.rotation.z = 0;
+   		head.GetComponent(CharacterController).enabled = true;
     }
 }
