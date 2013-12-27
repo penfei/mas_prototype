@@ -4,12 +4,15 @@ import Photon.MonoBehaviour;
  
 class StartMenu extends Photon.MonoBehaviour{    
 	var userName = "";
-	var data:DataController = null;
-	var scrollPos:Vector2 = Vector2.zero;
-	var scrollPosGame:Vector2 = Vector2.zero;
-	var connected = false;
-	var complete = false;
-	var gamesCount = 0;
+	private var data:DataController = null;
+	private var scrollPos:Vector2 = Vector2.zero;
+	private var scrollPosGame:Vector2 = Vector2.zero;
+	private var connected = false;
+	private var complete = false;
+	private var gamesCount = 0;
+	var fastStart = false;
+	
+	private var connectToRoom = false;
 
 	function Start () {
 		PhotonNetwork.automaticallySyncScene = true;
@@ -21,6 +24,7 @@ class StartMenu extends Photon.MonoBehaviour{
 	    
 		connected = false;
 		complete = false;
+		connectToRoom = false;
 		gamesCount = 0;
 		data = GetComponent(DataController);
 	}
@@ -59,6 +63,7 @@ class StartMenu extends Photon.MonoBehaviour{
 			
 			if (GUILayout.Button("Create Room", GUILayout.Width(100)))
 	        {
+	        	connectToRoom = true;
 	            PhotonNetwork.CreateRoom(PhotonNetwork.playerName, true, true, 2);
 	        }
 	        
@@ -70,6 +75,7 @@ class StartMenu extends Photon.MonoBehaviour{
 	        GUILayout.FlexibleSpace();
 	        if (GUILayout.Button("Join Random", GUILayout.Width(100)))
 	        {
+	        	connectToRoom = true;
 	            PhotonNetwork.JoinRandomRoom();
 	        }
 	        
@@ -87,6 +93,7 @@ class StartMenu extends Photon.MonoBehaviour{
 	                GUILayout.Label(roomInfo.name.Split("&"[0])[0]);
 	                if (GUILayout.Button("Join"))
 	                {
+	                	connectToRoom = true;
 	                    PhotonNetwork.JoinRoom(roomInfo.name);
 	                }
 	
@@ -111,14 +118,14 @@ class StartMenu extends Photon.MonoBehaviour{
 	    	
 	    	if (GUILayout.Button("Continue Game", GUILayout.Width(100)))
 	        {
-	            ContinueGame();
+	            ContinueGame(true);
 	        }
 	        
 	    	GUILayout.Space(15);
 	    	
 	    	if (GUILayout.Button("New Game", GUILayout.Width(100)))
 	        {
-	            NewGame();
+	            NewGame(true);
 	        }
 	        
 	        GUILayout.Space(15);
@@ -131,7 +138,7 @@ class StartMenu extends Photon.MonoBehaviour{
 	                GUILayout.Label(PlayerPrefs.GetString("last_level_with_" + data.otherPlayer.fullName + "_in_game_" + i.ToString()));
 	                if (GUILayout.Button("Continue"))
 	                {
-	                    StartGame(i);
+	                    StartGame(i, true);
 	                }
 	
 	                GUILayout.EndHorizontal();
@@ -164,26 +171,45 @@ class StartMenu extends Photon.MonoBehaviour{
     }
 	
 	function Update () {
+		if(PhotonNetwork.countOfPlayers > 0 && fastStart && !connectToRoom){
+			connectToRoom = true;
+			if (PhotonNetwork.countOfPlayers == 1){
+				PhotonNetwork.CreateRoom(PhotonNetwork.playerName, true, true, 2);
+			} else {
+				PhotonNetwork.JoinRandomRoom();
+			}
+		}
 		if(connected && PhotonNetwork.otherPlayers.Length == 1 && !complete){
 			complete = true;
 			data.otherPlayer.Init(PhotonNetwork.otherPlayers[0].ToString());
 			gamesCount = PlayerPrefs.GetInt("games_with_" + data.otherPlayer.fullName);
 			if(gamesCount == 0){
-				NewGame();
+				NewGame(true);
+			}
+			if(fastStart){
+				ContinueGame(false);
 			} 
 		}
 	}
 	
-	function ContinueGame(){
-		StartGame(PlayerPrefs.GetInt("last_game_with_" + data.otherPlayer.fullName));
+	function ContinueGame(toAll:boolean){
+		StartGame(PlayerPrefs.GetInt("last_game_with_" + data.otherPlayer.fullName), toAll);
 	}
 	
-	function NewGame(){
-		photonView.RPC("SendNewGame", PhotonTargets.All);
+	function NewGame(toAll:boolean){
+		if(toAll){
+			photonView.RPC("SendNewGame", PhotonTargets.All);
+		} else {
+			SendNewGame(null);
+		}	
 	}
 	
-	function StartGame(gameId:int):void{
-		photonView.RPC("SendStartGame", PhotonTargets.All, gameId);
+	function StartGame(gameId:int, toAll:boolean):void{
+		if(toAll){
+			photonView.RPC("SendStartGame", PhotonTargets.All, gameId);
+		} else {
+			SendStartGame(gameId, null);
+		}	
 	}
 	
 	function OnJoinedRoom()
