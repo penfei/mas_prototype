@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GestureController : MonoBehaviour {
+public class GestureControllerTest : MonoBehaviour {
 	
 	public GestureSet myGestures;
 	public Camera cam;
 	public HyperGlyphResult match;
+
+	public float distance = 10f;
 	
 	void Start () {
 		HyperGlyph.Init(myGestures);
@@ -15,7 +17,7 @@ public class GestureController : MonoBehaviour {
 		if(Input.GetMouseButton(0))
 		{
 			//This next line moves our empty gameobject so the trail renderer can draw a line for us.
-			transform.position = cam.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x,Input.mousePosition.y,10));
+			transform.position = cam.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x,Input.mousePosition.y,distance));
 			HyperGlyph.AddPoint(Input.mousePosition);
 		}
 		

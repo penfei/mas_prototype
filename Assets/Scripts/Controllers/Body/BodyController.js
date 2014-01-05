@@ -5,9 +5,17 @@ class BodyController extends PlayerController{
 	public var boneForHead:GameObject;
 	public var boneForHeadCamera:GameObject;
 	
+	private var gestures:GestureController;
+	
 	override protected function PlayerAwake(){
 		super.PlayerAwake();
 		leftHandController = GetComponentInChildren(LeftHandController);
+		
+		if (photonView.isMine)
+	    {
+	    	gestures = GameObject.Find("BodyGestures").GetComponent(GestureController);
+	    	gestures.Init();
+	    }
 	}
 	
 	override protected function PlayerStart(){
@@ -28,7 +36,6 @@ class BodyController extends PlayerController{
 		super.PlayerUpdate();
 		
 		cameraObject.active = false;
-		cameraContainer.active = false;
 		gameObject.GetComponent(CharacterMotor).canControl = photonView.isMine;
 	}
 	
@@ -40,7 +47,24 @@ class BodyController extends PlayerController{
             transform.rotation = Quaternion.Lerp(transform.rotation, core.bodyCorrectPlayerRot, Time.deltaTime * smooth);
         }
         
+        if(Input.GetMouseButton(0) && core.head != null)
+		{
+			gestures.AddPoint(core.head.GetComponent(HeadController).cameraObject.GetComponent(HeadCameraController).basicCamera);
+		}
+		
+		if(Input.GetMouseButtonUp(0) && core.head != null){
+			gestures.Recognize();
+		}
+        
         leftHandController.ikActive = Input.GetButton("Action");
+	}
+	
+	function OnGUI(){
+		if (photonView.isMine)
+	    {
+        	var GUIPosition:Rect = new Rect(15,Screen.height - 100,800,100);
+			GUI.Label(GUIPosition, gestures.matchStroke);
+		}
 	}
 	
 	override protected function PlayerUpdateOther() {

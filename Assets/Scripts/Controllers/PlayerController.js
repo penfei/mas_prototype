@@ -3,7 +3,6 @@
 import Photon.MonoBehaviour;
  
 class PlayerController extends Photon.MonoBehaviour{
-	var cameraContainer:GameObject;
 	var cameraObject:GameObject;
 	
 	var smooth = 15f;

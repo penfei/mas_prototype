@@ -2,6 +2,8 @@
 
 class HeadCameraController extends Photon.MonoBehaviour{
 
+	public var basicCamera:Camera;
+
 	private var correctCameraRot:Quaternion = Quaternion.identity;
 	
 	function Start () {
