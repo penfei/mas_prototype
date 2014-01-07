@@ -19,16 +19,20 @@ var inputMoveDirection : Vector3 = Vector3.zero;
 // Is the jump button held down? We use this interface instead of checking
 // for the jump button directly so this script can also be used by AIs.
 @System.NonSerialized
-var inputJump : boolean = false;
 var inputX : float = 0;
 var inputY : float = 0;
+var inputJump : boolean = false;
 var inputSneak : boolean = false;
+var inputRun : boolean = false;
+var inputSeatDown : boolean = false;
+var inputRotateLeft : boolean = false;
+var inputRotateRight : boolean = false;
 
 class CharacterMotorMovement {
 	// The maximum horizontal speed when moving
-	var maxForwardSpeed : float = 10.0;
-	var maxSidewaysSpeed : float = 10.0;
-	var maxBackwardsSpeed : float = 10.0;
+	var maxForwardSpeed : float = 10;
+	var maxSidewaysSpeed : float = 10;
+	var maxBackwardsSpeed : float = 10;
 	
 	// Curve for multiplying speed based on slope (negative = downwards)
 	var slopeSpeedMultiplier : AnimationCurve = AnimationCurve(Keyframe(-90, 1), Keyframe(0, 1), Keyframe(90, 0));

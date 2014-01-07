@@ -21,10 +21,15 @@ function Update () {
 			}
 			
 			motor.inputMoveDirection = transform.rotation * directionVector;
-			motor.inputJump = Input.GetButton("Jump");
-			motor.inputSneak = Input.GetButton("Sneak");;
-            motor.inputX = Input.GetAxis("Horizontal");
+			motor.inputX = Input.GetAxis("Horizontal");
             motor.inputY = Input.GetAxis("Vertical");
+			motor.inputJump = Input.GetButton("Jump");
+			motor.inputSneak = Input.GetButton("Sneak");
+			motor.inputRun = Input.GetButton("Run");
+			motor.inputSeatDown = Input.GetButton("SeatDown");
+			motor.inputRotateLeft = Input.GetButton("RotateLeft");
+			motor.inputRotateRight = Input.GetButton("RotateRight");
+			//motor.inputSneakIdle = Input.GetButton("SneakIdle");
             
             leftHandController.ikActive = Input.GetButton("Action");
 }

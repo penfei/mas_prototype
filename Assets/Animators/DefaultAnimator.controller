@@ -6,42 +6,43 @@ AnimatorController:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: DefaultAnimator
-  m_AnimatorEvents:
+  serializedVersion: 2
+  m_AnimatorParameters:
   - m_Name: Run
     m_Type: 4
-    m_Min: -1
-    m_Max: 1
-    m_DefaultVector: {x: 0, y: 0, z: 0}
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
   - m_Name: Connect
     m_Type: 4
-    m_Min: -1
-    m_Max: 1
-    m_DefaultVector: {x: 0, y: 0, z: 0}
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-  m_Layers:
+    m_Controller: {fileID: 9100000}
+  m_AnimatorLayers:
   - serializedVersion: 3
     m_Name: Base Layer
-    m_Type: 0
     m_StateMachine: {fileID: 110700000}
     m_Mask: {fileID: 0}
     m_BlendingMode: 0
     m_SyncedLayerIndex: -1
     m_StateMachineMotionSetIndex: 0
+    m_DefaultWeight: 0
     m_IKPass: 1
+    m_SyncedLayerAffectsTiming: 0
+    m_Controller: {fileID: 9100000}
   - serializedVersion: 3
     m_Name: LeftHand
-    m_Type: 0
     m_StateMachine: {fileID: 110700002}
     m_Mask: {fileID: 101100000, guid: 3eff50db998f0394798763d4c6548b8b, type: 2}
     m_BlendingMode: 0
     m_SyncedLayerIndex: -1
     m_StateMachineMotionSetIndex: 0
+    m_DefaultWeight: 0
     m_IKPass: 1
+    m_SyncedLayerAffectsTiming: 0
+    m_Controller: {fileID: 9100000}
 --- !u!206 &20600000
 BlendTree:
   m_ObjectHideFlags: 1
@@ -49,8 +50,8 @@ BlendTree:
   m_PrefabInternal: {fileID: 0}
   m_Name: Blend Tree
   m_Childs: []
-  m_BlendEvent: Blend
-  m_BlendEventY: Blend
+  m_BlendParameter: Blend
+  m_BlendParameterY: Blend
   m_MinThreshold: 0
   m_MaxThreshold: 1
   m_UseAutomaticThresholds: 1
@@ -138,7 +139,7 @@ State:
   m_Motions:
   - {fileID: 7400000, guid: 2ff23ef13deb7404d94185e5b22e827a, type: 3}
   m_ParentStateMachine: {fileID: 110700000}
-  m_Position: {x: 24, y: -48, z: 0}
+  m_Position: {x: 36, y: -48, z: 0}
   m_IKOnFeet: 1
   m_Mirror: 0
   m_Tag: 
@@ -183,7 +184,7 @@ State:
   m_Motions:
   - {fileID: 7400002, guid: 4ec06bf1db915ca46b120866dcfaca64, type: 3}
   m_ParentStateMachine: {fileID: 110700000}
-  m_Position: {x: 36, y: -132, z: 0}
+  m_Position: {x: 36, y: -144, z: 0}
   m_IKOnFeet: 1
   m_Mirror: 0
   m_Tag: 
@@ -200,15 +201,6 @@ StateMachine:
   - {fileID: 110229689}
   m_ChildStateMachine: []
   m_ChildStateMachinePosition: []
-  m_LocalTransitions:
-    data:
-      first: {fileID: 110200000}
-      second:
-      - {fileID: 110100000}
-    data:
-      first: {fileID: 110229689}
-      second:
-      - {fileID: 110130058}
   m_OrderedTransitions:
     data:
       first: {fileID: 110200000}
@@ -219,7 +211,7 @@ StateMachine:
       second:
       - {fileID: 110130058}
   m_MotionSetCount: 1
-  m_AnyStatePosition: {x: 50, y: 20, z: 0}
+  m_AnyStatePosition: {x: 60, y: 48, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
 --- !u!1107 &110700002
 StateMachine:
@@ -234,15 +226,6 @@ StateMachine:
   - {fileID: 110218987}
   m_ChildStateMachine: []
   m_ChildStateMachinePosition: []
-  m_LocalTransitions:
-    data:
-      first: {fileID: 110200725}
-      second:
-      - {fileID: 110129993}
-    data:
-      first: {fileID: 110218987}
-      second:
-      - {fileID: 110131377}
   m_OrderedTransitions:
     data:
       first: {fileID: 0}
