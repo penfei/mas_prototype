@@ -48,7 +48,6 @@ class HeadController extends PlayerController{
 		super.PlayerUpdate();
 		
 		cameraObject.active = true;
-		cameraContainer.active = true;
 		gameObject.GetComponent(CharacterMotor).canControl = false;
 	}
 	
