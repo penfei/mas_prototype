@@ -32,29 +32,30 @@ public class MouseLook : MonoBehaviour {
 
 	float rotationY = 0F;
 
+	public GameObject target;
+
 	void Update ()
 	{
 		if(canRotation){
 			if (axes == RotationAxes.MouseXAndY)
 			{
-				float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
-				
+				float rotationX = target.transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
+
 				rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
 				rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
 				
-				transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
+				target.transform.localEulerAngles = new Vector3(-rotationY, rotationX, 0);
 			}
 			else if (axes == RotationAxes.MouseX)
 			{
-				transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivityX, 0);
-//				transform.Rotate(0, 0.02f * sensitivityX, 0);
+				target.transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivityX, 0);
 			}
 			else
 			{
 				rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
 				rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
 				
-				transform.localEulerAngles = new Vector3(-rotationY, transform.localEulerAngles.y, 0);
+				target.transform.localEulerAngles = new Vector3(-rotationY, target.transform.localEulerAngles.y, 0);
 			}
 		}
 	}

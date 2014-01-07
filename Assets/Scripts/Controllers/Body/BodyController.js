@@ -44,7 +44,7 @@ class BodyController extends PlayerController{
 		
 		gameObject.GetComponent(MouseLook).canRotation = !core.isConnected;
        	if(core.isConnected){
-            transform.rotation = Quaternion.Lerp(transform.rotation, core.bodyCorrectPlayerRot, Time.deltaTime * smooth);
+            rotationObject.transform.rotation = Quaternion.Lerp(rotationObject.transform.rotation, core.bodyCorrectPlayerRot, Time.deltaTime * smooth);
         }
         
         if(Input.GetMouseButton(0) && core.head != null)
@@ -59,14 +59,6 @@ class BodyController extends PlayerController{
         leftHandController.ikActive = Input.GetButton("Action");
 	}
 	
-	function OnGUI(){
-		if (photonView.isMine)
-	    {
-        	var GUIPosition:Rect = new Rect(15,Screen.height - 100,800,100);
-			GUI.Label(GUIPosition, gestures.matchStroke);
-		}
-	}
-	
 	override protected function PlayerUpdateOther() {
 		super.PlayerUpdateOther();
 		
@@ -74,9 +66,17 @@ class BodyController extends PlayerController{
         cameraObject.GetComponent(MouseLook).canRotation = false;
         transform.position = Vector3.Lerp(transform.position, correctPlayerPos, Time.deltaTime * smooth);
         if(!core.isConnected){
-           	transform.rotation = Quaternion.Lerp(transform.rotation, correctPlayerRot, Time.deltaTime * smooth);
+           rotationObject.transform.rotation = Quaternion.Lerp(rotationObject.transform.rotation, correctPlayerRot, Time.deltaTime * smooth);
         }
             
        	leftHandController.ikActive = action;
+	}
+	
+	function OnGUI(){
+		if (photonView.isMine)
+	    {
+        	var GUIPosition:Rect = new Rect(15,Screen.height - 100,800,100);
+			GUI.Label(GUIPosition, gestures.matchStroke);
+		}
 	}
 }

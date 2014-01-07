@@ -1,6 +1,6 @@
-#pragma strict
+﻿#pragma strict
 
-class HeadCameraController extends Photon.MonoBehaviour{
+class HeadCameraControllerTest extends Photon.MonoBehaviour{
 
 	public var smooth = 15f;
 	public var basicCamera:Camera;
@@ -26,7 +26,8 @@ class HeadCameraController extends Photon.MonoBehaviour{
 	function Update () {
 		if (!photonView.isMine)
         {
-        	transform.rotation = Quaternion.Lerp(transform.rotation, correctCameraRot, Time.deltaTime * smooth);
+//        	gameObject.GetComponent(MouseLook).canRotation = false;
+//        	transform.rotation = Quaternion.Lerp(transform.rotation, correctCameraRot, Time.deltaTime * smooth);
         }
 	}
 }

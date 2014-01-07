@@ -20,7 +20,7 @@ class HeadController extends PlayerController{
 		
 		var bodyRotCorrect:Quaternion = Quaternion.identity;
         if(core.body != null){
-           	bodyRotCorrect = core.body.transform.rotation;
+           	bodyRotCorrect = core.body.GetComponent(BodyController).rotationObject.transform.rotation;
         }
         stream.SendNext(bodyRotCorrect);  
 	}
@@ -49,6 +49,10 @@ class HeadController extends PlayerController{
 		
 		cameraObject.active = true;
 		gameObject.GetComponent(CharacterMotor).canControl = false;
+		
+		if(core.isConnected){
+			cameraObject.transform.position = core.body.GetComponent(BodyController).boneForHeadCamera.transform.position;
+		}
 	}
 	
 	override protected function PlayerUpdateMe() {
@@ -57,18 +61,18 @@ class HeadController extends PlayerController{
 		gameObject.GetComponent(MouseLook).canRotation = !core.isConnected;
         if(core.isConnected){
     		transform.position = core.body.GetComponent(BodyController).boneForHead.transform.position;
-    		transform.rotation = core.body.GetComponent(BodyController).boneForHead.transform.rotation;
+    		rotationObject.transform.rotation = core.body.GetComponent(BodyController).boneForHead.transform.rotation;
         }
 	}
 	
 	override protected function PlayerUpdateOther() {
 		super.PlayerUpdateOther();
 		
-		gameObject.GetComponent(MouseLook).canRotation = core.isConnected;
+		gameObject.GetComponent(MouseLook).canRotation = false;
         cameraObject.GetComponent(MouseLook).canRotation = false;
         if(!core.isConnected){
            	transform.position = Vector3.Lerp(transform.position, correctPlayerPos, Time.deltaTime * smooth);
         } 
-        transform.rotation = Quaternion.Lerp(transform.rotation, correctPlayerRot, Time.deltaTime * smooth);
+        rotationObject.transform.rotation = Quaternion.Lerp(rotationObject.transform.rotation, correctPlayerRot, Time.deltaTime * smooth);
 	}
 }

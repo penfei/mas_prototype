@@ -140,7 +140,7 @@ GameObject:
   m_IsActive: 0
 --- !u!1 &100016
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -155,7 +155,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100018
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -1663,7 +1663,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100290
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -2627,10 +2627,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .889999986, z: .300000012}
+  m_LocalPosition: {x: .0199999996, y: 1.73883605, z: .200000003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400188}
+  m_Father: {fileID: 400202}
 --- !u!4 &400018
 Transform:
   m_ObjectHideFlags: 1
@@ -2638,10 +2638,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100018}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.15485334, y: .661703229, z: 1.8811214}
+  m_LocalPosition: {x: 2.15485287, y: 1.48570788, z: 1.8811214}
   m_LocalScale: {x: .199999958, y: .200000003, z: .199999958}
   m_Children: []
-  m_Father: {fileID: 400188}
+  m_Father: {fileID: 400202}
 --- !u!4 &400020
 Transform:
   m_ObjectHideFlags: 1
@@ -3344,10 +3344,7 @@ Transform:
   m_LocalPosition: {x: -14.7871618, y: 1.215662, z: -.350136518}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 400018}
   - {fileID: 400010}
-  - {fileID: 400016}
-  - {fileID: 400290}
   - {fileID: 400202}
   m_Father: {fileID: 0}
 --- !u!4 &400192
@@ -3417,7 +3414,10 @@ Transform:
   m_LocalPosition: {x: 0, y: -.82400465, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 400018}
   - {fileID: 400248}
+  - {fileID: 400016}
+  - {fileID: 400290}
   m_Father: {fileID: 400188}
 --- !u!4 &400206
 Transform:
@@ -3783,10 +3783,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100290}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.21841466, y: .661702871, z: .312376529}
+  m_LocalPosition: {x: -1.21841526, y: 1.48570752, z: .312376529}
   m_LocalScale: {x: .199999958, y: .200000003, z: .199999958}
   m_Children: []
-  m_Father: {fileID: 400188}
+  m_Father: {fileID: 400202}
 --- !u!4 &400292
 Transform:
   m_ObjectHideFlags: 1
@@ -6284,6 +6284,7 @@ MonoBehaviour:
   cameraObject: {fileID: 100010}
   smooth: 15
   type: 0
+  rotationObject: {fileID: 0}
   leftHandController: {fileID: 0}
   boneForHead: {fileID: 100352}
   boneForHeadCamera: {fileID: 100016}
@@ -6300,12 +6301,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axes: 1
   sensitivityX: 15
-  sensitivityY: 0
+  sensitivityY: 15
   minimumX: -360
   maximumX: 360
-  minimumY: 0
-  maximumY: 0
+  minimumY: -60
+  maximumY: 60
   canRotation: 1
+  target: {fileID: 100202}
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6417,14 +6419,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68ec2fe99d1108b9d0006a298d76c639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  axes: 2
-  sensitivityX: 10
-  sensitivityY: 10
-  minimumX: 0
+  axes: 0
+  sensitivityX: 15
+  sensitivityY: 15
+  minimumX: -360
   maximumX: 360
-  minimumY: -50
+  minimumY: -60
   maximumY: 60
   canRotation: 1
+  target: {fileID: 100010}
 --- !u!114 &11400014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6441,7 +6444,7 @@ MonoBehaviour:
   group: 0
   prefixBackup: -1
   observed: {fileID: 11400016}
-  synchronization: 1
+  synchronization: 3
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   instantiationId: -1
@@ -6456,6 +6459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4bc0aec7d86b84d8d21cc6169d329e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  smooth: 10
   basicCamera: {fileID: 2000000}
 --- !u!124 &12400000
 Behaviour:

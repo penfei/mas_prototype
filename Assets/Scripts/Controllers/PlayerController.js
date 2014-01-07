@@ -12,7 +12,8 @@ class PlayerController extends Photon.MonoBehaviour{
 	
 	protected var motor : CharacterMotor;
 	protected var correctPlayerPos:Vector3 = Vector3.zero; 
-    protected var correctPlayerRot:Quaternion = Quaternion.identity; 
+    protected var correctPlayerRot:Quaternion = Quaternion.identity;
+    public var rotationObject:GameObject; 
     protected var v = 0f;
 	protected var h = 0f;
 	protected var sneak = false;
@@ -27,6 +28,7 @@ class PlayerController extends Photon.MonoBehaviour{
 	protected function PlayerAwake(){
 		motor = GetComponent(CharacterMotor);
 		core = GameObject.Find("Administration").GetComponent(Core);
+		rotationObject = GetComponent(MouseLook).target;
 	}
 	
 	function Start(){
@@ -52,7 +54,7 @@ class PlayerController extends Photon.MonoBehaviour{
     
     protected function PlayerStreamMe(stream:PhotonStream, info:PhotonMessageInfo) {
     	stream.SendNext(transform.position);
-        stream.SendNext(transform.rotation); 
+        stream.SendNext(rotationObject.transform.rotation); 
         stream.SendNext(Input.GetAxis("Horizontal")); 
         stream.SendNext(Input.GetAxis("Vertical"));  
         stream.SendNext(Input.GetButton("Sneak")); 
@@ -102,7 +104,7 @@ class PlayerController extends Photon.MonoBehaviour{
 			directionVector = directionVector * directionLength;	
 		}
 			
-		motor.inputMoveDirection = transform.rotation * directionVector;
+		motor.inputMoveDirection = rotationObject.transform.rotation * directionVector;
 		motor.inputJump = Input.GetButton("Jump");
 		motor.inputSneak = Input.GetButton("Sneak");;
         motor.inputX = Input.GetAxis("Horizontal");

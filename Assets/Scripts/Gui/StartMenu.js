@@ -168,6 +168,7 @@ class StartMenu extends Photon.MonoBehaviour{
         data.InitSession(gameId);
 		data.Save();
 		PhotonNetwork.LoadLevel(data.session.levelName);
+//		PhotonNetwork.LoadLevel("HeadTest");
     }
 	
 	function Update () {
