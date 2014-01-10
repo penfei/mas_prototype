@@ -27,8 +27,8 @@ function Update () {
 			motor.inputSneak = Input.GetButton("Sneak");
 			motor.inputRun = Input.GetButton("Run");
 			motor.inputSeatDown = Input.GetButton("SeatDown");
-			motor.inputRotateLeft = Input.GetButton("RotateLeft");
-			motor.inputRotateRight = Input.GetButton("RotateRight");
+			motor.inputTurnLeft = Input.GetButton("TurnLeft");
+			motor.inputTurnRight = Input.GetButton("TurnRight");
 			//motor.inputSneakIdle = Input.GetButton("SneakIdle");
             
             leftHandController.ikActive = Input.GetButton("Action");

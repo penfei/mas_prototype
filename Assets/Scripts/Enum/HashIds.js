@@ -10,8 +10,6 @@ var walkBackBool:int;
 var walkLeftBool:int;
 var walkRightBool:int;
 var seatDownBool:int;
-var rotateLeftBool:int;
-var rotateRightBool:int;
 	
 function Awake ()
 {
@@ -25,6 +23,4 @@ function Awake ()
 	walkLeftBool = Animator.StringToHash("WalkLeft");
 	walkRightBool = Animator.StringToHash("WalkRight");
 	seatDownBool = Animator.StringToHash("SeatDown");
-	rotateLeftBool = Animator.StringToHash("RotateLeft");
-	rotateRightBool = Animator.StringToHash("RotateRight");
 }

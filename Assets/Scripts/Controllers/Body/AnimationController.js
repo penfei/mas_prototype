@@ -3,11 +3,22 @@
 import Photon.MonoBehaviour;
 
 class AnimationController extends Photon.MonoBehaviour{
+
 	private var anim:Animator;
 	private var hash:HashIds;
 	var player:GameObject;
 	private var currentBaseState:AnimatorStateInfo ;
 	private var motor : CharacterMotor;
+	
+	private var doTurnLeft:boolean = false;
+	private var doTurnRight:boolean = false;
+	private var targetTurnLeft:float = -90;
+	private var targetTurnRight:float = 90;
+	private var targetRotation:Quaternion;
+	private var isRotating:boolean = false;
+	private var rotateFrom:float;
+	private var rotateTo:float;
+	private var sumRotate:float;
 	
 	//static int idleState = Animator.StringToHash("Base Layer.Idle");	
 	//static int locoState = Animator.StringToHash("Base Layer.Locomotion");
@@ -34,8 +45,8 @@ class AnimationController extends Photon.MonoBehaviour{
 			motor.inputJump, 
 			motor.inputRun,
 			motor.inputSeatDown,
-			motor.inputRotateLeft,
-			motor.inputRotateRight
+			motor.inputTurnLeft,
+			motor.inputTurnRight
 		);
 	//	AudioManagement();
 	}
@@ -48,8 +59,8 @@ class AnimationController extends Photon.MonoBehaviour{
 		jump:boolean,
 		run:boolean,
 		seatDown:boolean,
-		rotateLeft:boolean,
-		rotateRight:boolean
+		turnLeft:boolean,
+		turnRight:boolean
 	){
 		currentBaseState = anim.GetCurrentAnimatorStateInfo(0);
 	//	Debug.Log(currentBaseState.length );
@@ -156,17 +167,69 @@ class AnimationController extends Photon.MonoBehaviour{
 		}
 		
 		
+		// перешаг влево
+		if(turnLeft && !isRotating){
+			doTurnLeft = true;
+			isRotating = true;
+			rotateFrom = player.transform.localEulerAngles.y;
+			rotateTo = rotateFrom - 90;
+			sumRotate = 0;
+		}
+		else if(turnRight && !isRotating){
+			doTurnRight = true;
+			isRotating = true;
+			rotateFrom = player.transform.localEulerAngles.y;
+			rotateTo = rotateFrom + 90;
+			sumRotate = 0;
+		}
+		if(turnLeft){
+			anim.SetBool("Turn", doTurnLeft);
+			anim.SetFloat("Direction", targetTurnLeft);
+		}
+		else if(turnRight){
+			anim.SetBool("Turn", doTurnRight);
+			anim.SetFloat("Direction", targetTurnRight);
+		}
+		else{
+			anim.SetFloat("Direction", targetTurnLeft);
+			anim.SetBool("Turn", false);
+		}
+		//if (anim.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Idle")){
+			//if(doTurnLeft){
+				//targetRotation = transform.rotation * Quaternion.AngleAxis(targetTurnLeft, Vector3.up); // Compute target rotation when doTurn is triggered
+				//doTurnLeft = false;
+				//player.transform.localEulerAngles = new Vector3(player.transform.localEulerAngles.x, player.transform.localEulerAngles.y-90, player.transform.localEulerAngles.z);
+			//}
+			//else if(doTurnRight){
+			//	targetRotation = transform.rotation * Quaternion.AngleAxis(targetTurnRight, Vector3.up); // Compute target rotation when doTurn is triggered
+			//	doTurnRight = false;
+				//player.transform.localEulerAngles = new Vector3(player.transform.localEulerAngles.x, player.transform.localEulerAngles.y+90, player.transform.localEulerAngles.z);
+			//}
+		//}
+		//else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Turn"))
+		//{
+			// calls MatchTarget when in Turn state, subsequent calls are ignored until targetTime (0.9f) is reached .
+		//	anim.MatchTarget(Vector3.one, targetRotation, AvatarTarget.Root, new MatchTargetWeightMask(Vector3.zero, 1), anim.GetCurrentAnimatorStateInfo(0).normalizedTime, 0.9f);			
+		//}
+		if(isRotating){
+			if(sumRotate > 90){
+				player.transform.localEulerAngles.y = rotateTo;
+				isRotating = false;
+				doTurnLeft = false;
+				doTurnRight = false;
+			}
+			else{
+				sumRotate += 100*Time.deltaTime;
+				if(doTurnLeft){
+					player.transform.localEulerAngles.y -= 100*Time.deltaTime;
+				}
+				else if(doTurnRight){
+					player.transform.localEulerAngles.y += 100*Time.deltaTime;
+				}
+				Debug.Log(player.transform.localEulerAngles.y);
+			}
+		}
 		
-		if(rotateLeft){
-			anim.SetBool(hash.rotateLeftBool, true);
-		}else{
-			anim.SetBool(hash.rotateLeftBool, false);
-		}
-		if(rotateRight){
-			anim.SetBool(hash.rotateRightBool, true);
-		}else{
-			anim.SetBool(hash.rotateRightBool, false);
-		}
 		//Debug.Log("horizontal = " + horizontal);
 		//Debug.Log("vertical = " + vertical);
 	}

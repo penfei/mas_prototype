@@ -3422,8 +3422,8 @@ MonoBehaviour:
   inputSneak: 0
   inputRun: 0
   inputSeatDown: 0
-  inputRotateLeft: 0
-  inputRotateRight: 0
+  inputTurnLeft: 0
+  inputTurnRight: 0
   movement:
     maxForwardSpeed: 10
     maxSidewaysSpeed: 10
@@ -3513,6 +3513,7 @@ MonoBehaviour:
   minimumY: 0
   maximumY: 0
   canRotation: 0
+  target: {fileID: 0}
 --- !u!1 &492083381
 GameObject:
   m_ObjectHideFlags: 0
@@ -3741,6 +3742,7 @@ MonoBehaviour:
   minimumY: 0
   maximumY: 0
   canRotation: 1
+  target: {fileID: 0}
 --- !u!114 &517863897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3760,8 +3762,8 @@ MonoBehaviour:
   inputSneak: 0
   inputRun: 0
   inputSeatDown: 0
-  inputRotateLeft: 0
-  inputRotateRight: 0
+  inputTurnLeft: 0
+  inputTurnRight: 0
   movement:
     maxForwardSpeed: 5
     maxSidewaysSpeed: 5
@@ -6235,7 +6237,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400188, guid: 9bb8aabc3668a1443a1cf617d5603db4, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 927203832}
-  m_LocalRotation: {x: 0, y: .99958539, z: 0, w: -.0287939291}
+  m_LocalRotation: {x: 0, y: .993027568, z: 0, w: .117882855}
   m_LocalPosition: {x: 10.6143303, y: 1.26383591, z: -12.5947628}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -6275,6 +6277,7 @@ MonoBehaviour:
   minimumY: 0
   maximumY: 0
   canRotation: 1
+  target: {fileID: 927203832}
 --- !u!114 &927203837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6295,8 +6298,8 @@ MonoBehaviour:
   inputSneak: 0
   inputRun: 0
   inputSeatDown: 0
-  inputRotateLeft: 0
-  inputRotateRight: 0
+  inputTurnLeft: 0
+  inputTurnRight: 0
   movement:
     maxForwardSpeed: 5
     maxSidewaysSpeed: 5
@@ -8813,8 +8816,6 @@ MonoBehaviour:
   walkLeftBool: 0
   walkRightBool: 0
   seatDownBool: 0
-  rotateLeftBool: 0
-  rotateRightBool: 0
 --- !u!4 &1314095740
 Transform:
   m_ObjectHideFlags: 0
