@@ -10,8 +10,9 @@ GameObject:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
-  - 114: {fileID: 11400004}
   - 114: {fileID: 11400006}
+  - 114: {fileID: 11400008}
+  - 114: {fileID: 11400004}
   m_Layer: 0
   m_Name: Administration
   m_TagString: GameController
@@ -40,11 +41,17 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f41772a4ac521d4fa1ff485cb9c39ea, type: 3}
   m_Name: 
+  m_EditorClassIdentifier: 
   runBool: 0
-  sneakingBool: 0
+  sneakBool: 0
   sneakIdleBool: 0
   jumpBool: 0
   connectBool: 0
+  walkBool: 0
+  walkBackBool: 0
+  walkLeftBool: 0
+  walkRightBool: 0
+  seatDownBool: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -55,9 +62,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c43ca8e98c9563488b4b4e6daf14a3a, type: 3}
   m_Name: 
+  m_EditorClassIdentifier: 
   isHead: 0
   isBody: 0
   isConnected: 0
+  actionTimeOffset: 2
   bodyPrefab: {fileID: 400188, guid: 9bb8aabc3668a1443a1cf617d5603db4, type: 2}
   headPrefab: {fileID: 400002, guid: 153449d80d7a6ae4ea990320461ef7d9, type: 2}
   bodyStartPosition: {fileID: 0}
@@ -73,18 +82,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ef7a36d1b2e0fb46b187d61e61ca2f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b7c728ca521ec64a925262a77b89d3c, type: 3}
   m_Name: 
-  player:
-    userName: 
-    userId: 
-  otherPlayer:
-    userName: 
-    userId: 
-    fullName: 
-  session:
-    sessionId: 0
-    levelName: 
+  m_EditorClassIdentifier: 
+  allQuests:
+  - {fileID: 11400000, guid: 891b701612e983f4f9de2275d1b1ee44, type: 2}
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -95,6 +97,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
+  m_EditorClassIdentifier: 
   subId: 0
   ownerId: 0
   group: 0
@@ -104,6 +107,27 @@ MonoBehaviour:
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   instantiationId: 0
+--- !u!114 &11400008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adbf802febdef9b4b992a69187d7fb15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player:
+    userName: 
+    userId: 
+  otherPlayer:
+    userName: 
+    userId: 
+    fullName: 
+  session:
+    sessionId: 0
+    levelName: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

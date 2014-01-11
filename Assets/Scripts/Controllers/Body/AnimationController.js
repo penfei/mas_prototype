@@ -226,7 +226,7 @@ class AnimationController extends Photon.MonoBehaviour{
 				else if(doTurnRight){
 					player.transform.localEulerAngles.y += 100*Time.deltaTime;
 				}
-				Debug.Log(player.transform.localEulerAngles.y);
+//				Debug.Log(player.transform.localEulerAngles.y);
 			}
 		}
 		

@@ -8,7 +8,6 @@ class UserData {
 	var userId:String;
 	
 	public function Init():void{
-//		PlayerPrefs.DeleteAll();
 		userId = PlayerPrefs.GetString("user_id");
 		if (String.IsNullOrEmpty(userId))
 	    {
@@ -21,7 +20,6 @@ class UserData {
 	public function SetUserName(userName:String){
 		this.userName = userName;
 		PlayerPrefs.SetString("user_name", userName);
-//		userName = "Waka";
 		if (!String.IsNullOrEmpty(userName))
 	    {
 	    	PhotonNetwork.playerName = userName + "&" + userId;
@@ -54,13 +52,6 @@ class SessionData {
 
 function Start () {
     player.Init();
-    
-    if(PhotonNetwork.otherPlayers.Length == 1){
-    	otherPlayer.Init(PhotonNetwork.otherPlayers[0].ToString());
-    	InitSession(PlayerPrefs.GetInt("last_game_with_" + otherPlayer.fullName));
-    }
-
-//	Debug.Log(PhotonNetwork.playerName);
 }
 
 function InitSession (sessionId:int) {
@@ -81,14 +72,26 @@ public function SaveStringParameter(parameterName:String, parameterValue:String)
 	PlayerPrefs.SetString(otherPlayer.fullName + "&" + session.sessionId + "&" + parameterName, parameterValue);
 }
 
+public function GetStringParameter(parameterName:String):String{
+	return PlayerPrefs.GetString(otherPlayer.fullName + "&" + session.sessionId + "&" + parameterName);
+}
+
 public function SaveIntParameter(parameterName:String, parameterValue:int):void{
 	PlayerPrefs.SetInt(otherPlayer.fullName + "&" + session.sessionId + "&" + parameterName, parameterValue);
+}
+
+public function GetIntParameter(parameterName:String):int{
+	return PlayerPrefs.GetInt(otherPlayer.fullName + "&" + session.sessionId + "&" + parameterName);
 }
 
 public function SaveFloatParameter(parameterName:String, parameterValue:float):void{
 	PlayerPrefs.SetFloat(otherPlayer.fullName + "&" + session.sessionId + "&" + parameterName, parameterValue);
 }
 
-function Update () {
+public function GetFloatParameter(parameterName:String):float{
+	return PlayerPrefs.GetFloat(otherPlayer.fullName + "&" + session.sessionId + "&" + parameterName);
+}
 
+function Update () {
+	
 }

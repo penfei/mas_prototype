@@ -37,7 +37,7 @@ GameObject:
   - 114: {fileID: 11400016}
   m_Layer: 0
   m_Name: HeadPlayer
-  m_TagString: toChange
+  m_TagString: Head
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -370,9 +370,13 @@ MonoBehaviour:
   enabledScript: 1
   canControl: 1
   useFixedUpdate: 1
-  inputX: 0
   inputY: 0
+  inputJump: 0
   inputSneak: 0
+  inputRun: 0
+  inputSeatDown: 0
+  inputTurnLeft: 0
+  inputTurnRight: 0
   movement:
     maxForwardSpeed: 10
     maxSidewaysSpeed: 10
