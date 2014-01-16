@@ -1217,8 +1217,13 @@ Prefab:
       propertyPath: subId
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: 4571bb26ef97ccf40997919a9d214240, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400002, guid: 4571bb26ef97ccf40997919a9d214240, type: 2}
+    - {fileID: 11400008, guid: 4571bb26ef97ccf40997919a9d214240, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 4571bb26ef97ccf40997919a9d214240, type: 2}
   m_RootGameObject: {fileID: 1314095737}
   m_IsPrefabParent: 0
@@ -6238,7 +6243,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 927203832}
   m_LocalRotation: {x: 0, y: .993027568, z: 0, w: .117882855}
-  m_LocalPosition: {x: 10.6143303, y: 1.26383591, z: -12.5947628}
+  m_LocalPosition: {x: -15.6580067, y: 1.26383591, z: -12.5947628}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1576662118}
@@ -8691,8 +8696,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 1314095740}
   - 114: {fileID: 1314095739}
-  - 114: {fileID: 1314095742}
   - 114: {fileID: 1314095741}
+  - 114: {fileID: 1314095742}
   - 114: {fileID: 1314095738}
   m_Layer: 0
   m_Name: Administration
@@ -8857,19 +8862,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1314095737}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ef7a36d1b2e0fb46b187d61e61ca2f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b7c728ca521ec64a925262a77b89d3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player:
-    userName: 
-    userId: 
-  otherPlayer:
-    userName: 
-    userId: 
-    fullName: 
-  session:
-    sessionId: 0
-    levelName: 
+  allQuests:
+  - {fileID: 11400000, guid: 891b701612e983f4f9de2275d1b1ee44, type: 2}
 --- !u!1 &1320338794
 GameObject:
   m_ObjectHideFlags: 0
@@ -9335,8 +9332,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1386485369}
-  m_LocalRotation: {x: .22652249, y: .657876611, z: -.22206676, w: .683061004}
-  m_LocalPosition: {x: 2.34028339, y: 5.83840609, z: -11.4194908}
+  m_LocalRotation: {x: .235019907, y: .654889226, z: -.230890527, w: .680128992}
+  m_LocalPosition: {x: -23.3984737, y: 5.89173889, z: -11.4194908}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

@@ -5,7 +5,7 @@ var noQuests:String[];
 
 var requirementItemsName:String[];
 var requirementItemsCount:float[];
-enum RequirementItemsCompareType { More, Less, Equally};
+enum RequirementItemsCompareType { More, Less, Equally };
 var requirementItemsCompareType:RequirementItemsCompareType[];
 
 function Start () {

@@ -33,4 +33,5 @@ MonoBehaviour:
   - DisconnectionFromHead
   - DisconnectionFromBody
   - CheckingQuest
+  - CheckingItem
   DisableAutoOpenWizard: 0

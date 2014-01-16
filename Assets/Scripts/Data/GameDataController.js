@@ -39,6 +39,7 @@ class GameDataController extends DataController{
 		for (var i:uint = 0; i < items.length; i++){
 			var item:ItemData = items[i] as ItemData;
 			var playerItem:ItemData = GetItemByName(item.itemName);
+			Debug.Log("items count before reward = " + playerItem.itemCount);
 			if(reward.rewardActionType[i] == RewardActionType.Add){
 				playerItem.itemCount += item.itemCount;
 			}
@@ -49,6 +50,11 @@ class GameDataController extends DataController{
 				playerItem.itemCount = item.itemCount;
 			}
 	//		SaveItemCount(playerItem);
+		}
+		
+		for (var j:uint = 0; j < items.length; j++){
+			var pItem:ItemData = GetItemByName((items[j] as ItemData).itemName);
+			Debug.Log("items count after reward = " + pItem.itemCount);
 		}
 	}
 
