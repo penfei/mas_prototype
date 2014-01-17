@@ -39,30 +39,54 @@ class HeadController extends PlayerController{
 		if(photonView.isMine && core.body != null){
 	    	var con:LeftHandController = core.body.GetComponent(BodyController).leftHandController;
 			if(con.ikActive && con.targetFirst && con.inRadius && !core.isConnected){
-				GetComponent(ImpulsController).AddImpulse(con.leftHand);
+				GetComponent(ImpulsController).AddImpulse(con.gameObject);
 			}
 		} 
+	}
+	
+	override protected function PlayerLateUpdate() {
+		super.PlayerLateUpdate();
+	
+		if(core.isConnected){
+			cameraObject.transform.position = core.body.GetComponent(BodyController).boneForHeadCamera.transform.position;
+			cameraObject.transform.localEulerAngles.y = core.body.transform.localEulerAngles.y;
+		}
+	}
+	
+	override protected function PlayerLateUpdateMe() {
+		super.PlayerLateUpdateMe();
+		
+        if(core.isConnected){
+    		transform.position = core.body.GetComponent(BodyController).boneForHead.transform.position;
+    		rotationObject.transform.rotation = core.body.GetComponent(BodyController).boneForHead.transform.rotation;
+        }
+	}
+	
+	override protected function PlayerLateUpdateOther() {
+		super.PlayerLateUpdateOther();
+		
+        if(!core.isConnected){
+           	transform.position = Vector3.Lerp(transform.position, correctPlayerPos, Time.deltaTime * smooth);
+        } 
+        rotationObject.transform.rotation = Quaternion.Lerp(rotationObject.transform.rotation, correctPlayerRot, Time.deltaTime * smooth);
 	}
 	
 	override protected function PlayerUpdate() {
 		super.PlayerUpdate();
 		
 		cameraObject.active = true;
-		gameObject.GetComponent(CharacterMotor).canControl = false;
-		
-		if(core.isConnected){
-			cameraObject.transform.position = core.body.GetComponent(BodyController).boneForHeadCamera.transform.position;
-		}
+		motor.canControl = false;
 	}
 	
 	override protected function PlayerUpdateMe() {
 		super.PlayerUpdateMe();
 		
 		gameObject.GetComponent(MouseLook).canRotation = !core.isConnected;
-        if(core.isConnected){
-    		transform.position = core.body.GetComponent(BodyController).boneForHead.transform.position;
-    		rotationObject.transform.rotation = core.body.GetComponent(BodyController).boneForHead.transform.rotation;
-        }
+		if(core.isConnected){
+			cameraObject.GetComponent(MouseLook).axes = 2;
+		} else {
+			cameraObject.GetComponent(MouseLook).axes = 0;
+		}
 	}
 	
 	override protected function PlayerUpdateOther() {
@@ -70,9 +94,5 @@ class HeadController extends PlayerController{
 		
 		gameObject.GetComponent(MouseLook).canRotation = false;
         cameraObject.GetComponent(MouseLook).canRotation = false;
-        if(!core.isConnected){
-           	transform.position = Vector3.Lerp(transform.position, correctPlayerPos, Time.deltaTime * smooth);
-        } 
-        rotationObject.transform.rotation = Quaternion.Lerp(rotationObject.transform.rotation, correctPlayerRot, Time.deltaTime * smooth);
 	}
 }

@@ -21,7 +21,11 @@ class BodyController extends PlayerController{
 	override protected function PlayerStart(){
 		super.PlayerStart();
 		motor.enabledScript = photonView.isMine;
+		motor.canControl = false;
+		GetComponent(Animator).applyRootMotion = photonView.isMine;
 		core.body = gameObject;
+		gameObject.GetComponent(MouseLook).canRotation = false;
+		cameraObject.GetComponent(MouseLook).canRotation = false;
 	}
 	
 	override protected function PlayerStreamMe(stream:PhotonStream, info:PhotonMessageInfo) {
@@ -32,20 +36,32 @@ class BodyController extends PlayerController{
 		super.PlayerStreamOther(stream, info);
 	}
 	
+	override protected function PlayerLateUpdateMe() {
+		super.PlayerLateUpdateMe();
+		
+        if(core.isConnected){
+            rotationObject.transform.rotation = Quaternion.Lerp(rotationObject.transform.rotation, core.bodyCorrectPlayerRot, Time.deltaTime * smooth);
+        }
+	}
+	
+	override protected function PlayerLateUpdateOther() {
+		super.PlayerLateUpdateOther();
+		
+      	transform.position = Vector3.Lerp(transform.position, correctPlayerPos, Time.deltaTime * smooth);
+        if(!core.isConnected){
+           rotationObject.transform.rotation = Quaternion.Lerp(rotationObject.transform.rotation, correctPlayerRot, Time.deltaTime * smooth);
+        }
+	}
+	
 	override protected function PlayerUpdate() {		
 		super.PlayerUpdate();
 		
 		cameraObject.active = false;
-		gameObject.GetComponent(CharacterMotor).canControl = photonView.isMine;
+//		gameObject.GetComponent(CharacterMotor).canControl = photonView.isMine;
 	}
 	
 	override protected function PlayerUpdateMe() {
 		super.PlayerUpdateMe();
-		
-		gameObject.GetComponent(MouseLook).canRotation = !core.isConnected;
-       	if(core.isConnected){
-            rotationObject.transform.rotation = Quaternion.Lerp(rotationObject.transform.rotation, core.bodyCorrectPlayerRot, Time.deltaTime * smooth);
-        }
         
         if(Input.GetMouseButton(0) && core.head != null)
 		{
@@ -63,11 +79,6 @@ class BodyController extends PlayerController{
 		super.PlayerUpdateOther();
 		
 		gameObject.GetComponent(MouseLook).canRotation = core.isConnected;
-        cameraObject.GetComponent(MouseLook).canRotation = false;
-        transform.position = Vector3.Lerp(transform.position, correctPlayerPos, Time.deltaTime * smooth);
-        if(!core.isConnected){
-           rotationObject.transform.rotation = Quaternion.Lerp(rotationObject.transform.rotation, correctPlayerRot, Time.deltaTime * smooth);
-        }
             
        	leftHandController.ikActive = action;
 	}

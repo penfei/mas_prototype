@@ -375,8 +375,6 @@ MonoBehaviour:
   inputSneak: 0
   inputRun: 0
   inputSeatDown: 0
-  inputTurnLeft: 0
-  inputTurnRight: 0
   movement:
     maxForwardSpeed: 10
     maxSidewaysSpeed: 10

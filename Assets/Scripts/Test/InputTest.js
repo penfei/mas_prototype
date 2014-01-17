@@ -3,6 +3,19 @@ private var motor : CharacterMotor;
 private var leftHandController:LeftHandController;
 var target:GameObject;
 
+	public var runSpeed : float = 4.6;
+	public var runStrafeSpeed : float = 3.07;
+	public var runBackSpeed : float = 2.5;
+	public var walkSpeed : float = 1.22;
+	public var walkStrafeSpeed : float = 1.22;
+	public var walkBackSpeed : float = 1.1;
+	public var crouchRunSpeed : float = 5;
+	public var crouchRunStrafeSpeed : float = 5;
+	public var crouchRunBackSpeed : float = 5;
+	public var crouchWalkSpeed : float = 1.8;
+	public var crouchWalkStrafeSpeed : float = 1.8;
+	public var crouchWalkBackSpeed : float = 1.8;
+
 function Start () {
 	motor = GetComponent(CharacterMotor);
 	leftHandController = GetComponentInChildren(LeftHandController);
@@ -27,16 +40,21 @@ function Update () {
 			motor.inputSneak = Input.GetButton("Sneak");
 			motor.inputRun = Input.GetButton("Run");
 			motor.inputSeatDown = Input.GetButton("SeatDown");
-			motor.inputTurnLeft = Input.GetButton("TurnLeft");
-			motor.inputTurnRight = Input.GetButton("TurnRight");
 			//motor.inputSneakIdle = Input.GetButton("SneakIdle");
             
             leftHandController.ikActive = Input.GetButton("Action");
+            
+            var crouch:boolean = motor.inputSneak;
+            var walk:boolean = ((motor.inputX != 0f) || (motor.inputY!= 0f)) && !motor.inputRun;
+            
+            motor.movement.maxForwardSpeed = ((walk) ? ((crouch) ? crouchWalkSpeed : walkSpeed) : ((crouch) ? crouchRunSpeed : runSpeed));
+			motor.movement.maxBackwardsSpeed = ((walk) ? ((crouch) ? crouchWalkBackSpeed : walkBackSpeed) : ((crouch) ? crouchRunBackSpeed : runBackSpeed));
+			motor.movement.maxSidewaysSpeed = ((walk) ? ((crouch) ? crouchWalkStrafeSpeed : walkStrafeSpeed) : ((crouch) ? crouchRunStrafeSpeed : runStrafeSpeed));
 }
 
 function FixedUpdate () {
 	if(leftHandController.ikActive && leftHandController.targetFirst && leftHandController.inRadius){
-		target.GetComponent(ImpulsController).AddImpulse(leftHandController.leftHand);
+		target.GetComponent(ImpulsController).AddImpulse(leftHandController.gameObject);
 	}
 }
 

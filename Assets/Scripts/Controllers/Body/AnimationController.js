@@ -10,25 +10,37 @@ class AnimationController extends Photon.MonoBehaviour{
 	private var currentBaseState:AnimatorStateInfo ;
 	private var motor : CharacterMotor;
 	
-	private var doTurnLeft:boolean = false;
-	private var doTurnRight:boolean = false;
-	private var targetTurnLeft:float = -90;
-	private var targetTurnRight:float = 90;
-	private var targetRotation:Quaternion;
 	private var isRotating:boolean = false;
-	private var rotateFrom:float;
-	private var rotateTo:float;
-	private var sumRotate:float;
+	
+	var rotationSpeed:float = 100f;
+	var walkRotationSpeed:float = 1.5f;
+	var smooth:float = 10f;
+	var united = false;
+	
+	private var v:float = 0f;
+	private var h:float = 0f;
+	private var d:float = 0f;
 	
 	//static int idleState = Animator.StringToHash("Base Layer.Idle");	
 	//static int locoState = Animator.StringToHash("Base Layer.Locomotion");
 	static private var jumpState:int = Animator.StringToHash("Base Layer.Jump");
+	
+	private var leftHandController:LeftHandController;
+	private var core:Core;
 
 	function Awake ()
 	{
 		anim = GetComponent(Animator);
 		hash = GameObject.FindGameObjectWithTag(Tags.gameController).GetComponent(HashIds);
 		motor = player.GetComponent(CharacterMotor);
+		anim.SetLayerWeight(1, 1f);
+		leftHandController = GetComponentInChildren(LeftHandController);
+		core = GameObject.Find("Administration").GetComponent(Core);
+	}
+	
+	function OnAnimatorIK(layerIndex:int)
+	{	
+		leftHandController.OnAnimatorIK(layerIndex);
 	}
 		
 	function FixedUpdate ()
@@ -38,6 +50,10 @@ class AnimationController extends Photon.MonoBehaviour{
 		
 	function Update ()
 	{	
+		if(core){
+			united = core.isConnected;
+		}
+		
 		movementManagement(
 			motor.inputX, 
 			motor.inputY, 
@@ -45,10 +61,9 @@ class AnimationController extends Photon.MonoBehaviour{
 			motor.inputJump, 
 			motor.inputRun,
 			motor.inputSeatDown,
-			motor.inputTurnLeft,
-			motor.inputTurnRight
+			motor.inputX == -1,
+			motor.inputX == 1
 		);
-	//	AudioManagement();
 	}
 		
 		
@@ -63,8 +78,7 @@ class AnimationController extends Photon.MonoBehaviour{
 		turnRight:boolean
 	){
 		currentBaseState = anim.GetCurrentAnimatorStateInfo(0);
-	//	Debug.Log(currentBaseState.length );
-	//	Debug.Log(contr.isGrounded);
+	
 		if (currentBaseState.nameHash != jumpState)
 		{
 			if(jump)
@@ -95,70 +109,22 @@ class AnimationController extends Photon.MonoBehaviour{
 	//		}
 		}
 		
-		// если движение вперед или назад
-		if(vertical != 0f){
-			// если движение вперед
-			if(vertical == 1){
-				if(run){
-					anim.SetBool(hash.runBool, true);
-					anim.SetBool(hash.walkBool, false);
-					anim.SetBool(hash.sneakBool, false);
-					Debug.Log("run");
-				}
-				else if(sneak){
-					anim.SetBool(hash.sneakBool, true);
-					anim.SetBool(hash.runBool, false);
-					anim.SetBool(hash.walkBool, false);
-					Debug.Log("sneak");
-				}
-				else{
-					anim.SetBool(hash.sneakBool, false);
-					anim.SetBool(hash.runBool, false);
-					anim.SetBool(hash.walkBool, true);
-					Debug.Log("walk");
-				}
-				anim.SetBool(hash.walkBackBool, false);
-			}
-			// если движение назад
-			else{
-				anim.SetBool(hash.walkBackBool, true);
-				anim.SetBool(hash.walkBool, false);
-				anim.SetBool(hash.runBool, false);
-				anim.SetBool(hash.sneakBool, false);
-				Debug.Log("back");
-			}
-		}
-		// если нет движения вперед и назад
-		else{
-			anim.SetBool(hash.runBool, false);
-			anim.SetBool(hash.walkBool, false);
-			anim.SetBool(hash.walkBackBool, false);
-			anim.SetBool(hash.sneakBool, false);
-			Debug.Log("none");
+		v = Mathf.Lerp(v, vertical, Time.deltaTime * smooth);
+		h = Mathf.Lerp(h, horizontal, Time.deltaTime * smooth);
+		
+		anim.SetFloat("Horizontal", h);
+		anim.SetFloat("Vertical", v);
+		anim.SetBool("United", united);
+		
+		if(united){
+			anim.SetBool(hash.walkBool, (vertical != 0f || horizontal != 0f) && !run);
+			anim.SetBool(hash.runBool, (vertical != 0f || horizontal != 0f) && run);
+		} else {
+			anim.SetBool(hash.walkBool, vertical != 0f && !run);
+			anim.SetBool(hash.runBool, vertical != 0f && run);
 		}
 		
-		
-		
-		// если движение влево или вправо
-		if(horizontal != 0f){
-			// если движение влево
-			if(horizontal == -1){
-				anim.SetBool(hash.walkLeftBool, true);
-				anim.SetBool(hash.walkRightBool, false);
-			}
-			// если движение вправо
-			else{
-				anim.SetBool(hash.walkLeftBool, false);
-				anim.SetBool(hash.walkRightBool, true);
-			}
-		}
-		// если нет движения влево и вправо
-		else{
-			anim.SetBool(hash.walkLeftBool, false);
-			anim.SetBool(hash.walkRightBool, false);
-		}
-		
-		
+		anim.SetBool(hash.sneakBool, sneak);
 		
 		if(seatDown){
 			anim.SetBool(hash.seatDownBool, true);
@@ -166,71 +132,24 @@ class AnimationController extends Photon.MonoBehaviour{
 			anim.SetBool(hash.seatDownBool, false);
 		}
 		
-		
-		// перешаг влево
-		if(turnLeft && !isRotating){
-			doTurnLeft = true;
-			isRotating = true;
-			rotateFrom = player.transform.localEulerAngles.y;
-			rotateTo = rotateFrom - 90;
-			sumRotate = 0;
-		}
-		else if(turnRight && !isRotating){
-			doTurnRight = true;
-			isRotating = true;
-			rotateFrom = player.transform.localEulerAngles.y;
-			rotateTo = rotateFrom + 90;
-			sumRotate = 0;
-		}
-		if(turnLeft){
-			anim.SetBool("Turn", doTurnLeft);
-			anim.SetFloat("Direction", targetTurnLeft);
-		}
-		else if(turnRight){
-			anim.SetBool("Turn", doTurnRight);
-			anim.SetFloat("Direction", targetTurnRight);
-		}
-		else{
-			anim.SetFloat("Direction", targetTurnLeft);
-			anim.SetBool("Turn", false);
-		}
-		//if (anim.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Idle")){
-			//if(doTurnLeft){
-				//targetRotation = transform.rotation * Quaternion.AngleAxis(targetTurnLeft, Vector3.up); // Compute target rotation when doTurn is triggered
-				//doTurnLeft = false;
-				//player.transform.localEulerAngles = new Vector3(player.transform.localEulerAngles.x, player.transform.localEulerAngles.y-90, player.transform.localEulerAngles.z);
-			//}
-			//else if(doTurnRight){
-			//	targetRotation = transform.rotation * Quaternion.AngleAxis(targetTurnRight, Vector3.up); // Compute target rotation when doTurn is triggered
-			//	doTurnRight = false;
-				//player.transform.localEulerAngles = new Vector3(player.transform.localEulerAngles.x, player.transform.localEulerAngles.y+90, player.transform.localEulerAngles.z);
-			//}
-		//}
-		//else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.Turn"))
-		//{
-			// calls MatchTarget when in Turn state, subsequent calls are ignored until targetTime (0.9f) is reached .
-		//	anim.MatchTarget(Vector3.one, targetRotation, AvatarTarget.Root, new MatchTargetWeightMask(Vector3.zero, 1), anim.GetCurrentAnimatorStateInfo(0).normalizedTime, 0.9f);			
-		//}
+		isRotating = (turnLeft || turnRight) && !(turnLeft && turnRight);
+		anim.SetBool("Turn", isRotating);
 		if(isRotating){
-			if(sumRotate > 90){
-				player.transform.localEulerAngles.y = rotateTo;
-				isRotating = false;
-				doTurnLeft = false;
-				doTurnRight = false;
+			var rt:float = rotationSpeed;
+			if(vertical != 0f){
+				rt *= walkRotationSpeed;
 			}
-			else{
-				sumRotate += 100*Time.deltaTime;
-				if(doTurnLeft){
-					player.transform.localEulerAngles.y -= 100*Time.deltaTime;
-				}
-				else if(doTurnRight){
-					player.transform.localEulerAngles.y += 100*Time.deltaTime;
-				}
-//				Debug.Log(player.transform.localEulerAngles.y);
+			if(turnLeft){
+//				player.transform.localEulerAngles.y -= rt*Time.deltaTime;
+				d = Mathf.Lerp(d, -1, Time.deltaTime * smooth);
 			}
+			if(turnRight){
+				d = Mathf.Lerp(d, 1, Time.deltaTime * smooth);
+//				player.transform.localEulerAngles.y += rt*Time.deltaTime;
+			} 
+		} else {
+			d = Mathf.Lerp(d, 0, Time.deltaTime * smooth);
 		}
-		
-		//Debug.Log("horizontal = " + horizontal);
-		//Debug.Log("vertical = " + vertical);
+		anim.SetFloat("Direction", d);
 	}
 }

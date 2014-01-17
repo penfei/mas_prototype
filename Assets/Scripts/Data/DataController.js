@@ -58,7 +58,7 @@ function InitSession (sessionId:int) {
     var lastLevel = PlayerPrefs.GetString("last_level_with_" + otherPlayer.fullName + "_in_game_" + sessionId.ToString());
     if (String.IsNullOrEmpty(lastLevel))
 	{
-	   	lastLevel = Levels.Tutorial;
+	   	lastLevel = Levels.Levels[0];
 	}
    	session.Init(sessionId, lastLevel);
 }

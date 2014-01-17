@@ -19,6 +19,7 @@ class PlayerController extends Photon.MonoBehaviour{
 	protected var sneak = false;
 	protected var jump = false;
 	protected var action = false;
+	protected var run = false;
 	protected var core:Core;
 	
 	function Awake () {
@@ -60,6 +61,7 @@ class PlayerController extends Photon.MonoBehaviour{
         stream.SendNext(Input.GetButton("Sneak")); 
         stream.SendNext(Input.GetButton("Jump"));
         stream.SendNext(Input.GetButton("Action"));
+        stream.SendNext(Input.GetButton("Run"));
     }
     
     protected function PlayerStreamOther(stream:PhotonStream, info:PhotonMessageInfo) {
@@ -69,7 +71,8 @@ class PlayerController extends Photon.MonoBehaviour{
         v = stream.ReceiveNext();
         sneak = stream.ReceiveNext();
         jump = stream.ReceiveNext();
-        action = stream.ReceiveNext();            
+        action = stream.ReceiveNext();
+        run = stream.ReceiveNext();         
     }
     
     function FixedUpdate () {
@@ -77,6 +80,28 @@ class PlayerController extends Photon.MonoBehaviour{
 	}
 	
 	protected function PlayerFixedUpdate() {
+	
+	}
+	
+	function LateUpdate()
+    {
+    	PlayerLateUpdate();
+    	if(photonView.isMine){
+    		PlayerLateUpdateMe();
+    	}else{
+    		PlayerLateUpdateOther();
+    	}
+	}
+	
+	protected function PlayerLateUpdate() {
+	
+	}
+	
+	protected function PlayerLateUpdateMe() {
+	
+	}
+	
+	protected function PlayerLateUpdateOther() {
 	
 	}
 
@@ -106,9 +131,10 @@ class PlayerController extends Photon.MonoBehaviour{
 			
 		motor.inputMoveDirection = rotationObject.transform.rotation * directionVector;
 		motor.inputJump = Input.GetButton("Jump");
-		motor.inputSneak = Input.GetButton("Sneak");;
+		motor.inputSneak = Input.GetButton("Sneak");
         motor.inputX = Input.GetAxis("Horizontal");
        	motor.inputY = Input.GetAxis("Vertical");
+       	motor.inputRun = Input.GetButton("Run");
 	}
 	
 	protected function PlayerUpdateOther() {
@@ -116,5 +142,6 @@ class PlayerController extends Photon.MonoBehaviour{
        	motor.inputSneak = sneak;
         motor.inputX = h;
         motor.inputY = v;
+        motor.inputRun = run;
 	}
 }

@@ -25,8 +25,6 @@ var inputJump : boolean = false;
 var inputSneak : boolean = false;
 var inputRun : boolean = false;
 var inputSeatDown : boolean = false;
-var inputTurnLeft : boolean = false;
-var inputTurnRight : boolean = false;
 
 class CharacterMotorMovement {
 	// The maximum horizontal speed when moving

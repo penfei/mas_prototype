@@ -28,12 +28,11 @@ class LeftHandController extends MonoBehaviour{
 	public var backObject:GameObject;
 	public var rightObject:GameObject;
 	public var targetObject:GameObject;
-	public var leftHand:GameObject;
+	public var hero:GameObject;
 	
 	function Start () {
-		avatar = GetComponent(Animator);
+		avatar = hero.GetComponent(Animator);
 		core = GameObject.Find("Administration").GetComponent(Core);
-		avatar.SetLayerWeight(1, 1f);
 	}
 	
 	function Update () {
@@ -44,7 +43,7 @@ class LeftHandController extends MonoBehaviour{
 		if(targetObject == null){
 			return false;
 		}
-		return Vector3.Distance(targetObject.transform.position, leftHand.transform.position) < distanceConnection;
+		return Vector3.Distance(targetObject.transform.position, gameObject.transform.position) < distanceConnection;
 	}
 	
 	function OnAnimatorIK(layerIndex:int)
@@ -98,16 +97,16 @@ class LeftHandController extends MonoBehaviour{
 	    	targetInSight = false;
 			targetFirst = false;
 				
-	        var direction:Vector3 = targetObject.transform.position - transform.position;
-			var angle:float = Vector3.Angle(direction, transform.forward);
-			angleRight = Vector3.Angle(direction, transform.right);
+	        var direction:Vector3 = targetObject.transform.position - hero.transform.position;
+			var angle:float = Vector3.Angle(direction, hero.transform.forward);
+			angleRight = Vector3.Angle(direction, hero.transform.right);
 	
 			if(angle < fieldOfViewAngle * 0.5f + offset)
 			{
 				targetInSight = true;
 			}
 			var hit:RaycastHit;
-			if(Physics.Raycast(transform.position, direction, hit))
+			if(Physics.Raycast(hero.transform.position, direction, hit))
 			{
 				if(hit.collider.gameObject == targetObject)
 				{

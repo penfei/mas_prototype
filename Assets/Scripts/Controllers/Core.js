@@ -151,7 +151,7 @@ class Core extends Photon.MonoBehaviour{
     	head.transform.parent = body.GetComponent(BodyController).boneForHead.transform;
     	
     	head.GetComponent(PlayerController).cameraObject.transform.position = body.GetComponent(BodyController).boneForHeadCamera.transform.position;
-    	head.GetComponent(PlayerController).cameraObject.transform.rotation = body.GetComponent(BodyController).boneForHeadCamera.transform.rotation;
+    	head.GetComponent(PlayerController).cameraObject.transform.rotation = Quaternion.identity;
 //    	head.GetComponent(PlayerController).cameraObject.transform.parent = body.GetComponent(BodyController).boneForHeadCamera.transform;
 		head.GetComponent(PlayerController).cameraObject.transform.parent = null;
     	head.GetComponent(CharacterController).enabled = false;
