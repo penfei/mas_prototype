@@ -18,7 +18,7 @@ class ItemDistributor extends Photon.MonoBehaviour{
 	function Start () {
 		core = GameObject.Find("Administration").GetComponent(Core);
 		data = GameObject.Find("Administration").GetComponent(GameDataController);
-		Debug.Log("data: " + data);
+//		Debug.Log("data: " + data);
 		flag = false;
 		itemName = gameObject.name + gameObject.transform.position.x.ToString() + "_" + gameObject.transform.position.y.ToString() + "_" + gameObject.transform.position.z.ToString();
 	}

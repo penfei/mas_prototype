@@ -10,7 +10,6 @@ class StartMenu extends Photon.MonoBehaviour{
 	private var connected = false;
 	private var complete = false;
 	private var gamesCount = 0;
-	var fastStart = false;
 	
 	private var connectToRoom = false;
 
@@ -172,14 +171,6 @@ class StartMenu extends Photon.MonoBehaviour{
     }
 	
 	function Update () {
-		if(PhotonNetwork.countOfPlayers > 0 && fastStart && !connectToRoom){
-			connectToRoom = true;
-			if (PhotonNetwork.countOfPlayers == 1){
-				PhotonNetwork.CreateRoom(PhotonNetwork.playerName, true, true, 2);
-			} else {
-				PhotonNetwork.JoinRandomRoom();
-			}
-		}
 		if(connected && PhotonNetwork.otherPlayers.Length == 1 && !complete){
 			complete = true;
 			data.otherPlayer.Init(PhotonNetwork.otherPlayers[0].ToString());
@@ -187,9 +178,6 @@ class StartMenu extends Photon.MonoBehaviour{
 			if(gamesCount == 0){
 				NewGame(true);
 			}
-			if(fastStart){
-				ContinueGame(false);
-			} 
 		}
 	}
 	

@@ -6,17 +6,17 @@ class GameDataController extends DataController{
 	private var quests:QuestController;
 	
 	function Start () {
-		player.Init();
-		
-		StartLevel();
+
 	}
 
 	function Update () {
 		Debug.Log(GetItemCountByName(Items.money));
 	}
 	
-	public function StartLevel():void{
-		otherPlayer.Init(PhotonNetwork.otherPlayers[0].ToString());
+	public function StartLevel(otherPlayerName:String):void{
+		player.Init();
+		
+		otherPlayer.Init(otherPlayerName);
 	    InitSession(PlayerPrefs.GetInt("last_game_with_" + otherPlayer.fullName));
 	    
 	    quests = GetComponent(QuestController);
@@ -39,7 +39,6 @@ class GameDataController extends DataController{
 		for (var i:uint = 0; i < items.length; i++){
 			var item:ItemData = items[i] as ItemData;
 			var playerItem:ItemData = GetItemByName(item.itemName);
-			Debug.Log("items count before reward = " + playerItem.itemCount);
 			if(reward.rewardActionType[i] == RewardActionType.Add){
 				playerItem.itemCount += item.itemCount;
 			}
@@ -50,11 +49,6 @@ class GameDataController extends DataController{
 				playerItem.itemCount = item.itemCount;
 			}
 	//		SaveItemCount(playerItem);
-		}
-		
-		for (var j:uint = 0; j < items.length; j++){
-			var pItem:ItemData = GetItemByName((items[j] as ItemData).itemName);
-			Debug.Log("items count after reward = " + pItem.itemCount);
 		}
 	}
 

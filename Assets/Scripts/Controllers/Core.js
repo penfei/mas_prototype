@@ -15,21 +15,39 @@ class Core extends Photon.MonoBehaviour{
 	var bodyStartPosition:Transform;
 	var headStartPosition:Transform;
 	
+	var fastStart = false;
+	
 	public var body:GameObject;
 	public var head:GameObject;
 	
 	private var timeAction = 0f;
+	private var data:GameDataController;
 	
 	var bodyCorrectPlayerRot:Quaternion = Quaternion.identity;
 
 	function Awake()
     {
-		if (!PhotonNetwork.connected)
+    	data = GetComponent(GameDataController);
+		if (!PhotonNetwork.connected && !fastStart)
         {
             Application.LoadLevel(Levels.Menu);
             return;
         }
+		if (fastStart){
+			PhotonNetwork.automaticallySyncScene = true;
 		
+			if (PhotonNetwork.connectionStateDetailed == PeerState.PeerCreated)
+		    {
+		        PhotonNetwork.ConnectUsingSettings("1.0");
+		    }
+		}
+	}
+	
+	function Start()
+	{
+		if(!fastStart){
+			data.StartLevel(PhotonNetwork.otherPlayers[0].ToString());
+		}
 	}
 	
 	function OnGUI()
@@ -42,10 +60,16 @@ class Core extends Photon.MonoBehaviour{
 			if (GUI.Button (new Rect(10,50,100,30),"Head")){
 				InitHead(null);
 				photonView.RPC("InitBody", PhotonTargets.Others);
+				if(fastStart){
+					InitBody(null);
+				}
 			}
 			if (GUI.Button (new Rect(10,90,100,30),"Body")){
 				InitBody(null);
 				photonView.RPC("InitHead", PhotonTargets.Others);
+				if(fastStart){
+					InitHead(null);
+				}
 			}
 		}
     }
@@ -64,6 +88,14 @@ class Core extends Photon.MonoBehaviour{
     	isBody = true;
 		PhotonNetwork.Instantiate(this.bodyPrefab.name, bodyStartPosition.position, bodyStartPosition.rotation, 0);
 		GameObject.Find("Camera").active = false;
+    }
+    
+    function OnJoinedLobby()
+    {
+    	if(fastStart){
+			PhotonNetwork.CreateRoom("solo" + Random.Range(1, 99999), true, true, 2);
+			data.StartLevel("test_bot&" + data.player.userId);
+		}
     }
 	
 	function OnMasterClientSwitched(player:PhotonPlayer)
