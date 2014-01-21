@@ -16,6 +16,8 @@ function Start () {
 }
 
 function Update () {
+	motor.canControl = (Input.GetButton("Jump") && !animationController.IsJumpState()) || !motor.IsGrounded;
+	anim.applyRootMotion = !motor.canControl;
 	
 	var directionVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 			if (directionVector != Vector3.zero) {
@@ -31,16 +33,13 @@ function Update () {
             motor.inputY = Input.GetAxis("Vertical");
 			motor.inputJump = Input.GetButton("Jump");
 			motor.inputSneak = Input.GetButton("Sneak");
-			motor.inputRun = Input.GetButton("Run");
-			motor.inputSeatDown = Input.GetButton("SeatDown");
+			motor.inputWalk = Input.GetButton("Walk");
 
             leftHandController.ikActive = Input.GetButton("Action");       
 }
 
 function FixedUpdate () {
-	if(leftHandController.ikActive && leftHandController.targetFirst && leftHandController.inRadius){
-		target.GetComponent(ImpulsController).AddImpulse(leftHandController.gameObject);
-	}
+	target.GetComponent(ImpulsController).AddImpulse(leftHandController.gameObject, leftHandController.ikActive && leftHandController.targetFirst && leftHandController.inRadius);
 }
 
 function activateCharacterController(value:boolean){

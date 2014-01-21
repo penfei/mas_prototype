@@ -23,7 +23,7 @@ var inputX : float = 0;
 var inputY : float = 0;
 var inputJump : boolean = false;
 var inputSneak : boolean = false;
-var inputRun : boolean = false;
+var inputWalk : boolean = false;
 var inputSeatDown : boolean = false;
 
 class CharacterMotorMovement {
@@ -170,7 +170,7 @@ class CharacterMotorSliding {
 
 var sliding : CharacterMotorSliding = CharacterMotorSliding();
 
-@System.NonSerialized
+//@System.NonSerialized
 var grounded : boolean = true;
 
 @System.NonSerialized
@@ -527,7 +527,7 @@ private function AdjustGroundVelocityToNormal (hVelocity : Vector3, groundNormal
 	return Vector3.Cross(sideways, groundNormal).normalized * hVelocity.magnitude;
 }
 
-private function IsGroundedTest () {
+public function IsGroundedTest () {
 	return (groundNormal.y > 0.01);
 }
 

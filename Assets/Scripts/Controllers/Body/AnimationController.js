@@ -47,6 +47,14 @@ class AnimationController extends Photon.MonoBehaviour{
 	{
 		
 	}
+	
+	public function IsJumpState():boolean{
+		var stateName:int = anim.GetCurrentAnimatorStateInfo(0).nameHash;
+		for(var a:AnimationInfo in anim.GetCurrentAnimationClipState(0)){
+			if(a.clip.name.Contains("Jump")) return true;
+		}
+		return false;
+	}
 		
 	function Update ()
 	{	
@@ -59,7 +67,7 @@ class AnimationController extends Photon.MonoBehaviour{
 			motor.inputY, 
 			motor.inputSneak, 
 			motor.inputJump, 
-			motor.inputRun,
+			motor.inputWalk,
 			motor.inputSeatDown,
 			motor.inputX == -1,
 			motor.inputX == 1
@@ -72,30 +80,30 @@ class AnimationController extends Photon.MonoBehaviour{
 		vertical:float, 
 		sneak:boolean, 
 		jump:boolean,
-		run:boolean,
+		walk:boolean,
 		seatDown:boolean,
 		turnLeft:boolean,
 		turnRight:boolean
 	){
 		currentBaseState = anim.GetCurrentAnimatorStateInfo(0);
 	
-		if (currentBaseState.nameHash != jumpState)
-		{
-			if(jump)
-			{
-				anim.SetBool("Jump", true);
-			}
-		}
-			
-		else if(currentBaseState.nameHash == jumpState)
-		{
-			if(!anim.IsInTransition(0))
-			{
-	//			if(useCurves)
-	//				col.height = anim.GetFloat("ColliderHeight");
-					
-				anim.SetBool("Jump", false);
-			}
+//		if (currentBaseState.nameHash != jumpState)
+//		{
+//			if(jump)
+//			{
+//				anim.SetBool("Jump", true);
+//			}
+//		}
+//			
+//		else if(currentBaseState.nameHash == jumpState)
+//		{
+//			if(!anim.IsInTransition(0))
+//			{
+//	//			if(useCurves)
+//	//				col.height = anim.GetFloat("ColliderHeight");
+//					
+//				anim.SetBool("Jump", false);
+//			}
 				
 	//		Ray ray = new Ray(transform.position + Vector3.up, -Vector3.up);
 	//		RaycastHit hitInfo = new RaycastHit();
@@ -107,22 +115,27 @@ class AnimationController extends Photon.MonoBehaviour{
 	//				anim.MatchTarget(hitInfo.point, Quaternion.identity, AvatarTarget.Root, new MatchTargetWeightMask(new Vector3(0, 1, 0), 0), 0.35f, 0.5f);
 	//			}
 	//		}
-		}
+//		}
 		
 		v = Mathf.Lerp(v, vertical, Time.deltaTime * smooth);
 		h = Mathf.Lerp(h, horizontal, Time.deltaTime * smooth);
-		
+//		Debug.Log(motor.movement.velocity.y);
+		anim.SetBool("InAir", !motor.IsGrounded());
 		anim.SetFloat("Horizontal", h);
 		anim.SetFloat("Vertical", v);
 		anim.SetBool("United", united);
+		anim.SetBool("Jump", jump && !IsJumpState());
 		
-		if(united){
-			anim.SetBool(hash.walkBool, (vertical != 0f || horizontal != 0f) && !run);
-			anim.SetBool(hash.runBool, (vertical != 0f || horizontal != 0f) && run);
-		} else {
-			anim.SetBool(hash.walkBool, vertical != 0f && !run);
-			anim.SetBool(hash.runBool, vertical != 0f && run);
-		}
+		if(motor.IsGrounded()){
+			
+			if(united){
+				anim.SetBool(hash.walkBool, (vertical != 0f || horizontal != 0f) && walk);
+				anim.SetBool(hash.runBool, (vertical != 0f || horizontal != 0f) && !walk);
+			} else {
+				anim.SetBool(hash.walkBool, vertical != 0f && walk);
+				anim.SetBool(hash.runBool, vertical != 0f && !walk);
+			}
+		} 
 		
 		anim.SetBool(hash.sneakBool, sneak);
 		

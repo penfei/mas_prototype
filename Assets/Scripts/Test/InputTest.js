@@ -38,14 +38,14 @@ function Update () {
             motor.inputY = Input.GetAxis("Vertical");
 			motor.inputJump = Input.GetButton("Jump");
 			motor.inputSneak = Input.GetButton("Sneak");
-			motor.inputRun = Input.GetButton("Run");
+			motor.inputWalk = Input.GetButton("Walk");
 			motor.inputSeatDown = Input.GetButton("SeatDown");
 			//motor.inputSneakIdle = Input.GetButton("SneakIdle");
             
             leftHandController.ikActive = Input.GetButton("Action");
             
             var crouch:boolean = motor.inputSneak;
-            var walk:boolean = ((motor.inputX != 0f) || (motor.inputY!= 0f)) && !motor.inputRun;
+            var walk:boolean = ((motor.inputX != 0f) || (motor.inputY!= 0f)) && !motor.inputWalk;
             
             motor.movement.maxForwardSpeed = ((walk) ? ((crouch) ? crouchWalkSpeed : walkSpeed) : ((crouch) ? crouchRunSpeed : runSpeed));
 			motor.movement.maxBackwardsSpeed = ((walk) ? ((crouch) ? crouchWalkBackSpeed : walkBackSpeed) : ((crouch) ? crouchRunBackSpeed : runBackSpeed));
@@ -53,9 +53,7 @@ function Update () {
 }
 
 function FixedUpdate () {
-	if(leftHandController.ikActive && leftHandController.targetFirst && leftHandController.inRadius){
-		target.GetComponent(ImpulsController).AddImpulse(leftHandController.gameObject);
-	}
+	target.GetComponent(ImpulsController).AddImpulse(leftHandController.gameObject, leftHandController.ikActive && leftHandController.targetFirst && leftHandController.inRadius);
 }
 
 function activateCharacterController(value:boolean){

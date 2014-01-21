@@ -134,7 +134,7 @@ class PlayerController extends Photon.MonoBehaviour{
 		motor.inputSneak = Input.GetButton("Sneak");
         motor.inputX = Input.GetAxis("Horizontal");
        	motor.inputY = Input.GetAxis("Vertical");
-       	motor.inputRun = Input.GetButton("Run");
+       	motor.inputWalk = Input.GetButton("Walk");
 	}
 	
 	protected function PlayerUpdateOther() {
@@ -142,6 +142,6 @@ class PlayerController extends Photon.MonoBehaviour{
        	motor.inputSneak = sneak;
         motor.inputX = h;
         motor.inputY = v;
-        motor.inputRun = run;
+        motor.inputWalk = run;
 	}
 }

@@ -4955,8 +4955,8 @@ GameObject:
   - 143: {fileID: 488732290}
   - 114: {fileID: 488732289}
   - 114: {fileID: 488732287}
-  - 54: {fileID: 488732288}
   - 135: {fileID: 488732291}
+  - 54: {fileID: 488732288}
   m_Layer: 0
   m_Name: HeadPlayer_test
   m_TagString: toChange
@@ -4971,7 +4971,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 488732285}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.9455566, y: 2.97707319, z: -15.419405}
+  m_LocalPosition: {x: 14.9455566, y: 9.59094429, z: -15.419405}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 671405811}
@@ -4997,14 +4997,14 @@ Rigidbody:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 488732285}
   serializedVersion: 2
-  m_Mass: .100000001
-  m_Drag: 3
-  m_AngularDrag: .0500000007
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &488732289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5023,7 +5023,7 @@ MonoBehaviour:
   inputY: 0
   inputJump: 0
   inputSneak: 0
-  inputRun: 0
+  inputWalk: 0
   inputSeatDown: 0
   movement:
     maxForwardSpeed: 10
@@ -5051,8 +5051,8 @@ MonoBehaviour:
       m_PostInfinity: 2
     maxGroundAcceleration: 30
     maxAirAcceleration: 20
-    gravity: 10
-    maxFallSpeed: 20
+    gravity: 20
+    maxFallSpeed: 100
   jumping:
     enabled: 1
     baseHeight: 1
@@ -5067,6 +5067,7 @@ MonoBehaviour:
     slidingSpeed: 15
     sidewaysControl: 1
     speedControl: .400000006
+  grounded: 1
 --- !u!143 &488732290
 CharacterController:
   m_ObjectHideFlags: 0
@@ -5090,7 +5091,7 @@ SphereCollider:
   m_GameObject: {fileID: 488732285}
   m_Material: {fileID: 13400000, guid: b688c255e2b3d354ab72a351bed697c5, type: 2}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: .25
   m_Center: {x: 0, y: 0, z: 0}
@@ -5419,7 +5420,7 @@ MonoBehaviour:
   inputY: 0
   inputJump: 0
   inputSneak: 0
-  inputRun: 0
+  inputWalk: 0
   inputSeatDown: 0
   movement:
     maxForwardSpeed: 5
@@ -5463,6 +5464,7 @@ MonoBehaviour:
     slidingSpeed: 10
     sidewaysControl: 1
     speedControl: .400000006
+  grounded: 1
 --- !u!114 &517863898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9383,7 +9385,6 @@ GameObject:
   - 4: {fileID: 977495318}
   - 95: {fileID: 977495319}
   - 114: {fileID: 977495320}
-  - 54: {fileID: 977495323}
   - 114: {fileID: 977495326}
   - 143: {fileID: 977495325}
   - 114: {fileID: 977495321}
@@ -9402,7 +9403,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 977495317}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.6143303, y: .439831257, z: -12.5947628}
+  m_LocalPosition: {x: 10.6143303, y: 2.88091397, z: -12.5947628}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1576662118}
@@ -9459,7 +9460,7 @@ MonoBehaviour:
   inputY: 0
   inputJump: 0
   inputSneak: 0
-  inputRun: 0
+  inputWalk: 0
   inputSeatDown: 0
   movement:
     maxForwardSpeed: 5
@@ -9503,6 +9504,7 @@ MonoBehaviour:
     slidingSpeed: 10
     sidewaysControl: 1
     speedControl: .400000006
+  grounded: 1
 --- !u!114 &977495322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9516,22 +9518,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 488732285}
   rotationOffset: .0199999996
---- !u!54 &977495323
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 5400000, guid: b2d032569efe6d14fb0ee78cd0c18949,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 977495317}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: .0500000007
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!143 &977495325
 CharacterController:
   m_ObjectHideFlags: 0
@@ -13780,8 +13766,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1386485369}
-  m_LocalRotation: {x: .22652249, y: .657876611, z: -.22206676, w: .683061004}
-  m_LocalPosition: {x: 5.20551491, y: 5.42153978, z: -13.3765688}
+  m_LocalRotation: {x: -.00086143543, y: .692900717, z: -.00379304588, w: .721022546}
+  m_LocalPosition: {x: 5.20551491, y: 1.28964281, z: -13.3765688}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -19039,7 +19025,7 @@ MonoBehaviour:
   inputY: 0
   inputJump: 0
   inputSneak: 0
-  inputRun: 0
+  inputWalk: 0
   inputSeatDown: 0
   movement:
     maxForwardSpeed: 5
@@ -19083,6 +19069,7 @@ MonoBehaviour:
     slidingSpeed: 10
     sidewaysControl: 1
     speedControl: .400000006
+  grounded: 1
 --- !u!143 &1953492238
 CharacterController:
   m_ObjectHideFlags: 0
