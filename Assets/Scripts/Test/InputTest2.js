@@ -3,6 +3,7 @@ private var motor : CharacterMotor;
 private var leftHandController:LeftHandController;
 private var anim:Animator;
 private var animationController:AnimationController;
+private var character:CharacterController;
 var target:GameObject;
 var rotationOffset:float = 0.1f;
 
@@ -11,6 +12,7 @@ function Start () {
 	leftHandController = GetComponentInChildren(LeftHandController);
 	anim = GetComponent(Animator);
 	animationController = GetComponent(AnimationController);
+	character = GetComponent(CharacterController);
 //	target.GetComponent(CharacterMotor).enabled = false;
 	activateCharacterController(false);
 }
@@ -18,6 +20,14 @@ function Start () {
 function Update () {
 	motor.canControl = (Input.GetButton("Jump") && !animationController.IsJumpState()) || !motor.IsGrounded;
 	anim.applyRootMotion = !motor.canControl;
+	
+	if(animationController.IsSneakState()){
+		character.height = 1.6;
+		character.center.y = 0.75;
+	} else {
+		character.height = 1.9;
+		character.center.y = 0.9;
+	}
 	
 	var directionVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 			if (directionVector != Vector3.zero) {
@@ -32,7 +42,10 @@ function Update () {
 			motor.inputX = Input.GetAxis("Horizontal");
             motor.inputY = Input.GetAxis("Vertical");
 			motor.inputJump = Input.GetButton("Jump");
-			motor.inputSneak = Input.GetButton("Sneak");
+			if(animationController.IsSneakState() && !Input.GetButton("Sneak") && checkUp()){
+				motor.inputSneak = true;
+			} else
+				motor.inputSneak = Input.GetButton("Sneak");
 			motor.inputWalk = Input.GetButton("Walk");
 
             leftHandController.ikActive = Input.GetButton("Action");       
@@ -46,4 +59,15 @@ function activateCharacterController(value:boolean){
 	target.GetComponent(CharacterMotor).enabledScript = value;
 	target.GetComponent(SphereCollider).enabled = !value;
 	target.rigidbody.useGravity = !value;
+}
+
+private function checkUp():boolean{
+	var ray:Ray = new Ray(transform.position, transform.up);
+	var	hitInfo:RaycastHit = new RaycastHit();
+	
+	if (Physics.Raycast(ray, hitInfo)){
+		return hitInfo.distance < 2;
+	} else {
+		return false;
+	}
 }

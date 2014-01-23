@@ -55,6 +55,14 @@ class AnimationController extends Photon.MonoBehaviour{
 		}
 		return false;
 	}
+	
+	public function IsSneakState():boolean{
+		var stateName:int = anim.GetCurrentAnimatorStateInfo(0).nameHash;
+		for(var a:AnimationInfo in anim.GetCurrentAnimationClipState(0)){
+			if(a.clip.name.Contains("Sneak")) return true;
+		}
+		return false;
+	}
 		
 	function Update ()
 	{	
