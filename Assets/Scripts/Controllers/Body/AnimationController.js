@@ -68,7 +68,6 @@ class AnimationController extends Photon.MonoBehaviour{
 			motor.inputSneak, 
 			motor.inputJump, 
 			motor.inputWalk,
-			motor.inputSeatDown,
 			motor.inputX == -1,
 			motor.inputX == 1
 		);
@@ -81,7 +80,6 @@ class AnimationController extends Photon.MonoBehaviour{
 		sneak:boolean, 
 		jump:boolean,
 		walk:boolean,
-		seatDown:boolean,
 		turnLeft:boolean,
 		turnRight:boolean
 	){
@@ -123,11 +121,12 @@ class AnimationController extends Photon.MonoBehaviour{
 		anim.SetBool("InAir", !motor.IsGrounded());
 		anim.SetFloat("Horizontal", h);
 		anim.SetFloat("Vertical", v);
+		anim.SetBool("Sneak", sneak);
 		anim.SetBool("United", united);
 		anim.SetBool("Jump", jump && !IsJumpState());
+		anim.SetBool(hash.sneakBool, sneak);
 		
 		if(motor.IsGrounded()){
-			
 			if(united){
 				anim.SetBool(hash.walkBool, (vertical != 0f || horizontal != 0f) && walk);
 				anim.SetBool(hash.runBool, (vertical != 0f || horizontal != 0f) && !walk);
@@ -136,14 +135,6 @@ class AnimationController extends Photon.MonoBehaviour{
 				anim.SetBool(hash.runBool, vertical != 0f && !walk);
 			}
 		} 
-		
-		anim.SetBool(hash.sneakBool, sneak);
-		
-		if(seatDown){
-			anim.SetBool(hash.seatDownBool, true);
-		}else{
-			anim.SetBool(hash.seatDownBool, false);
-		}
 		
 		isRotating = (turnLeft || turnRight) && !(turnLeft && turnRight);
 		anim.SetBool("Turn", isRotating);

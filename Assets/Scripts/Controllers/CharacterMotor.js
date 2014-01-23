@@ -24,7 +24,6 @@ var inputY : float = 0;
 var inputJump : boolean = false;
 var inputSneak : boolean = false;
 var inputWalk : boolean = false;
-var inputSeatDown : boolean = false;
 
 class CharacterMotorMovement {
 	// The maximum horizontal speed when moving

@@ -5024,7 +5024,6 @@ MonoBehaviour:
   inputJump: 0
   inputSneak: 0
   inputWalk: 0
-  inputSeatDown: 0
   movement:
     maxForwardSpeed: 10
     maxSidewaysSpeed: 10
@@ -5421,7 +5420,6 @@ MonoBehaviour:
   inputJump: 0
   inputSneak: 0
   inputWalk: 0
-  inputSeatDown: 0
   movement:
     maxForwardSpeed: 5
     maxSidewaysSpeed: 5
@@ -9461,7 +9459,6 @@ MonoBehaviour:
   inputJump: 0
   inputSneak: 0
   inputWalk: 0
-  inputSeatDown: 0
   movement:
     maxForwardSpeed: 5
     maxSidewaysSpeed: 5
@@ -19026,7 +19023,6 @@ MonoBehaviour:
   inputJump: 0
   inputSneak: 0
   inputWalk: 0
-  inputSeatDown: 0
   movement:
     maxForwardSpeed: 5
     maxSidewaysSpeed: 5

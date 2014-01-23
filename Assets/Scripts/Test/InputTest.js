@@ -39,8 +39,6 @@ function Update () {
 			motor.inputJump = Input.GetButton("Jump");
 			motor.inputSneak = Input.GetButton("Sneak");
 			motor.inputWalk = Input.GetButton("Walk");
-			motor.inputSeatDown = Input.GetButton("SeatDown");
-			//motor.inputSneakIdle = Input.GetButton("SneakIdle");
             
             leftHandController.ikActive = Input.GetButton("Action");
             
