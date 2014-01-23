@@ -202,42 +202,42 @@ BlendTree:
   - m_Motion: {fileID: 7400002, guid: a72fb85e2d133804d982acc9f29e67c7, type: 3}
     m_Threshold: 0
     m_Position: {x: 0, y: 1}
-    m_TimeScale: 1.5
+    m_TimeScale: 2
     m_CycleOffset: 0
     m_IsAnim: 1
     m_Mirror: 0
   - m_Motion: {fileID: 7400000, guid: a72fb85e2d133804d982acc9f29e67c7, type: 3}
     m_Threshold: .200000003
     m_Position: {x: 0, y: -1}
-    m_TimeScale: 1.5
+    m_TimeScale: 2
     m_CycleOffset: 0
     m_IsAnim: 1
     m_Mirror: 0
   - m_Motion: {fileID: 7400018, guid: a72fb85e2d133804d982acc9f29e67c7, type: 3}
     m_Threshold: .400000006
     m_Position: {x: 1, y: 1}
-    m_TimeScale: 1.5
+    m_TimeScale: 2
     m_CycleOffset: 0
     m_IsAnim: 1
     m_Mirror: 0
   - m_Motion: {fileID: 7400020, guid: a72fb85e2d133804d982acc9f29e67c7, type: 3}
     m_Threshold: .600000024
     m_Position: {x: -1, y: 1}
-    m_TimeScale: 1.5
+    m_TimeScale: 2
     m_CycleOffset: 0
     m_IsAnim: 1
     m_Mirror: 0
   - m_Motion: {fileID: 7400018, guid: a72fb85e2d133804d982acc9f29e67c7, type: 3}
     m_Threshold: .800000012
     m_Position: {x: 1, y: -1}
-    m_TimeScale: -1.5
+    m_TimeScale: -2
     m_CycleOffset: 0
     m_IsAnim: 1
     m_Mirror: 0
   - m_Motion: {fileID: 7400020, guid: a72fb85e2d133804d982acc9f29e67c7, type: 3}
     m_Threshold: 1
     m_Position: {x: -1, y: -1}
-    m_TimeScale: -1.5
+    m_TimeScale: -2
     m_CycleOffset: 0
     m_IsAnim: 1
     m_Mirror: 0
@@ -298,42 +298,42 @@ BlendTree:
   - m_Motion: {fileID: 7400002, guid: a72fb85e2d133804d982acc9f29e67c7, type: 3}
     m_Threshold: 0
     m_Position: {x: 0, y: 1}
-    m_TimeScale: 1.5
+    m_TimeScale: 2
     m_CycleOffset: 0
     m_IsAnim: 1
     m_Mirror: 0
   - m_Motion: {fileID: 7400000, guid: a72fb85e2d133804d982acc9f29e67c7, type: 3}
     m_Threshold: .200000003
     m_Position: {x: 0, y: -1}
-    m_TimeScale: 1.5
+    m_TimeScale: 2
     m_CycleOffset: 0
     m_IsAnim: 1
     m_Mirror: 0
   - m_Motion: {fileID: 7400012, guid: a72fb85e2d133804d982acc9f29e67c7, type: 3}
     m_Threshold: .400000006
     m_Position: {x: 1, y: 1}
-    m_TimeScale: 1.5
+    m_TimeScale: 2
     m_CycleOffset: 0
     m_IsAnim: 1
     m_Mirror: 0
   - m_Motion: {fileID: 7400010, guid: a72fb85e2d133804d982acc9f29e67c7, type: 3}
     m_Threshold: .600000024
     m_Position: {x: -1, y: 1}
-    m_TimeScale: 1.5
+    m_TimeScale: 2
     m_CycleOffset: 0
     m_IsAnim: 1
     m_Mirror: 0
   - m_Motion: {fileID: 7400014, guid: a72fb85e2d133804d982acc9f29e67c7, type: 3}
     m_Threshold: .800000012
     m_Position: {x: 1, y: -1}
-    m_TimeScale: 1.5
+    m_TimeScale: 2
     m_CycleOffset: 0
     m_IsAnim: 1
     m_Mirror: 0
   - m_Motion: {fileID: 7400016, guid: a72fb85e2d133804d982acc9f29e67c7, type: 3}
     m_Threshold: 1
     m_Position: {x: -1, y: -1}
-    m_TimeScale: 1.5
+    m_TimeScale: 2
     m_CycleOffset: 0
     m_IsAnim: 1
     m_Mirror: 0
@@ -1239,8 +1239,12 @@ Transition:
   m_TransitionDuration: .127118632
   m_TransitionOffset: 0
   m_Conditions:
-  - m_ConditionMode: 5
-    m_ConditionEvent: 
+  - m_ConditionMode: 2
+    m_ConditionEvent: Jump
+    m_EventTreshold: 0
+    m_ExitTime: .872881353
+  - m_ConditionMode: 1
+    m_ConditionEvent: InAir
     m_EventTreshold: 0
     m_ExitTime: .872881353
   m_Atomic: 1
@@ -3684,23 +3688,6 @@ StateMachine:
   - {x: -384, y: -648, z: 0}
   m_OrderedTransitions:
     data:
-      first: {fileID: 110242583}
-      second:
-      - {fileID: 110187741}
-      - {fileID: 110160091}
-    data:
-      first: {fileID: 110278802}
-      second:
-      - {fileID: 110118283}
-      - {fileID: 110121225}
-      - {fileID: 110122388}
-      - {fileID: 110186963}
-      - {fileID: 110120511}
-      - {fileID: 110156929}
-      - {fileID: 110139255}
-      - {fileID: 110179719}
-      - {fileID: 110127615}
-    data:
       first: {fileID: 0}
       second: []
     data:
@@ -3798,6 +3785,23 @@ StateMachine:
       first: {fileID: 110238901}
       second:
       - {fileID: 110182778}
+    data:
+      first: {fileID: 110278802}
+      second:
+      - {fileID: 110118283}
+      - {fileID: 110121225}
+      - {fileID: 110122388}
+      - {fileID: 110186963}
+      - {fileID: 110120511}
+      - {fileID: 110156929}
+      - {fileID: 110139255}
+      - {fileID: 110179719}
+      - {fileID: 110127615}
+    data:
+      first: {fileID: 110242583}
+      second:
+      - {fileID: 110187741}
+      - {fileID: 110160091}
     data:
       first: {fileID: 110244456}
       second:
