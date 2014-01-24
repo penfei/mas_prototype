@@ -5,6 +5,7 @@ private var anim:Animator;
 private var animationController:AnimationController;
 private var character:CharacterController;
 private var layerMask = 1 << 10;
+
 var target:GameObject;
 var rotationOffset:float = 0.1f;
 
@@ -51,10 +52,6 @@ function Update () {
 			motor.inputWalk = Input.GetButton("Walk");
 
             leftHandController.ikActive = Input.GetButton("Action");       
-}
-
-function FixedUpdate () {
-	target.GetComponent(ImpulsController).AddImpulse(leftHandController.gameObject, leftHandController.ikActive && leftHandController.targetFirst && leftHandController.inRadius);
 }
 
 function activateCharacterController(value:boolean){
