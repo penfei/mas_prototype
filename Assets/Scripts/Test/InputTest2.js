@@ -4,10 +4,12 @@ private var leftHandController:LeftHandController;
 private var anim:Animator;
 private var animationController:AnimationController;
 private var character:CharacterController;
+private var layerMask = 1 << 10;
 var target:GameObject;
 var rotationOffset:float = 0.1f;
 
 function Start () {
+	layerMask = ~layerMask;
 	motor = GetComponent(CharacterMotor);
 	leftHandController = GetComponentInChildren(LeftHandController);
 	anim = GetComponent(Animator);
@@ -65,7 +67,7 @@ private function checkUp():boolean{
 	var ray:Ray = new Ray(transform.position, transform.up);
 	var	hitInfo:RaycastHit = new RaycastHit();
 	
-	if (Physics.Raycast(ray, hitInfo)){
+	if (Physics.Raycast(ray, hitInfo, 2f, layerMask)){
 		return hitInfo.distance < 2;
 	} else {
 		return false;
