@@ -13,8 +13,12 @@ function Update () {
 
 function AddImpulse (target:GameObject, isImpulse:boolean) {
 	if(isImpulse){
-		var direction:Vector3 = target.transform.position - transform.position;
-		var distance:float = Vector3.Distance(target.transform.position, transform.position);
+		var t:Vector3 = target.transform.position;
+		if(target.GetComponent(DragingObject) != null){
+			t = target.GetComponent(DragingObject).getTarget();
+		}
+		var direction:Vector3 = t - transform.position;
+		var distance:float = Vector3.Distance(t, transform.position);
 		rigidbody.AddForce((direction * impulsStrengh) / distance );
 	} 
 }

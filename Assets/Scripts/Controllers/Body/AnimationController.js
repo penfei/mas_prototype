@@ -6,14 +6,11 @@ class AnimationController extends Photon.MonoBehaviour{
 
 	private var anim:Animator;
 	private var hash:HashIds;
-	var player:GameObject;
 	private var currentBaseState:AnimatorStateInfo ;
 	private var motor : CharacterMotor;
 	
 	private var isRotating:boolean = false;
 	
-	var rotationSpeed:float = 100f;
-	var walkRotationSpeed:float = 1.5f;
 	var smooth:float = 10f;
 	var united = false;
 	
@@ -32,7 +29,7 @@ class AnimationController extends Photon.MonoBehaviour{
 	{
 		anim = GetComponent(Animator);
 		hash = GameObject.FindGameObjectWithTag(Tags.gameController).GetComponent(HashIds);
-		motor = player.GetComponent(CharacterMotor);
+		motor = GetComponent(CharacterMotor);
 		anim.SetLayerWeight(1, 1f);
 		leftHandController = GetComponentInChildren(LeftHandController);
 		core = GameObject.Find("Administration").GetComponent(Core);
@@ -92,46 +89,17 @@ class AnimationController extends Photon.MonoBehaviour{
 		turnRight:boolean
 	){
 		currentBaseState = anim.GetCurrentAnimatorStateInfo(0);
-	
-//		if (currentBaseState.nameHash != jumpState)
-//		{
-//			if(jump)
-//			{
-//				anim.SetBool("Jump", true);
-//			}
-//		}
-//			
-//		else if(currentBaseState.nameHash == jumpState)
-//		{
-//			if(!anim.IsInTransition(0))
-//			{
-//	//			if(useCurves)
-//	//				col.height = anim.GetFloat("ColliderHeight");
-//					
-//				anim.SetBool("Jump", false);
-//			}
-				
-	//		Ray ray = new Ray(transform.position + Vector3.up, -Vector3.up);
-	//		RaycastHit hitInfo = new RaycastHit();
-	//			
-	//		if (Physics.Raycast(ray, out hitInfo))
-	//		{
-	//			if (hitInfo.distance > 1.75f)
-	//			{	
-	//				anim.MatchTarget(hitInfo.point, Quaternion.identity, AvatarTarget.Root, new MatchTargetWeightMask(new Vector3(0, 1, 0), 0), 0.35f, 0.5f);
-	//			}
-	//		}
-//		}
 		
 		v = Mathf.Lerp(v, vertical, Time.deltaTime * smooth);
 		h = Mathf.Lerp(h, horizontal, Time.deltaTime * smooth);
-//		Debug.Log(motor.movement.velocity.y);
+		
 		anim.SetBool("InAir", !motor.IsGrounded());
 		anim.SetFloat("Horizontal", h);
 		anim.SetFloat("Vertical", v);
 		anim.SetBool("Sneak", sneak);
 		anim.SetBool("United", united);
 		anim.SetBool("Jump", jump && !IsJumpState());
+		anim.SetBool("ikActive", leftHandController.ikActive);
 		anim.SetBool(hash.sneakBool, sneak);
 		
 		if(motor.IsGrounded()){
@@ -147,17 +115,11 @@ class AnimationController extends Photon.MonoBehaviour{
 		isRotating = (turnLeft || turnRight) && !(turnLeft && turnRight);
 		anim.SetBool("Turn", isRotating);
 		if(isRotating){
-			var rt:float = rotationSpeed;
-			if(vertical != 0f){
-				rt *= walkRotationSpeed;
-			}
 			if(turnLeft){
-//				player.transform.localEulerAngles.y -= rt*Time.deltaTime;
 				d = Mathf.Lerp(d, -1, Time.deltaTime * smooth);
 			}
 			if(turnRight){
 				d = Mathf.Lerp(d, 1, Time.deltaTime * smooth);
-//				player.transform.localEulerAngles.y += rt*Time.deltaTime;
 			} 
 		} else {
 			d = Mathf.Lerp(d, 0, Time.deltaTime * smooth);

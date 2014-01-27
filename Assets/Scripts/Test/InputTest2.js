@@ -4,13 +4,12 @@ private var leftHandController:LeftHandController;
 private var anim:Animator;
 private var animationController:AnimationController;
 private var character:CharacterController;
-private var layerMask = 1 << 10;
+private var layerMask = 10 | 11;
 
 var target:GameObject;
 var rotationOffset:float = 0.1f;
 
 function Start () {
-	layerMask = ~layerMask;
 	motor = GetComponent(CharacterMotor);
 	leftHandController = GetComponentInChildren(LeftHandController);
 	anim = GetComponent(Animator);
@@ -59,6 +58,15 @@ function activateCharacterController(value:boolean){
 	target.GetComponent(SphereCollider).enabled = !value;
 	target.rigidbody.useGravity = !value;
 }
+
+//function OnControllerColliderHit (hit :ControllerColliderHit) {
+//	if(hit.gameObject == leftHandController.targetObject && !leftHandController.hasObject){
+//		var drag:GameObject = leftHandController.targetObject;
+//		if(drag.GetComponent(DragingObject) != null){
+//			drag.GetComponent(DragingObject).SetInHand();
+//		}
+//	}
+//}
 
 private function checkUp():boolean{
 	var ray:Ray = new Ray(transform.position, transform.up);

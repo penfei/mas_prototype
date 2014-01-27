@@ -74,6 +74,12 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
+  - m_Name: ikActive
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 3
     m_Name: Base Layer
@@ -558,7 +564,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 5
-    m_ConditionEvent: 
+    m_ConditionEvent: ikActive
     m_EventTreshold: 0
     m_ExitTime: .100000001
   - m_ConditionMode: 1
@@ -704,7 +710,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 5
-    m_ConditionEvent: 
+    m_ConditionEvent: ikActive
     m_EventTreshold: 0
     m_ExitTime: .100000001
   - m_ConditionMode: 1
@@ -882,7 +888,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 5
-    m_ConditionEvent: 
+    m_ConditionEvent: ikActive
     m_EventTreshold: 0
     m_ExitTime: .0399999991
   - m_ConditionMode: 1
@@ -916,7 +922,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 5
-    m_ConditionEvent: 
+    m_ConditionEvent: ikActive
     m_EventTreshold: 0
     m_ExitTime: .0399999991
   - m_ConditionMode: 1
@@ -1221,8 +1227,8 @@ Transition:
   m_TransitionDuration: .100000001
   m_TransitionOffset: 0
   m_Conditions:
-  - m_ConditionMode: 5
-    m_ConditionEvent: Connect
+  - m_ConditionMode: 1
+    m_ConditionEvent: ikActive
     m_EventTreshold: 0
     m_ExitTime: .899999976
   m_Atomic: 1
@@ -1480,7 +1486,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 5
-    m_ConditionEvent: 
+    m_ConditionEvent: ikActive
     m_EventTreshold: 0
     m_ExitTime: 1
   m_Atomic: 1
@@ -2042,7 +2048,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 5
-    m_ConditionEvent: 
+    m_ConditionEvent: ikActive
     m_EventTreshold: 0
     m_ExitTime: .100000001
   - m_ConditionMode: 1
@@ -2076,7 +2082,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 5
-    m_ConditionEvent: 
+    m_ConditionEvent: ikActive
     m_EventTreshold: 0
     m_ExitTime: .529999971
   - m_ConditionMode: 2
@@ -2322,7 +2328,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 5
-    m_ConditionEvent: 
+    m_ConditionEvent: ikActive
     m_EventTreshold: 0
     m_ExitTime: .0624991059
   - m_ConditionMode: 1
@@ -2356,7 +2362,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 5
-    m_ConditionEvent: 
+    m_ConditionEvent: ikActive
     m_EventTreshold: 0
     m_ExitTime: .529999971
   - m_ConditionMode: 2
@@ -2386,7 +2392,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 5
-    m_ConditionEvent: 
+    m_ConditionEvent: ikActive
     m_EventTreshold: 0
     m_ExitTime: .712428093
   m_Atomic: 1
@@ -2599,8 +2605,8 @@ Transition:
   m_TransitionDuration: .100000001
   m_TransitionOffset: 0
   m_Conditions:
-  - m_ConditionMode: 5
-    m_ConditionEvent: Connect
+  - m_ConditionMode: 2
+    m_ConditionEvent: ikActive
     m_EventTreshold: 0
     m_ExitTime: .899999976
   m_Atomic: 1
@@ -2618,7 +2624,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 5
-    m_ConditionEvent: 
+    m_ConditionEvent: ikActive
     m_EventTreshold: 0
     m_ExitTime: .0624991059
   - m_ConditionMode: 2
@@ -2768,7 +2774,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 5
-    m_ConditionEvent: 
+    m_ConditionEvent: ikActive
     m_EventTreshold: 0
     m_ExitTime: .0624991059
   - m_ConditionMode: 2
@@ -2902,7 +2908,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 5
-    m_ConditionEvent: 
+    m_ConditionEvent: ikActive
     m_EventTreshold: 0
     m_ExitTime: .0399999991
   - m_ConditionMode: 1
@@ -3052,7 +3058,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 5
-    m_ConditionEvent: 
+    m_ConditionEvent: ikActive
     m_EventTreshold: 0
     m_ExitTime: .100000001
   - m_ConditionMode: 1
@@ -3320,10 +3326,10 @@ State:
   m_Speed: 1
   m_CycleOffset: 0
   m_Motions:
-  - {fileID: 0}
+  - {fileID: 7400000, guid: dffa50cfe77e0434bbfa71245b3dd529, type: 3}
   m_ParentStateMachine: {fileID: 110779781}
   m_Position: {x: 36, y: 192, z: 0}
-  m_IKOnFeet: 0
+  m_IKOnFeet: 1
   m_Mirror: 0
   m_Tag: 
 --- !u!1102 &110207153
@@ -3430,7 +3436,7 @@ State:
   - {fileID: 0}
   m_ParentStateMachine: {fileID: 110779781}
   m_Position: {x: 36, y: 84, z: 0}
-  m_IKOnFeet: 0
+  m_IKOnFeet: 1
   m_Mirror: 0
   m_Tag: 
 --- !u!1102 &110237561

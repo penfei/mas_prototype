@@ -23,6 +23,7 @@ class LeftHandController extends MonoBehaviour{
 	public var inRadius = false;
 	public var targetInSight = false;
 	public var targetFirst = false;
+	public var hasObject = false;
 	
 	public var lastTargetPosition:Vector3;
 	
@@ -32,7 +33,7 @@ class LeftHandController extends MonoBehaviour{
 	public var fromCamera:GameObject;
 	public var hero:GameObject;
 	
-	private var targetObject:GameObject;
+	public var targetObject:GameObject;
 	private var targetObjectHand:GameObject;
 	
 	function Start () {
@@ -75,8 +76,10 @@ class LeftHandController extends MonoBehaviour{
 			
 			avatar.SetIKPosition(AvatarIKGoal.LeftHand, handTarget);
 			avatar.SetIKPositionWeight(AvatarIKGoal.LeftHand, handWeight);
-			avatar.SetLookAtPosition(targetObjectHand.transform.position);
-	        avatar.SetLookAtWeight(handWeight, 0.3f, 0.3f, 0.0f, 0.3f); 
+			if(!hasObject){
+				avatar.SetLookAtPosition(targetObjectHand.transform.position);
+		        avatar.SetLookAtWeight(handWeight, 0.3f, 0.3f, 0.0f, 0.3f);
+		    } 
 		}
 		if(!ikActive && layerIndex == 1){
 			if(handWeight != 0){
@@ -111,7 +114,7 @@ class LeftHandController extends MonoBehaviour{
 			}
 			inRadius = targetObject && Vector3.Distance(hero.transform.position, targetObject.transform.position) < gameObject.GetComponent(SphereCollider).radius;
 		}
-		if(ikActive && targetObject == null){
+		if(ikActive && targetObject == null && !hasObject){
 			FindTarget();
 		}
 		if(!ikActive){
@@ -131,9 +134,13 @@ class LeftHandController extends MonoBehaviour{
 			if(!core.isConnected){
 				SetObjectToTarget(core.head);
 			}
-			else FindTargetRayCast();
+			else {
+				FindTargetRayCast();
+				HandToForward();
+			}
 		} else {
 			FindTargetRayCast();
+			HandToForward();
 		}
 	}
 	
@@ -147,15 +154,19 @@ class LeftHandController extends MonoBehaviour{
 			targetObject.GetComponent(ImpulsController).SetImpulsMass();
 		} else {
 			ResetTarget();
-			targetObjectHand = forwardObject;
+			HandToForward();
 		}
 	}
 	
-	private function ResetTarget(){
+	public function ResetTarget(){
 		if(targetObject != null){
 			targetObject.GetComponent(ImpulsController).SetNormalMass();
 			targetObject = null;
 		}
+	}
+	
+	public function HandToForward(){
+		targetObjectHand = forwardObject;
 	}
 	
 	private function FindTargetRayCast(){
