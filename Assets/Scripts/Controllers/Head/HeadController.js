@@ -38,7 +38,7 @@ class HeadController extends PlayerController{
 		super.PlayerFixedUpdate();
 		if(photonView.isMine && core.body != null){
 	    	var con:LeftHandController = core.body.GetComponent(BodyController).leftHandController;
-	    	GetComponent(ImpulsController).AddImpulse(con.gameObject, con.ikActive && con.targetFirst && con.inRadius && !core.isConnected);
+	    	GetComponent(ImpulsController).AddImpulse(con.gameObject, con.CanPulling() && con.targetFirst && con.inRadius && !core.isConnected);
 		} 
 	}
 	

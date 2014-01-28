@@ -19,11 +19,12 @@ class LeftHandController extends MonoBehaviour{
 	public var handWeight = 0f;
 	public var handWeightMax = 0.9f;
 	public var angleRightLimit = 90f;
-	public var ikActive = false;
+	public var gamerActive = false;
 	public var inRadius = false;
 	public var targetInSight = false;
 	public var targetFirst = false;
 	public var hasObject = false;
+	public var isButtonUp = true;
 	
 	public var lastTargetPosition:Vector3;
 	
@@ -36,6 +37,10 @@ class LeftHandController extends MonoBehaviour{
 	public var targetObject:GameObject;
 	private var targetObjectHand:GameObject;
 	
+	function CanPulling ():boolean {
+		return gamerActive && isButtonUp;
+	}
+	
 	function Start () {
 		targetObjectHand = forwardObject;
 		layerMaskWithHead = ~layerMaskWithHead;
@@ -44,7 +49,7 @@ class LeftHandController extends MonoBehaviour{
 	}
 	
 	function Update () {
-		avatar.SetBool("Connect", ikActive);
+		avatar.SetBool("Connect", CanPulling());
 	}
 	
 	public function CanConnection():boolean{
@@ -56,11 +61,11 @@ class LeftHandController extends MonoBehaviour{
 	
 	function OnAnimatorIK(layerIndex:int)
 	{	
-		if((ikActive || handWeight > 0) && layerIndex == 1)
+		if((CanPulling() || handWeight > 0) && layerIndex == 1)
 		{	
 			var target:Vector3 = targetObjectHand.transform.position;
 			
-			if(ikActive && handWeight != handWeightMax){
+			if(CanPulling() && handWeight != handWeightMax){
 				handWeight = Mathf.Lerp(handWeight, handWeightMax, Time.deltaTime * smoothUp);
 			}
 			
@@ -81,7 +86,7 @@ class LeftHandController extends MonoBehaviour{
 		        avatar.SetLookAtWeight(handWeight, 0.3f, 0.3f, 0.0f, 0.3f);
 		    } 
 		}
-		if(!ikActive && layerIndex == 1){
+		if(!CanPulling() && layerIndex == 1){
 			if(handWeight != 0){
 				handWeight = Mathf.Lerp(handWeight, 0, Time.deltaTime * smoothDown);
 			}
@@ -92,7 +97,10 @@ class LeftHandController extends MonoBehaviour{
 	}
     
     function FixedUpdate(){
-    	if(targetObject != null && (ikActive || handWeight > 0)){
+    	if(!gamerActive && !isButtonUp){
+    		isButtonUp = true;
+    	}
+    	if(targetObject != null && (CanPulling() || handWeight > 0)){
 	    	targetInSight = false;
 			targetFirst = false;
 				
@@ -114,10 +122,10 @@ class LeftHandController extends MonoBehaviour{
 			}
 			inRadius = targetObject && Vector3.Distance(hero.transform.position, targetObject.transform.position) < gameObject.GetComponent(SphereCollider).radius;
 		}
-		if(ikActive && targetObject == null && !hasObject){
+		if(CanPulling() && targetObject == null && !hasObject){
 			FindTarget();
 		}
-		if(!ikActive){
+		if(!CanPulling()){
 			ResetTarget();
 		}
 		AddImpulseToTarget();
@@ -125,7 +133,7 @@ class LeftHandController extends MonoBehaviour{
     
     function AddImpulseToTarget(){
     	if(targetObject != null){
-    		targetObject.GetComponent(ImpulsController).AddImpulse(gameObject, ikActive && targetFirst && inRadius);
+    		targetObject.GetComponent(ImpulsController).AddImpulse(gameObject, CanPulling() && targetFirst && inRadius);
     	}
     }
 	

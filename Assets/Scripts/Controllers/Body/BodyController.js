@@ -72,7 +72,7 @@ class BodyController extends PlayerController{
 			gestures.Recognize();
 		}
         
-        leftHandController.ikActive = Input.GetButton("Action");
+        leftHandController.gamerActive = Input.GetButton("Action");
 	}
 	
 	override protected function PlayerUpdateOther() {
@@ -80,7 +80,7 @@ class BodyController extends PlayerController{
 		
 		gameObject.GetComponent(MouseLook).canRotation = core.isConnected;
             
-       	leftHandController.ikActive = action;
+       	leftHandController.gamerActive = action;
 	}
 	
 	function OnGUI(){

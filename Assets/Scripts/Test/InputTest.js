@@ -40,7 +40,7 @@ function Update () {
 			motor.inputSneak = Input.GetButton("Sneak");
 			motor.inputWalk = Input.GetButton("Walk");
             
-            leftHandController.ikActive = Input.GetButton("Action");
+            leftHandController.gamerActive = Input.GetButton("Action");
             
             var crouch:boolean = motor.inputSneak;
             var walk:boolean = ((motor.inputX != 0f) || (motor.inputY!= 0f)) && !motor.inputWalk;
@@ -51,7 +51,7 @@ function Update () {
 }
 
 function FixedUpdate () {
-	target.GetComponent(ImpulsController).AddImpulse(leftHandController.gameObject, leftHandController.ikActive && leftHandController.targetFirst && leftHandController.inRadius);
+	target.GetComponent(ImpulsController).AddImpulse(leftHandController.gameObject, leftHandController.CanPulling() && leftHandController.targetFirst && leftHandController.inRadius);
 }
 
 function activateCharacterController(value:boolean){

@@ -4059,11 +4059,12 @@ MonoBehaviour:
   handWeight: 0
   handWeightMax: 1
   angleRightLimit: 90
-  ikActive: 0
+  gamerActive: 0
   inRadius: 0
   targetInSight: 0
   targetFirst: 0
   hasObject: 0
+  isButtonUp: 1
   lastTargetPosition: {x: 0, y: 0, z: 0}
   backObject: {fileID: 1576662117}
   rightObject: {fileID: 1474308079}
@@ -5107,6 +5108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impulsStrengh: 4
   impulsUpStrengh: 100
+  impulsForwardStrengh: 200
 --- !u!54 &488732288
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5141,6 +5143,8 @@ MonoBehaviour:
   inputJump: 0
   inputSneak: 0
   inputWalk: 0
+  inputRightHand: 0
+  inputLeftHand: 0
   movement:
     maxForwardSpeed: 10
     maxSidewaysSpeed: 10
@@ -5537,6 +5541,8 @@ MonoBehaviour:
   inputJump: 0
   inputSneak: 0
   inputWalk: 0
+  inputRightHand: 0
+  inputLeftHand: 0
   movement:
     maxForwardSpeed: 5
     maxSidewaysSpeed: 5
@@ -8454,6 +8460,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impulsStrengh: 4
   impulsUpStrengh: 100
+  impulsForwardStrengh: 200
 --- !u!54 &840615524
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8536,6 +8543,7 @@ MonoBehaviour:
   distance: .75
   distanceToConnect: .699999988
   angle: 0
+  rightHandTimeOffset: .200000003
 --- !u!1 &841262102
 GameObject:
   m_ObjectHideFlags: 0
@@ -9690,6 +9698,8 @@ MonoBehaviour:
   inputJump: 0
   inputSneak: 0
   inputWalk: 0
+  inputRightHand: 0
+  inputLeftHand: 0
   movement:
     maxForwardSpeed: 5
     maxSidewaysSpeed: 5
@@ -10486,11 +10496,12 @@ MonoBehaviour:
   handWeight: 0
   handWeightMax: 1
   angleRightLimit: 90
-  ikActive: 0
+  gamerActive: 0
   inRadius: 0
   targetInSight: 0
   targetFirst: 0
   hasObject: 0
+  isButtonUp: 1
   lastTargetPosition: {x: 0, y: 0, z: 0}
   backObject: {fileID: 1718895690}
   rightObject: {fileID: 618609477}
@@ -16103,6 +16114,7 @@ MonoBehaviour:
   distance: .75
   distanceToConnect: .699999988
   angle: 0
+  rightHandTimeOffset: .200000003
 --- !u!114 &1555043434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16116,6 +16128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impulsStrengh: 4
   impulsUpStrengh: 100
+  impulsForwardStrengh: 200
 --- !u!54 &1555043435
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -19444,6 +19457,8 @@ MonoBehaviour:
   inputJump: 0
   inputSneak: 0
   inputWalk: 0
+  inputRightHand: 0
+  inputLeftHand: 0
   movement:
     maxForwardSpeed: 5
     maxSidewaysSpeed: 5

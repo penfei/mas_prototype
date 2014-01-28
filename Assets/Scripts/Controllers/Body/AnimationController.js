@@ -99,7 +99,6 @@ class AnimationController extends Photon.MonoBehaviour{
 		anim.SetBool("Sneak", sneak);
 		anim.SetBool("United", united);
 		anim.SetBool("Jump", jump && !IsJumpState());
-		anim.SetBool("ikActive", leftHandController.ikActive);
 		anim.SetBool(hash.sneakBool, sneak);
 		
 		if(motor.IsGrounded()){

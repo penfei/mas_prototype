@@ -49,8 +49,10 @@ function Update () {
 			} else
 				motor.inputSneak = Input.GetButton("Sneak");
 			motor.inputWalk = Input.GetButton("Walk");
+			motor.inputRightHand = Input.GetButton("RightHandAction");
+			motor.inputLeftHand = Input.GetButton("LeftHandAction");
 
-            leftHandController.ikActive = Input.GetButton("Action");       
+            leftHandController.gamerActive = motor.inputLeftHand;       
 }
 
 function activateCharacterController(value:boolean){
@@ -58,15 +60,6 @@ function activateCharacterController(value:boolean){
 	target.GetComponent(SphereCollider).enabled = !value;
 	target.rigidbody.useGravity = !value;
 }
-
-//function OnControllerColliderHit (hit :ControllerColliderHit) {
-//	if(hit.gameObject == leftHandController.targetObject && !leftHandController.hasObject){
-//		var drag:GameObject = leftHandController.targetObject;
-//		if(drag.GetComponent(DragingObject) != null){
-//			drag.GetComponent(DragingObject).SetInHand();
-//		}
-//	}
-//}
 
 private function checkUp():boolean{
 	var ray:Ray = new Ray(transform.position, transform.up);
