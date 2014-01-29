@@ -10,7 +10,7 @@ class GameDataController extends DataController{
 	}
 
 	function Update () {
-		Debug.Log(GetItemCountByName(Items.money));
+//		Debug.Log(GetItemCountByName(Items.money));
 	}
 	
 	public function StartLevel(otherPlayerName:String):void{

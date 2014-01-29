@@ -35,6 +35,7 @@ GameObject:
   - 54: {fileID: 5400000}
   - 135: {fileID: 13500000}
   - 114: {fileID: 11400016}
+  - 114: {fileID: 11400012}
   m_Layer: 0
   m_Name: HeadPlayer
   m_TagString: Head
@@ -373,8 +374,10 @@ MonoBehaviour:
   inputY: 0
   inputJump: 0
   inputSneak: 0
-  inputRun: 0
-  inputSeatDown: 0
+  inputWalk: 0
+  inputRightHand: 0
+  inputLeftHand: 0
+  inAir: 0
   movement:
     maxForwardSpeed: 10
     maxSidewaysSpeed: 10
@@ -417,6 +420,7 @@ MonoBehaviour:
     slidingSpeed: 15
     sidewaysControl: 1
     speedControl: .400000006
+  grounded: 1
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -430,6 +434,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smooth: 10
   basicCamera: {fileID: 2000000}
+--- !u!114 &11400012
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 184dcabfe4fc66c4fb5925d17ef32f8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inHand: 0
+  offsetY: -.5
+  distance: .75
+  distanceToConnect: .699999988
+  angle: 0
+  rightHandTimeOffset: .400000006
 --- !u!114 &11400014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -443,6 +464,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impulsStrengh: 4
   impulsUpStrengh: 100
+  impulsForwardStrengh: 200
 --- !u!114 &11400016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -455,7 +477,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraObject: {fileID: 100000}
-  smooth: 15
+  smooth: 10
   type: 1
   rotationObject: {fileID: 0}
 --- !u!124 &12400000

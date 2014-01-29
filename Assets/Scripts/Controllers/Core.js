@@ -22,6 +22,7 @@ class Core extends Photon.MonoBehaviour{
 	
 	private var timeAction = 0f;
 	private var data:GameDataController;
+	private var initedPrefabs:int = 0;
 	
 	var bodyCorrectPlayerRot:Quaternion = Quaternion.identity;
 
@@ -90,6 +91,14 @@ class Core extends Photon.MonoBehaviour{
 		GameObject.Find("Camera").active = false;
     }
     
+    function PlayerInit(){
+		initedPrefabs++;
+    }
+    
+    function isInited():boolean{
+    	return initedPrefabs == 2;
+    }
+    
     function OnJoinedLobby()
     {
     	if(fastStart){
@@ -143,22 +152,24 @@ class Core extends Photon.MonoBehaviour{
     
     function Update()
     {
-   		if(CanConnection()){
-  			RPCConnection();
-  		}
-  		if(CanDisconnection()){
-  			RPCDisconnection();
-  		}
+    	if(isInited()){
+//	   		if(CanConnection()){
+//	  			RPCConnection();
+//	  		}
+	  		if(CanDisconnection()){
+	  			RPCDisconnection();
+	  		}
+	  	}
     }
     
     public function CanConnection():boolean{
    		if(!isBody) return false;
-    	return !isConnected && Input.GetButton("Action")
+    	return !isConnected 
     	&& Time.time > timeAction + actionTimeOffset && body.GetComponent(BodyController).leftHandController.CanConnection();
     }
     
     public function CanDisconnection():boolean{
-    	return isConnected && Input.GetButton("Action") && Time.time > timeAction + actionTimeOffset;
+    	return isConnected && Input.GetButton("Disconnection") && Time.time > timeAction + actionTimeOffset;
     }
     
     public function RPCConnection(){

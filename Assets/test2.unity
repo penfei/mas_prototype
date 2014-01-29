@@ -5075,6 +5075,7 @@ GameObject:
   - 114: {fileID: 488732287}
   - 135: {fileID: 488732291}
   - 54: {fileID: 488732288}
+  - 114: {fileID: 488732293}
   m_Layer: 10
   m_Name: HeadPlayer_test
   m_TagString: toChange
@@ -5145,6 +5146,7 @@ MonoBehaviour:
   inputWalk: 0
   inputRightHand: 0
   inputLeftHand: 0
+  inAir: 0
   movement:
     maxForwardSpeed: 10
     maxSidewaysSpeed: 10
@@ -5236,6 +5238,23 @@ MonoBehaviour:
   maximumY: 0
   canRotation: 0
   target: {fileID: 0}
+--- !u!114 &488732293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 488732285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 184dcabfe4fc66c4fb5925d17ef32f8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inHand: 0
+  offsetY: -.5
+  distance: .75
+  distanceToConnect: .699999988
+  angle: 0
+  rightHandTimeOffset: .200000003
 --- !u!1 &492083381
 GameObject:
   m_ObjectHideFlags: 0
@@ -5543,6 +5562,7 @@ MonoBehaviour:
   inputWalk: 0
   inputRightHand: 0
   inputLeftHand: 0
+  inAir: 0
   movement:
     maxForwardSpeed: 5
     maxSidewaysSpeed: 5
@@ -9700,6 +9720,7 @@ MonoBehaviour:
   inputWalk: 0
   inputRightHand: 0
   inputLeftHand: 0
+  inAir: 0
   movement:
     maxForwardSpeed: 5
     maxSidewaysSpeed: 5
@@ -10581,7 +10602,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1051251893
 Transform:
   m_ObjectHideFlags: 0
@@ -10600,7 +10621,7 @@ Renderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1051251892}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 255
@@ -13228,6 +13249,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1314095740}
   - 114: {fileID: 1314095739}
+  - 131: {fileID: 1314095742}
   - 114: {fileID: 1314095738}
   - 131: {fileID: 1314095741}
   m_Layer: 9
@@ -13368,6 +13390,26 @@ GUITexture:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1314095737}
+  m_Enabled: 1
+  m_Texture: {fileID: 2800000, guid: eefd83fb43a35ac44b90ac0591442341, type: 3}
+  m_Color: {r: .477941155, g: .477941155, b: .477941155, a: 1}
+  m_PixelInset:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 4
+    height: 4
+  m_LeftBorder: 0
+  m_RightBorder: 0
+  m_TopBorder: 0
+  m_BottomBorder: 0
+--- !u!131 &1314095742
+GUITexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 13100000, guid: 4571bb26ef97ccf40997919a9d214240,
+    type: 2}
+  m_PrefabInternal: {fileID: 193724498}
   m_GameObject: {fileID: 1314095737}
   m_Enabled: 1
   m_Texture: {fileID: 2800000, guid: eefd83fb43a35ac44b90ac0591442341, type: 3}
@@ -19459,6 +19501,7 @@ MonoBehaviour:
   inputWalk: 0
   inputRightHand: 0
   inputLeftHand: 0
+  inAir: 0
   movement:
     maxForwardSpeed: 5
     maxSidewaysSpeed: 5

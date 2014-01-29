@@ -6,10 +6,15 @@ class BodyController extends PlayerController{
 	public var boneForHeadCamera:GameObject;
 	
 	private var gestures:GestureController;
+	private var animationController:AnimationController;
+	private var leftHandAction = false;
+	private var rightHandAction = false;
+	private var layerMask = 10 | 11;
 	
 	override protected function PlayerAwake(){
 		super.PlayerAwake();
 		leftHandController = GetComponentInChildren(LeftHandController);
+		animationController = GetComponent(AnimationController);
 		
 		if (photonView.isMine)
 	    {
@@ -24,16 +29,23 @@ class BodyController extends PlayerController{
 		motor.canControl = false;
 		GetComponent(Animator).applyRootMotion = photonView.isMine;
 		core.body = gameObject;
+		core.PlayerInit();
 		gameObject.GetComponent(MouseLook).canRotation = false;
 		cameraObject.GetComponent(MouseLook).canRotation = false;
 	}
 	
 	override protected function PlayerStreamMe(stream:PhotonStream, info:PhotonMessageInfo) {
 		super.PlayerStreamMe(stream, info);
+		
+		stream.SendNext(Input.GetButton("RightHandAction"));
+		stream.SendNext(Input.GetButton("LeftHandAction"));
 	}
 	
 	override protected function PlayerStreamOther(stream:PhotonStream, info:PhotonMessageInfo) {
 		super.PlayerStreamOther(stream, info);
+		
+		rightHandAction = stream.ReceiveNext();
+		leftHandAction = stream.ReceiveNext();
 	}
 	
 	override protected function PlayerLateUpdateMe() {
@@ -57,6 +69,18 @@ class BodyController extends PlayerController{
 		super.PlayerUpdate();
 		
 		cameraObject.active = false;
+		
+		if(animationController.IsSneakState()){
+			character.height = 1.6;
+			character.center.y = 0.75;
+		} else {
+			character.height = 1.9;
+			character.center.y = 0.9;
+		}
+		
+		if(animationController.IsSneakState() && !motor.inputSneak && checkUp()){
+			motor.inputSneak = true;
+		} 
 //		gameObject.GetComponent(CharacterMotor).canControl = photonView.isMine;
 	}
 	
@@ -72,7 +96,13 @@ class BodyController extends PlayerController{
 			gestures.Recognize();
 		}
         
-        leftHandController.gamerActive = Input.GetButton("Action");
+        motor.inputLeftHand = Input.GetButton("LeftHandAction");
+        motor.inputRightHand = Input.GetButton("RightHandAction");
+        
+        motor.canControl = (Input.GetButton("Jump") && !animationController.IsJumpState()) || !motor.IsGrounded;
+		animationController.applyRootMotion(!motor.canControl);
+
+        leftHandController.gamerActive = motor.inputLeftHand;
 	}
 	
 	override protected function PlayerUpdateOther() {
@@ -80,7 +110,10 @@ class BodyController extends PlayerController{
 		
 		gameObject.GetComponent(MouseLook).canRotation = core.isConnected;
             
-       	leftHandController.gamerActive = action;
+       	motor.inputLeftHand = leftHandAction;
+       	motor.inputRightHand = rightHandAction;
+
+        leftHandController.gamerActive = motor.inputLeftHand;
 	}
 	
 	function OnGUI(){
@@ -88,6 +121,17 @@ class BodyController extends PlayerController{
 	    {
         	var GUIPosition:Rect = new Rect(15,Screen.height - 100,800,100);
 			GUI.Label(GUIPosition, gestures.matchStroke);
+		}
+	}
+	
+	private function checkUp():boolean{
+		var ray:Ray = new Ray(transform.position, transform.up);
+		var	hitInfo:RaycastHit = new RaycastHit();
+		
+		if (Physics.Raycast(ray, hitInfo, 2f, layerMask)){
+			return hitInfo.distance < 2;
+		} else {
+			return false;
 		}
 	}
 }

@@ -26,6 +26,7 @@ var inputSneak : boolean = false;
 var inputWalk : boolean = false;
 var inputRightHand : boolean = false;
 var inputLeftHand : boolean = false;
+var inAir : boolean = false;
 
 class CharacterMotorMovement {
 	// The maximum horizontal speed when moving

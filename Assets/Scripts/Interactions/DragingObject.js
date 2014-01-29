@@ -1,5 +1,6 @@
 ﻿#pragma strict
 
+private var core:Core;
 private var body:GameObject;
 private var leftHandController:LeftHandController;
 private var motor:CharacterMotor;
@@ -20,14 +21,15 @@ function Start () {
 }
 
 function Update () {
-	if(body == null){
-		if(GameObject.Find("Administration").GetComponent(Core) != null){
-			body = GameObject.Find("Administration").GetComponent(Core).body;
-		}
-		if(GameObject.Find("BodyPlayer_test") != null){
-			body = GameObject.Find("BodyPlayer_test");
-		}
-	} else{
+	core = GameObject.Find("Administration").GetComponent(Core);
+	if(core == null){
+		body = GameObject.Find("BodyPlayer_test");
+	} else {
+		if(core.isInited()){
+			body = core.body;
+		}	
+	}
+	if(body != null){
 		if(leftHandController == null){
 			leftHandController = body.GetComponentInChildren(LeftHandController);
 			motor = body.GetComponent(CharacterMotor);
@@ -36,7 +38,6 @@ function Update () {
 			ObjectUpdate();			
 		}
 	}
-	
 }
 
 function SetInHand () {
@@ -44,15 +45,39 @@ function SetInHand () {
 	inHand = true;
 	leftHandController.ResetTarget();
 	leftHandController.HandToForward();
-	rigidbody.useGravity = false;
+	if(gameObject.GetComponent(CharacterController)){
+		gameObject.GetComponent(CharacterController).enabled = false;
+	}
+	if(canChangeObject())
+		rigidbody.useGravity = false;
 }
 
 function SetOutHand () {
 	rightHandDown = false;
 	inHand = false;
 	leftHandController.hasObject = false;
-	GetComponent(ImpulsController).SetNormalMass();
-	rigidbody.useGravity = true;
+	if(gameObject.GetComponent(CharacterController)){
+		gameObject.GetComponent(CharacterController).enabled = true;
+	}
+	if(canChangeObject()){
+		GetComponent(ImpulsController).SetNormalMass();
+		rigidbody.useGravity = true;
+	}
+}
+
+function canChangeObject():boolean{
+	if(core != null){
+		if(core.isHead && gameObject == core.head){
+			return true;
+		}
+		if(gameObject != core.head && gameObject.GetComponent(InteractiveObjectController).photonView.isMine){
+			return true;
+		}
+	}
+	else{
+		return true;
+	}
+	return false;		
 }
 
 function getTarget():Vector3{
@@ -78,14 +103,20 @@ function ObjectUpdate () {
 	if(motor.inputRightHand && inHand && rightHandDown && Time.time > rightHandTime + rightHandTimeOffset){
 		leftHandController.isButtonUp = false;
 		SetOutHand();
+		if(core != null && core.isBody && gameObject == core.head){
+			core.RPCConnection();
+		}
 		Debug.Log("action");
 	}
 	if(!motor.inputRightHand && inHand && rightHandDown && Time.time < rightHandTime + rightHandTimeOffset){
 		leftHandController.isButtonUp = false;
 		SetOutHand();
-		GetComponent(ImpulsController).AddImpulseForward(body);
+		if(canChangeObject()){
+			Debug.Log("addForce");
+			GetComponent(ImpulsController).AddImpulseForward(body);
+		}
 	}
-	if(inHand){
+	if(inHand && canChangeObject()){
 		rigidbody.velocity = Vector3.Lerp(rigidbody.velocity, Vector3.zero, Time.deltaTime * 15);
 		rigidbody.angularVelocity = Vector3.Lerp(rigidbody.angularVelocity, Vector3.zero, Time.deltaTime * 15);
 		transform.position = Vector3.Lerp(transform.position, getTarget(), Time.deltaTime * 15);

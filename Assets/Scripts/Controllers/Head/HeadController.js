@@ -6,6 +6,7 @@ class HeadController extends PlayerController{
 		super.PlayerStart();
 		motor.enabledScript = false;
 		core.head = gameObject;
+		core.PlayerInit();
 		cameraObject.GetComponent(AudioListener).enabled = true;
 		
 		if (!photonView.isMine)

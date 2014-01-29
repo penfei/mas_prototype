@@ -19,8 +19,10 @@ class PlayerController extends Photon.MonoBehaviour{
 	protected var sneak = false;
 	protected var jump = false;
 	protected var action = false;
-	protected var run = false;
+	protected var walk = false;
+	protected var inAir = false;
 	protected var core:Core;
+	protected var character:CharacterController;
 	
 	function Awake () {
 		PlayerAwake();
@@ -30,6 +32,7 @@ class PlayerController extends Photon.MonoBehaviour{
 		motor = GetComponent(CharacterMotor);
 		core = GameObject.Find("Administration").GetComponent(Core);
 		rotationObject = GetComponent(MouseLook).target;
+		character = GetComponent(CharacterController);
 	}
 	
 	function Start(){
@@ -60,8 +63,8 @@ class PlayerController extends Photon.MonoBehaviour{
         stream.SendNext(Input.GetAxis("Vertical"));  
         stream.SendNext(Input.GetButton("Sneak")); 
         stream.SendNext(Input.GetButton("Jump"));
-        stream.SendNext(Input.GetButton("Action"));
-        stream.SendNext(Input.GetButton("Run"));
+        stream.SendNext(Input.GetButton("Walk"));
+        stream.SendNext(!motor.IsGrounded());
     }
     
     protected function PlayerStreamOther(stream:PhotonStream, info:PhotonMessageInfo) {
@@ -71,8 +74,8 @@ class PlayerController extends Photon.MonoBehaviour{
         v = stream.ReceiveNext();
         sneak = stream.ReceiveNext();
         jump = stream.ReceiveNext();
-        action = stream.ReceiveNext();
-        run = stream.ReceiveNext();         
+        walk = stream.ReceiveNext();
+        inAir = stream.ReceiveNext();         
     }
     
     function FixedUpdate () {
@@ -135,6 +138,7 @@ class PlayerController extends Photon.MonoBehaviour{
         motor.inputX = Input.GetAxis("Horizontal");
        	motor.inputY = Input.GetAxis("Vertical");
        	motor.inputWalk = Input.GetButton("Walk");
+       	motor.inAir = !motor.IsGrounded();
 	}
 	
 	protected function PlayerUpdateOther() {
@@ -142,6 +146,7 @@ class PlayerController extends Photon.MonoBehaviour{
        	motor.inputSneak = sneak;
         motor.inputX = h;
         motor.inputY = v;
-        motor.inputWalk = run;
+        motor.inputWalk = walk;
+        motor.inAir = inAir;
 	}
 }

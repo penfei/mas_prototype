@@ -6,7 +6,6 @@ class AnimationController extends Photon.MonoBehaviour{
 
 	private var anim:Animator;
 	private var hash:HashIds;
-	private var currentBaseState:AnimatorStateInfo ;
 	private var motor : CharacterMotor;
 	
 	private var isRotating:boolean = false;
@@ -17,10 +16,6 @@ class AnimationController extends Photon.MonoBehaviour{
 	private var v:float = 0f;
 	private var h:float = 0f;
 	private var d:float = 0f;
-	
-	//static int idleState = Animator.StringToHash("Base Layer.Idle");	
-	//static int locoState = Animator.StringToHash("Base Layer.Locomotion");
-	static private var jumpState:int = Animator.StringToHash("Base Layer.Jump");
 	
 	private var leftHandController:LeftHandController;
 	private var core:Core;
@@ -33,6 +28,10 @@ class AnimationController extends Photon.MonoBehaviour{
 		anim.SetLayerWeight(1, 1f);
 		leftHandController = GetComponentInChildren(LeftHandController);
 		core = GameObject.Find("Administration").GetComponent(Core);
+	}
+	
+	public function applyRootMotion(val:boolean){
+		anim.applyRootMotion = val;
 	}
 	
 	function OnAnimatorIK(layerIndex:int)
@@ -88,12 +87,10 @@ class AnimationController extends Photon.MonoBehaviour{
 		turnLeft:boolean,
 		turnRight:boolean
 	){
-		currentBaseState = anim.GetCurrentAnimatorStateInfo(0);
-		
 		v = Mathf.Lerp(v, vertical, Time.deltaTime * smooth);
 		h = Mathf.Lerp(h, horizontal, Time.deltaTime * smooth);
 		
-		anim.SetBool("InAir", !motor.IsGrounded());
+		anim.SetBool("InAir", motor.inAir);
 		anim.SetFloat("Horizontal", h);
 		anim.SetFloat("Vertical", v);
 		anim.SetBool("Sneak", sneak);

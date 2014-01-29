@@ -49,6 +49,9 @@ class LeftHandController extends MonoBehaviour{
 	}
 	
 	function Update () {
+		if(core != null && core.isInited() && fromCamera == null){
+			fromCamera = core.head.GetComponent(HeadController).cameraObject;
+		}
 		avatar.SetBool("Connect", CanPulling());
 	}
 	
@@ -122,6 +125,9 @@ class LeftHandController extends MonoBehaviour{
 			}
 			inRadius = targetObject && Vector3.Distance(hero.transform.position, targetObject.transform.position) < gameObject.GetComponent(SphereCollider).radius;
 		}
+		if((core != null && core.isHead) || core == null){
+			
+		}
 		if(CanPulling() && targetObject == null && !hasObject){
 			FindTarget();
 		}
@@ -132,10 +138,25 @@ class LeftHandController extends MonoBehaviour{
     }
     
     function AddImpulseToTarget(){
-    	if(targetObject != null){
+    	if(targetObject != null && canChangeObject()){
     		targetObject.GetComponent(ImpulsController).AddImpulse(gameObject, CanPulling() && targetFirst && inRadius);
     	}
     }
+    
+    function canChangeObject():boolean{
+		if(core != null){
+			if(core.isHead && targetObject == core.head){
+				return true;
+			}
+			if(targetObject != core.head && targetObject.GetComponent(InteractiveObjectController).photonView.isMine){
+				return true;
+			}
+		}
+		else{
+			return true;
+		}
+		return false;		
+	}
 	
 	function FindTarget(){
 		if(core){
@@ -159,7 +180,8 @@ class LeftHandController extends MonoBehaviour{
 		if(t != null && t.GetComponent(ImpulsController) != null){
 			targetObject = t;
 			targetObjectHand = t;
-			targetObject.GetComponent(ImpulsController).SetImpulsMass();
+			if(canChangeObject())
+				targetObject.GetComponent(ImpulsController).SetImpulsMass();
 		} else {
 			ResetTarget();
 			HandToForward();
@@ -168,7 +190,8 @@ class LeftHandController extends MonoBehaviour{
 	
 	public function ResetTarget(){
 		if(targetObject != null){
-			targetObject.GetComponent(ImpulsController).SetNormalMass();
+			if(canChangeObject())
+				targetObject.GetComponent(ImpulsController).SetNormalMass();
 			targetObject = null;
 		}
 	}
