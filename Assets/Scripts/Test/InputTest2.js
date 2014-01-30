@@ -20,7 +20,7 @@ function Start () {
 }
 
 function Update () {
-	motor.canControl = (Input.GetButton("Jump") && !animationController.IsJumpState()) || !motor.IsGrounded;
+	motor.canControl = (Input.GetButton("Jump") && !animationController.IsJumpState()) || !motor.IsGrounded();
 	anim.applyRootMotion = !motor.canControl;
 	
 	if(animationController.IsSneakState()){
@@ -51,6 +51,7 @@ function Update () {
 			motor.inputWalk = Input.GetButton("Walk");
 			motor.inputRightHand = Input.GetButton("RightHandAction");
 			motor.inputLeftHand = Input.GetButton("LeftHandAction");
+			motor.inAir = !motor.IsGrounded();
 
             leftHandController.gamerActive = motor.inputLeftHand;       
 }

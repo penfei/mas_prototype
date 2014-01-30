@@ -99,7 +99,7 @@ class BodyController extends PlayerController{
         motor.inputLeftHand = Input.GetButton("LeftHandAction");
         motor.inputRightHand = Input.GetButton("RightHandAction");
         
-        motor.canControl = (Input.GetButton("Jump") && !animationController.IsJumpState()) || !motor.IsGrounded;
+        motor.canControl = (Input.GetButton("Jump") && !animationController.IsJumpState()) || !motor.IsGrounded();
 		animationController.applyRootMotion(!motor.canControl);
 
         leftHandController.gamerActive = motor.inputLeftHand;
