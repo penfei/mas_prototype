@@ -516,8 +516,8 @@ GameObject:
   - 54: {fileID: 331142206}
   - 114: {fileID: 331142205}
   - 114: {fileID: 331142204}
-  - 114: {fileID: 331142209}
   - 114: {fileID: 331142210}
+  - 114: {fileID: 331142209}
   m_Layer: 0
   m_Name: WoodenBox02
   m_TagString: Untagged
@@ -537,6 +537,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inHand: 0
+  inActive: 0
   offsetY: -.5
   distance: .75
   distanceToConnect: .699999988
@@ -603,18 +604,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 331142203}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Script: {fileID: 11500000, guid: 9295ebd45d6ccea4cb330f25c8ace9d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subId: 3
-  ownerId: 0
-  group: 0
-  prefixBackup: -1
-  observed: {fileID: 331142210}
-  synchronization: 3
-  onSerializeTransformOption: 3
-  onSerializeRigidBodyOption: 2
-  instantiationId: 0
+  smooth: 15
 --- !u!114 &331142210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -623,10 +616,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 331142203}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9295ebd45d6ccea4cb330f25c8ace9d1, type: 3}
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smooth: 11
+  subId: 3
+  ownerId: 0
+  group: 0
+  prefixBackup: -1
+  observed: {fileID: 331142209}
+  synchronization: 3
+  onSerializeTransformOption: 3
+  onSerializeRigidBodyOption: 2
+  instantiationId: 0
 --- !u!1 &379778435
 GameObject:
   m_ObjectHideFlags: 0

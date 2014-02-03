@@ -6,6 +6,7 @@ private var leftHandController:LeftHandController;
 private var motor:CharacterMotor;
 
 public var inHand = false;
+public var inActive = false;
 
 var offsetY:float = 0;
 var distance:float = 2;
@@ -48,20 +49,18 @@ function SetInHand () {
 	if(gameObject.GetComponent(CharacterController)){
 		gameObject.GetComponent(CharacterController).enabled = false;
 	}
-	if(canChangeObject())
-		rigidbody.useGravity = false;
 }
 
 function SetOutHand () {
 	rightHandDown = false;
 	inHand = false;
+	inActive = false;
 	leftHandController.hasObject = false;
 	if(gameObject.GetComponent(CharacterController)){
 		gameObject.GetComponent(CharacterController).enabled = true;
 	}
 	if(canChangeObject()){
 		GetComponent(ImpulsController).SetNormalMass();
-		rigidbody.useGravity = true;
 	}
 }
 
@@ -90,6 +89,12 @@ function getTarget():Vector3{
 }
 
 function ObjectUpdate () {
+	if(gameObject == leftHandController.targetObject){
+		inActive = true;
+	}
+	if(rigidbody != null){
+		rigidbody.useGravity = !inActive && canChangeObject();
+	}
 	if(gameObject == leftHandController.targetObject && !leftHandController.hasObject && Vector3.Distance(getTarget(), transform.position) < distanceToConnect){
 		SetInHand();
 	}
@@ -119,7 +124,7 @@ function ObjectUpdate () {
 	if(inHand && canChangeObject()){
 		rigidbody.velocity = Vector3.Lerp(rigidbody.velocity, Vector3.zero, Time.deltaTime * 15);
 		rigidbody.angularVelocity = Vector3.Lerp(rigidbody.angularVelocity, Vector3.zero, Time.deltaTime * 15);
-		transform.position = Vector3.Lerp(transform.position, getTarget(), Time.deltaTime * 15);
+		transform.position = Vector3.Lerp(transform.position, getTarget(), Time.deltaTime * 5);
 	}
 }
 @script AddComponentMenu ("Trigger/DragingObject")
