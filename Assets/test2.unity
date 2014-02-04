@@ -4681,6 +4681,51 @@ Transform:
   m_Children:
   - {fileID: 1142195622}
   m_Father: {fileID: 324384960}
+--- !u!1 &468390419
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 468390420}
+  - 119: {fileID: 468390421}
+  m_Layer: 0
+  m_Name: Projector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &468390420
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 468390419}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 929148333}
+--- !u!119 &468390421
+Projector:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 468390419}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_NearClipPlane: .100000001
+  m_FarClipPlane: 100
+  m_FieldOfView: 60
+  m_AspectRatio: 1
+  m_Orthographic: 0
+  m_OrthographicSize: 10
+  m_Material: {fileID: 2100000, guid: 78c0a732ad112a541100162a44295342, type: 2}
+  m_IgnoreLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &471396316
 GameObject:
   m_ObjectHideFlags: 0
@@ -5250,6 +5295,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inHand: 0
+  inActive: 0
   offsetY: -.5
   distance: .75
   distanceToConnect: .699999988
@@ -8559,6 +8605,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inHand: 0
+  inActive: 0
   offsetY: -.5
   distance: .75
   distanceToConnect: .699999988
@@ -9246,6 +9293,34 @@ Transform:
   m_Children:
   - {fileID: 1262697754}
   m_Father: {fileID: 647409001}
+--- !u!1 &929148332
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 929148333}
+  m_Layer: 0
+  m_Name: Projectors
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &929148333
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 929148332}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .689999998, y: -.25999999, z: -1.11000001}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 468390420}
+  - {fileID: 1190925538}
+  m_Father: {fileID: 1426903867}
 --- !u!1 &931083762
 GameObject:
   m_ObjectHideFlags: 0
@@ -9775,6 +9850,208 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e8fec964cdfef742955a12d953e32a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  headProjector: {fileID: 1190925539}
+  customFont: {fileID: 12800000, guid: 4719be448080f5d428532f9b1b93e10e, type: 2}
+  fontCountX: 10
+  fontCountY: 10
+  text: lolololo
+  textPlacementY: 615
+  perCharacterKerning:
+  - First: 
+    Second: .187999994
+  - First: '!'
+    Second: .207000002
+  - First: '"'
+    Second: .340000004
+  - First: '#'
+    Second: .465999991
+  - First: $
+    Second: .397000015
+  - First: '%'
+    Second: .63499999
+  - First: '&'
+    Second: .519999981
+  - First: ''''
+    Second: .192000002
+  - First: (
+    Second: .244000003
+  - First: )
+    Second: .244000003
+  - First: '*'
+    Second: .393000007
+  - First: +
+    Second: .397000015
+  - First: ','
+    Second: .209000006
+  - First: '-'
+    Second: .231999993
+  - First: .
+    Second: .206
+  - First: /
+    Second: .298000008
+  - First: 0
+    Second: .397000015
+  - First: 1
+    Second: .397000015
+  - First: 2
+    Second: .397000015
+  - First: 3
+    Second: .397000015
+  - First: 4
+    Second: .397000015
+  - First: 5
+    Second: .397000015
+  - First: 6
+    Second: .397000015
+  - First: 7
+    Second: .397000015
+  - First: 8
+    Second: .397000015
+  - First: 9
+    Second: .397000015
+  - First: ':'
+    Second: .206
+  - First: ;
+    Second: .209000006
+  - First: <
+    Second: .397000015
+  - First: =
+    Second: .397000015
+  - First: '>'
+    Second: .397000015
+  - First: '?'
+    Second: .331
+  - First: '@'
+    Second: .624000013
+  - First: A
+    Second: .467999995
+  - First: B
+    Second: .463
+  - First: C
+    Second: .44600001
+  - First: D
+    Second: .504999995
+  - First: E
+    Second: .404000014
+  - First: F
+    Second: .395999998
+  - First: G
+    Second: .522000015
+  - First: H
+    Second: .523000002
+  - First: I
+    Second: .280999988
+  - First: J
+    Second: .238999993
+  - First: K
+    Second: .456999987
+  - First: L
+    Second: .386000007
+  - First: M
+    Second: .657999992
+  - First: N
+    Second: .56400001
+  - First: O
+    Second: .545000017
+  - First: P
+    Second: .430999994
+  - First: Q
+    Second: .545000017
+  - First: R
+    Second: .453999996
+  - First: S
+    Second: .377999991
+  - First: T
+    Second: .40200001
+  - First: U
+    Second: .515999973
+  - First: V
+    Second: .439999998
+  - First: W
+    Second: .667999983
+  - First: X
+    Second: .451999992
+  - First: Y
+    Second: .421000004
+  - First: Z
+    Second: .388999999
+  - First: '['
+    Second: .238999993
+  - First: \
+    Second: .298000008
+  - First: ']'
+    Second: .238999993
+  - First: ^
+    Second: .384000003
+  - First: _
+    Second: .296999991
+  - First: '`'
+    Second: .416000009
+  - First: a
+    Second: .414000005
+  - First: b
+    Second: .437999994
+  - First: c
+    Second: .360000014
+  - First: d
+    Second: .437999994
+  - First: e
+    Second: .419
+  - First: f
+    Second: .279000014
+  - First: g
+    Second: .404000014
+  - First: h
+    Second: .451999992
+  - First: i
+    Second: .219999999
+  - First: j
+    Second: .219999999
+  - First: k
+    Second: .425000012
+  - First: l
+    Second: .219999999
+  - First: m
+    Second: .67900002
+  - First: n
+    Second: .451999992
+  - First: o
+    Second: .432000011
+  - First: p
+    Second: .437999994
+  - First: q
+    Second: .437999994
+  - First: r
+    Second: .312999994
+  - First: s
+    Second: .347000003
+  - First: t
+    Second: .305000007
+  - First: u
+    Second: .451999992
+  - First: v
+    Second: .388999999
+  - First: w
+    Second: .58099997
+  - First: x
+    Second: .395000011
+  - First: y
+    Second: .388999999
+  - First: z
+    Second: .330000013
+  - First: '{'
+    Second: .261999995
+  - First: '|'
+    Second: .397000015
+  - First: '}'
+    Second: .261999995
+  - First: ~
+    Second: .397000015
+  lineSpacing: 2
+  useSharedMaterial: 1
+  decalTextureSize: 1024
+  characterSize: 2
+  maxMugTextWidth: 280
   target: {fileID: 488732285}
   rotationOffset: .0199999996
 --- !u!143 &977495325
@@ -11994,6 +12271,51 @@ MeshFilter:
   m_PrefabInternal: {fileID: 378528770}
   m_GameObject: {fileID: 1188550223}
   m_Mesh: {fileID: 4300038, guid: 17fa237ed5f81384eb478c82098ce1d6, type: 3}
+--- !u!1 &1190925537
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1190925538}
+  - 119: {fileID: 1190925539}
+  m_Layer: 0
+  m_Name: ProjectorText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1190925538
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1190925537}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 929148333}
+--- !u!119 &1190925539
+Projector:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1190925537}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_NearClipPlane: .100000001
+  m_FarClipPlane: 100
+  m_FieldOfView: 60
+  m_AspectRatio: 1
+  m_Orthographic: 0
+  m_OrthographicSize: 10
+  m_Material: {fileID: 2100000, guid: acb777d5fb9c91547b6579753e4d935f, type: 2}
+  m_IgnoreLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1191569524
 GameObject:
   m_ObjectHideFlags: 0
@@ -14425,6 +14747,7 @@ Transform:
   m_Children:
   - {fileID: 1227287366}
   - {fileID: 1007968646}
+  - {fileID: 929148333}
   m_Father: {fileID: 0}
 --- !u!114 &1426903868
 MonoBehaviour:
@@ -16152,6 +16475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inHand: 0
+  inActive: 0
   offsetY: -.5
   distance: .75
   distanceToConnect: .699999988

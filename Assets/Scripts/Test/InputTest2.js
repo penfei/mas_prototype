@@ -5,6 +5,19 @@ private var anim:Animator;
 private var animationController:AnimationController;
 private var character:CharacterController;
 private var layerMask = 10 | 11;
+var headProjector:Projector;
+
+var customFont:Font;
+var fontCountX = 10;
+var fontCountY = 10;
+var text:String = "lolololo";
+var textPlacementY = 615;
+var perCharacterKerning:PerCharacterKerning[]; 
+var lineSpacing = 1;
+var useSharedMaterial = true;
+var decalTextureSize = 1024;
+var characterSize = 1;
+var maxMugTextWidth = 280;
 
 var target:GameObject;
 var rotationOffset:float = 0.1f;
@@ -17,6 +30,12 @@ function Start () {
 	character = GetComponent(CharacterController);
 //	target.GetComponent(CharacterMotor).enabled = false;
 	activateCharacterController(false);
+//	headProjector = GameObject.Find("HeadCameras").GetComponentInChildren(Projector);
+	
+	var textToTexture:TextToTexture = new TextToTexture(customFont, fontCountX, fontCountY, perCharacterKerning, false);
+    var textWidthPlusTrailingBuffer:int = textToTexture.CalcTextWidthPlusTrailingBuffer(text, decalTextureSize, characterSize);
+    var posX:int = (Screen.width - textWidthPlusTrailingBuffer)/ 2;
+	headProjector.material.SetTexture("_ShadowTex", textToTexture.CreateTextToTexture(text, posX, textPlacementY, decalTextureSize, characterSize, lineSpacing));
 }
 
 function Update () {
