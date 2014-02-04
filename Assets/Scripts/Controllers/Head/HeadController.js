@@ -37,10 +37,10 @@ class HeadController extends PlayerController{
 	
 	override protected function PlayerFixedUpdate() {
 		super.PlayerFixedUpdate();
-		if(photonView.isMine && core.body != null){
-	    	var con:LeftHandController = core.body.GetComponent(BodyController).leftHandController;
-	    	GetComponent(ImpulsController).AddImpulse(con.gameObject, con.CanPulling() && con.targetFirst && con.inRadius && !core.isConnected);
-		} 
+//		if(photonView.isMine && core.body != null){
+//	    	var con:LeftHandController = core.body.GetComponent(BodyController).leftHandController;
+//	    	GetComponent(ImpulsController).AddImpulse(con.gameObject, con.CanPulling() && con.targetFirst && con.inRadius && !core.isConnected);
+//		} 
 	}
 	
 	override protected function PlayerLateUpdate() {

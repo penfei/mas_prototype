@@ -30,7 +30,6 @@ function AddImpulseForward (target:GameObject) {
 }
 
 function SetNormalMass(){
-	rigidbody.useGravity = true;
 	rigidbody.mass = 1;
 	rigidbody.drag = 0;
 }
