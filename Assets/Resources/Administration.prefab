@@ -68,7 +68,7 @@ MonoBehaviour:
   isBody: 0
   isConnected: 0
   actionTimeOffset: 2
-  bodyPrefab: {fileID: 400134, guid: ceae4c98ebae56d489d0be4a1adef213, type: 2}
+  bodyPrefab: {fileID: 400134, guid: 898f9b6b8792f5341a9576b5c0205aee, type: 2}
   headPrefab: {fileID: 400002, guid: 153449d80d7a6ae4ea990320461ef7d9, type: 2}
   bodyStartPosition: {fileID: 0}
   headStartPosition: {fileID: 0}

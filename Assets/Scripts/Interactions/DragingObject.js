@@ -79,6 +79,21 @@ function canChangeObject():boolean{
 	return false;		
 }
 
+function canChangePhotonObject():boolean{
+	if(core != null){
+		if(core.isHead && gameObject == core.head){
+			return true;
+		}
+		if(gameObject != core.head){
+			return true;
+		}
+	}
+	else{
+		return true;
+	}
+	return false;		
+}
+
 function getTarget():Vector3{
 	var a:float = (body.transform.localEulerAngles.y + angle) * Mathf.Deg2Rad;
 	var point:Vector3 = new Vector3();
@@ -121,9 +136,11 @@ function ObjectUpdate () {
 			GetComponent(ImpulsController).AddImpulseForward(body);
 		}
 	}
-	if(inHand && canChangeObject()){
-		rigidbody.velocity = Vector3.Lerp(rigidbody.velocity, Vector3.zero, Time.deltaTime * 15);
-		rigidbody.angularVelocity = Vector3.Lerp(rigidbody.angularVelocity, Vector3.zero, Time.deltaTime * 15);
+	if(inHand && canChangePhotonObject()){
+		if(rigidbody != null){
+			rigidbody.velocity = Vector3.Lerp(rigidbody.velocity, Vector3.zero, Time.deltaTime * 15);
+			rigidbody.angularVelocity = Vector3.Lerp(rigidbody.angularVelocity, Vector3.zero, Time.deltaTime * 15);
+		}
 		transform.position = Vector3.Lerp(transform.position, getTarget(), Time.deltaTime * 5);
 	}
 }
