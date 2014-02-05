@@ -221,6 +221,7 @@ public class TextToTexture
     private Texture2D CreatefillTexture2D(Color color, int textureWidth, int textureHeight)
     {
         Texture2D texture = new Texture2D(textureWidth, textureHeight);
+		texture.wrapMode = TextureWrapMode.Clamp;
         int numOfPixels = texture.width * texture.height;
         Color[] colors = new Color[numOfPixels];
         for (int x = 0; x < numOfPixels; x++)
