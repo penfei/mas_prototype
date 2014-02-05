@@ -34,7 +34,10 @@ function Start () {
 	
 	var textToTexture:TextToTexture = new TextToTexture(customFont, fontCountX, fontCountY, perCharacterKerning, false);
     var textWidthPlusTrailingBuffer:int = textToTexture.CalcTextWidthPlusTrailingBuffer(text, decalTextureSize, characterSize);
-    var posX:int = (Screen.width - textWidthPlusTrailingBuffer)/ 2;
+    var posX:int = (Screen.width - textWidthPlusTrailingBuffer) / 2;
+    if(posX < 0){
+    	posX = 0;
+    }
 	headProjector.material.SetTexture("_ShadowTex", textToTexture.CreateTextToTexture(text, posX, textPlacementY, decalTextureSize, characterSize, lineSpacing));
 }
 
