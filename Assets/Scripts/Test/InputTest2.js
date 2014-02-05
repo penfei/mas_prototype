@@ -6,6 +6,7 @@ private var animationController:AnimationController;
 private var character:CharacterController;
 private var layerMask = 10 | 11;
 var headProjector:Projector;
+var headProjectorContainer:GameObject;
 
 var customFont:Font;
 var fontCountX = 10;
@@ -31,10 +32,11 @@ function Start () {
 //	target.GetComponent(CharacterMotor).enabled = false;
 	activateCharacterController(false);
 //	headProjector = GameObject.Find("HeadCameras").GetComponentInChildren(Projector);
+	headProjectorContainer.active = false;
 	
 	var textToTexture:TextToTexture = new TextToTexture(customFont, fontCountX, fontCountY, perCharacterKerning, false);
     var textWidthPlusTrailingBuffer:int = textToTexture.CalcTextWidthPlusTrailingBuffer(text, decalTextureSize, characterSize);
-    var posX:int = (Screen.width - textWidthPlusTrailingBuffer) / 2;
+    var posX:int = (decalTextureSize - textWidthPlusTrailingBuffer) / 2;
     if(posX < 0){
     	posX = 0;
     }
@@ -51,6 +53,10 @@ function Update () {
 	} else {
 		character.height = 1.9;
 		character.center.y = 0.9;
+	}
+	
+	if(Input.GetButtonDown("Chat")){
+		headProjectorContainer.active = !headProjectorContainer.active;
 	}
 	
 	var directionVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));

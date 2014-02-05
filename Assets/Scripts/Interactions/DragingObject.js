@@ -141,7 +141,7 @@ function ObjectUpdate () {
 			rigidbody.velocity = Vector3.Lerp(rigidbody.velocity, Vector3.zero, Time.deltaTime * 15);
 			rigidbody.angularVelocity = Vector3.Lerp(rigidbody.angularVelocity, Vector3.zero, Time.deltaTime * 15);
 		}
-		transform.position = Vector3.Lerp(transform.position, getTarget(), Time.deltaTime * 5);
+		transform.position = Vector3.Lerp(transform.position, getTarget(), Time.deltaTime * 10);
 	}
 }
 @script AddComponentMenu ("Trigger/DragingObject")
