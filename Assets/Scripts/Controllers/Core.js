@@ -15,6 +15,8 @@ class Core extends Photon.MonoBehaviour{
 	var bodyStartPosition:Transform;
 	var headStartPosition:Transform;
 	
+	var customFont:Font;
+	
 	var fastStart = false;
 	
 	public var body:GameObject;

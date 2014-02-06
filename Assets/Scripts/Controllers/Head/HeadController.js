@@ -1,6 +1,21 @@
 #pragma strict
 
 class HeadController extends PlayerController{
+
+	var headProjector:Projector;
+	var headProjectorContainer:GameObject;
+	
+	var customFont:Font;
+	var fontCountX = 10;
+	var fontCountY = 10;
+	var text:String = "lolololo";
+	var textPlacementY = 615;
+	var perCharacterKerning:PerCharacterKerning[]; 
+	var lineSpacing = 1;
+	var useSharedMaterial = true;
+	var decalTextureSize = 1024;
+	var characterSize = 1;
+	var maxMugTextWidth = 280;
 	
 	override protected function PlayerStart(){
 		super.PlayerStart();
@@ -9,11 +24,32 @@ class HeadController extends PlayerController{
 		core.PlayerInit();
 		cameraObject.GetComponent(AudioListener).enabled = true;
 		
-		if (!photonView.isMine)
-	    {
+		if (!photonView.isMine){
 	    	GetComponent(SphereCollider).enabled = false;
 			rigidbody.useGravity = false;
 	    }
+	    
+	    if(headProjectorContainer != null){
+	    	Debug.Log("text = " + text);
+			headProjectorContainer.active = false;
+			var textToTexture:TextToTexture = new TextToTexture(customFont, fontCountX, fontCountY, perCharacterKerning, false);
+		    var textWidthPlusTrailingBuffer:int = textToTexture.CalcTextWidthPlusTrailingBuffer(text, decalTextureSize, characterSize);
+		    var posX:int = (decalTextureSize - textWidthPlusTrailingBuffer) / 2;
+		    if(posX < 0){
+		    	posX = 0;
+		    }
+			headProjector.material.SetTexture("_ShadowTex", textToTexture.CreateTextToTexture(text, posX, textPlacementY, decalTextureSize, characterSize, lineSpacing));
+		}
+	}
+	
+	override function Update(){
+		super.Update();
+		if(Input.GetButtonDown("Chat")){
+			headProjectorContainer.active = !headProjectorContainer.active;
+			if(!headProjectorContainer.active){
+				
+			}
+		}
 	}
 	
 	override protected function PlayerStreamMe(stream:PhotonStream, info:PhotonMessageInfo) {

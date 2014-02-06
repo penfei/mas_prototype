@@ -28,6 +28,7 @@ class InRoomChat extends Photon.MonoBehaviour
 	
 	public function OnGUI():void
 	{
+		return;
 		if (!this.IsVisible || PhotonNetwork.connectionStateDetailed != PeerState.Joined)
 		{
 			return;

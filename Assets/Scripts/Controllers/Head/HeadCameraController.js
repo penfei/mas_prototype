@@ -2,6 +2,9 @@
 
 class HeadCameraController extends Photon.MonoBehaviour{
 
+	var headProjector:Projector;
+	var headProjectorContainer:GameObject;
+
 	public var smooth = 15f;
 	public var basicCamera:Camera;
 

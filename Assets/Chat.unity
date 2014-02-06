@@ -515,10 +515,11 @@ MonoBehaviour:
   isBody: 0
   isConnected: 0
   actionTimeOffset: 2
-  bodyPrefab: {fileID: 400134, guid: 478ddd49aaa22924c91813c444a05130, type: 2}
-  headPrefab: {fileID: 400002, guid: 153449d80d7a6ae4ea990320461ef7d9, type: 2}
+  bodyPrefab: {fileID: 400318, guid: 1e66f48d64070114eb37fe189a8be69e, type: 2}
+  headPrefab: {fileID: 400008, guid: 035306f70d6fd18468e5f857cd8f665f, type: 2}
   bodyStartPosition: {fileID: 162480745}
   headStartPosition: {fileID: 1395307615}
+  customFont: {fileID: 12800000, guid: 4719be448080f5d428532f9b1b93e10e, type: 2}
   fastStart: 0
   body: {fileID: 0}
   head: {fileID: 0}
@@ -1750,9 +1751,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22c0749a5e7a7d246a412ed6f4fb44e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  takeRequirements:
-  - {fileID: 11400000, guid: 4a3825ae42552d547a0b4da4b0426ee8, type: 2}
-  itemReward: {fileID: 11400000, guid: 754b035e738c64341b7299bf2df9f862, type: 2}
 --- !u!23 &623009607
 Renderer:
   m_ObjectHideFlags: 0
@@ -3382,6 +3380,19 @@ Prefab:
       propertyPath: subId
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 4571bb26ef97ccf40997919a9d214240, type: 2}
+      propertyPath: bodyPrefab
+      value: 
+      objectReference: {fileID: 400318, guid: 1e66f48d64070114eb37fe189a8be69e, type: 2}
+    - target: {fileID: 11400002, guid: 4571bb26ef97ccf40997919a9d214240, type: 2}
+      propertyPath: headPrefab
+      value: 
+      objectReference: {fileID: 400008, guid: 035306f70d6fd18468e5f857cd8f665f, type: 2}
+    - target: {fileID: 11400002, guid: 4571bb26ef97ccf40997919a9d214240, type: 2}
+      propertyPath: customFont
+      value: 
+      objectReference: {fileID: 12800000, guid: 4719be448080f5d428532f9b1b93e10e,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4571bb26ef97ccf40997919a9d214240, type: 2}
   m_RootGameObject: {fileID: 156976593}
