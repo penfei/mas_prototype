@@ -44,7 +44,7 @@ function Update () {
 function SetInHand () {
 	leftHandController.hasObject = true;
 	inHand = true;
-	leftHandController.ResetTarget();
+	leftHandController.targetObject = null;
 	leftHandController.HandToForward();
 	if(gameObject.GetComponent(CharacterController)){
 		gameObject.GetComponent(CharacterController).enabled = false;

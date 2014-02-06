@@ -191,7 +191,7 @@ class LeftHandController extends MonoBehaviour{
 	public function ResetTarget(){
 		if(targetObject != null){
 			if(canChangeObject())
-				targetObject.GetComponent(ImpulsController).SetNormalMass();
+				targetObject.GetComponent(DragingObject).SetOutHand();
 			targetObject = null;
 		}
 	}

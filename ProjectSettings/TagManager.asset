@@ -13,7 +13,8 @@ TagManager:
   - Alarm
   - Head
   - toChange
-  - HeroCollider
+  - BodyCollider
+  - HeadCollider
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

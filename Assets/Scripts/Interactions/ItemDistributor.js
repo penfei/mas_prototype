@@ -32,7 +32,7 @@ class ItemDistributor extends Photon.MonoBehaviour{
 			testTriggered = true;
 		}
 		else{
-			if(other.gameObject.tag == Tags.body){
+			if(other.gameObject.tag == "BodyCollider"){
 	        	StartChecking(core.isBody);
 	        }
 	        if(other.gameObject.tag == Tags.head){
