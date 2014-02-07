@@ -8,7 +8,7 @@ class HeadController extends PlayerController{
 	var customFont:Font;
 	var fontCountX = 10;
 	var fontCountY = 10;
-	var text:String = "lolololo";
+	var text:String = "";
 	var textPlacementY = 615;
 	var perCharacterKerning:PerCharacterKerning[]; 
 	var lineSpacing = 1;
@@ -30,25 +30,15 @@ class HeadController extends PlayerController{
 	    }
 	    
 	    if(headProjectorContainer != null){
-	    	Debug.Log("text = " + text);
 			headProjectorContainer.active = false;
-			var textToTexture:TextToTexture = new TextToTexture(customFont, fontCountX, fontCountY, perCharacterKerning, false);
-		    var textWidthPlusTrailingBuffer:int = textToTexture.CalcTextWidthPlusTrailingBuffer(text, decalTextureSize, characterSize);
-		    var posX:int = (decalTextureSize - textWidthPlusTrailingBuffer) / 2;
-		    if(posX < 0){
-		    	posX = 0;
-		    }
-			headProjector.material.SetTexture("_ShadowTex", textToTexture.CreateTextToTexture(text, posX, textPlacementY, decalTextureSize, characterSize, lineSpacing));
+			updateText();
 		}
 	}
 	
 	override function Update(){
 		super.Update();
-		if(Input.GetButtonDown("Chat")){
+		if(Input.GetButtonDown("Chat") && core.isBody){
 			headProjectorContainer.active = !headProjectorContainer.active;
-			if(!headProjectorContainer.active){
-				
-			}
 		}
 	}
 	
@@ -129,5 +119,26 @@ class HeadController extends PlayerController{
 		
 		gameObject.GetComponent(MouseLook).canRotation = false;
         cameraObject.GetComponent(MouseLook).canRotation = false;
+	}
+	
+	protected function updateText():void{
+		var textToTexture:TextToTexture = new TextToTexture(customFont, fontCountX, fontCountY, perCharacterKerning, false);
+		var textWidthPlusTrailingBuffer:int = textToTexture.CalcTextWidthPlusTrailingBuffer(text, decalTextureSize, characterSize);
+		var posX:int = (decalTextureSize - textWidthPlusTrailingBuffer) / 2;
+		if(posX < 0){
+			posX = 0;
+		}
+		headProjector.material.SetTexture("_ShadowTex", textToTexture.CreateTextToTexture(text, posX, textPlacementY, decalTextureSize, characterSize, lineSpacing));
+	}
+	
+	@RPC
+	public function Chat(newLine:String, info:PhotonMessageInfo){
+		text = newLine;
+		if(text != ""){
+			updateText();
+		}
+		else{
+			headProjectorContainer.active = !headProjectorContainer.active;
+		}
 	}
 }
