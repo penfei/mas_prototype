@@ -78,16 +78,16 @@ class InRoomChat extends Photon.MonoBehaviour
 		inputLine = GUILayout.TextField(inputLine);
 		if (GUILayout.Button("Send", GUILayout.ExpandWidth(false)))
 		{
-			this.photonView.RPC("Chat", PhotonTargets.All, this.inputLine);
-			this.inputLine = "";
+			photonView.RPC("Chat", PhotonTargets.All, inputLine);
+			inputLine = "";
 			GUI.FocusControl("");
 		}
 		GUILayout.EndHorizontal();
 		GUILayout.EndArea();
 	}
 	
-	/*@RPC
-	public function Chat(newLine:String, mi:PhotonMessageInfo):void{
+	@RPC
+	function Chat(newLine:String, mi:PhotonMessageInfo){
 		var senderName:String = "anonymous";
 		Debug.Log("newLine = " + newLine);
         if (mi != null && mi.sender != null)
@@ -103,7 +103,7 @@ class InRoomChat extends Photon.MonoBehaviour
         }
 
         this.messages.Add(senderName +": " + newLine);
-	}*/
+	}
 	
 	public function AddLine(newLine:String):void{
 		this.messages.Add(newLine);

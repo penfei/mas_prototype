@@ -9976,6 +9976,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e8fec964cdfef742955a12d953e32a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  headCamera: {fileID: 1426903866}
   headProjector: {fileID: 1190925539}
   headProjectorContainer: {fileID: 1666509463}
   customFont: {fileID: 12800000, guid: 4719be448080f5d428532f9b1b93e10e, type: 2}
@@ -10179,8 +10180,22 @@ MonoBehaviour:
   decalTextureSize: 1024
   characterSize: 1
   maxMugTextWidth: 280
+  core: {fileID: 1314095737}
   target: {fileID: 488732285}
   rotationOffset: .0199999996
+  myGestures: {fileID: 11400000, guid: a0bde21e004384248abbf556945e07e8, type: 2}
+  cam: {fileID: 1227287369}
+  match:
+    glyphname: 
+    score: 0
+    bounds:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    direction: 0
+  distance: 10
 --- !u!143 &977495325
 CharacterController:
   m_ObjectHideFlags: 0
@@ -13739,8 +13754,10 @@ GameObject:
   - 4: {fileID: 1314095740}
   - 114: {fileID: 1314095739}
   - 131: {fileID: 1314095742}
+  - 114: {fileID: 1314095743}
   - 114: {fileID: 1314095738}
   - 131: {fileID: 1314095741}
+  - 96: {fileID: 1314095745}
   m_Layer: 9
   m_Name: Administration
   m_TagString: GameController
@@ -13913,6 +13930,69 @@ GUITexture:
   m_RightBorder: 0
   m_TopBorder: 0
   m_BottomBorder: 0
+--- !u!114 &1314095743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400010, guid: 4571bb26ef97ccf40997919a9d214240,
+    type: 2}
+  m_PrefabInternal: {fileID: 193724498}
+  m_GameObject: {fileID: 1314095737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6292b45380befaf4e94245563cf3eae9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GuiRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 250
+    height: 300
+  IsVisible: 1
+  AlignBottom: 0
+  messages: []
+--- !u!96 &1314095745
+TrailRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1314095737}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: cb29e56dd845c704a9076ab04a6441bc, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
+  m_Time: 1
+  m_StartWidth: .5
+  m_EndWidth: 0
+  m_Colors:
+    m_Color[0]:
+      serializedVersion: 2
+      rgba: 4292711497
+    m_Color[1]:
+      serializedVersion: 2
+      rgba: 4293685591
+    m_Color[2]:
+      serializedVersion: 2
+      rgba: 4292229161
+    m_Color[3]:
+      serializedVersion: 2
+      rgba: 4293532689
+    m_Color[4]:
+      serializedVersion: 2
+      rgba: 16720640
+  m_MinVertexDistance: .100000001
+  m_Autodestruct: 0
 --- !u!1 &1320338794
 GameObject:
   m_ObjectHideFlags: 0
@@ -16204,6 +16284,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4bc0aec7d86b84d8d21cc6169d329e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  headProjector: {fileID: 0}
+  headProjectorContainer: {fileID: 0}
   smooth: 10
   basicCamera: {fileID: 1611767861}
 --- !u!114 &1509218499

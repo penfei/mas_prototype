@@ -7,6 +7,8 @@ class AnimationController extends Photon.MonoBehaviour{
 	private var anim:Animator;
 	private var hash:HashIds;
 	private var motor : CharacterMotor;
+	private var gesture:String;
+	private var gestureTime:float;
 	
 	private var isRotating:boolean = false;
 	
@@ -26,6 +28,7 @@ class AnimationController extends Photon.MonoBehaviour{
 		hash = GameObject.FindGameObjectWithTag(Tags.gameController).GetComponent(HashIds);
 		motor = GetComponent(CharacterMotor);
 		anim.SetLayerWeight(1, 1f);
+		anim.SetLayerWeight(2, 1f);
 		leftHandController = GetComponentInChildren(LeftHandController);
 		core = GameObject.Find("Administration").GetComponent(Core);
 	}
@@ -58,6 +61,15 @@ class AnimationController extends Photon.MonoBehaviour{
 			if(a.clip.name.Contains("Sneak")) return true;
 		}
 		return false;
+	}
+	
+	public function StartGesture(glyphname:String){
+		if(gesture == null){
+			gesture = glyphname;
+			gestureTime = Time.time;
+			anim.SetBool("Gesture", true);
+			anim.SetBool("GestureWave", gesture == "Circle");
+		}
 	}
 		
 	function Update ()
@@ -97,6 +109,11 @@ class AnimationController extends Photon.MonoBehaviour{
 		anim.SetBool("United", united);
 		anim.SetBool("Jump", jump && !IsJumpState());
 		anim.SetBool(hash.sneakBool, sneak);
+		
+		if(Time.time > gestureTime + 0.2f && gesture != null){
+			gesture = null;
+			anim.SetBool("Gesture", false);
+		}
 		
 		if(motor.IsGrounded()){
 			if(united){
