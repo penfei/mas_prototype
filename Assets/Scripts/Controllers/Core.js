@@ -15,6 +15,8 @@ class Core extends Photon.MonoBehaviour{
 	var bodyStartPosition:Transform;
 	var headStartPosition:Transform;
 	
+	var headController:HeadController;
+	
 	var customFont:Font;
 	
 	var fastStart = false;
@@ -51,6 +53,7 @@ class Core extends Photon.MonoBehaviour{
 		if(!fastStart){
 			data.StartLevel(PhotonNetwork.otherPlayers[0].ToString());
 		}
+		headController = headPrefab.GetComponent(HeadController);
 	}
 	
 	function OnGUI()
@@ -225,4 +228,14 @@ class Core extends Photon.MonoBehaviour{
    		head.GetComponent(PlayerController).cameraObject.transform.parent = head.transform;
    		head.GetComponent(CharacterController).enabled = true;
     }
+    
+    @RPC
+	public function UpdateMessage(newLine:String, info:PhotonMessageInfo){
+		if(newLine != ""){
+			headController.updateText(newLine);
+		}
+		else{
+			headController.switchProjector();
+		}
+	}
 }
