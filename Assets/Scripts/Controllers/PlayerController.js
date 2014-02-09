@@ -149,9 +149,4 @@ class PlayerController extends Photon.MonoBehaviour{
         motor.inputWalk = walk;
         motor.inAir = inAir;
 	}
-	
-	/*@RPC
-	public function Chat(newLine:String, mi:PhotonMessageInfo){
-		
-	}*/
 }

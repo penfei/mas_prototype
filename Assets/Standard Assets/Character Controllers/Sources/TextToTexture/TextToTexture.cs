@@ -215,7 +215,12 @@ public class TextToTexture
 
     private float GetKerningValue(char c)
     {
-        return kerningValues[((int)c) - ASCII_START_OFFSET];
+		int res = ((int)c) - ASCII_START_OFFSET;
+		if (res < 0 || res >= kerningValues.Length) {
+			res = 0;
+		}
+        //return kerningValues[((int)c) - ASCII_START_OFFSET];
+		return kerningValues[res];
     }
 
     private Texture2D CreatefillTexture2D(Color color, int textureWidth, int textureHeight)

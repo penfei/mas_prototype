@@ -6352,6 +6352,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4bc0aec7d86b84d8d21cc6169d329e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  headProjector: {fileID: 0}
+  headProjectorContainer: {fileID: 0}
   smooth: 10
   basicCamera: {fileID: 2000002}
 --- !u!114 &11400004

@@ -1,6 +1,5 @@
 #pragma strict
 
-@script RequireComponent(PhotonView)
 class HeadController extends PlayerController{
 
 	var headProjector:Projector;
@@ -18,24 +17,12 @@ class HeadController extends PlayerController{
 	var characterSize = 1;
 	var maxMugTextWidth = 280;
 	
-	public var GuiRect:Rect = new Rect(0,0,250,300);
-	public var IsVisible:boolean = true;
-	public var AlignBottom:boolean = false;
-	private var inputLine:String = "";
-	private var scrollPos:Vector2 = Vector2.zero;
-	private var isActive:boolean = false;
-	
 	override protected function PlayerStart(){
 		super.PlayerStart();
 		motor.enabledScript = false;
 		core.head = gameObject;
 		core.PlayerInit();
 		cameraObject.GetComponent(AudioListener).enabled = true;
-		
-		if (this.AlignBottom){
-			this.GuiRect.y = Screen.height - this.GuiRect.height + 200;
-			//this.GuiRect.y = Screen.height - 100;
-		}
 		
 		if (!photonView.isMine){
 	    	GetComponent(SphereCollider).enabled = false;
@@ -44,14 +31,8 @@ class HeadController extends PlayerController{
 	    
 	    if(headProjectorContainer != null){
 			headProjectorContainer.active = false;
-			updateText(text);
-		}
-	}
-	
-	override function Update(){
-		super.Update();
-		if(Input.GetButtonDown("Chat") && core.isBody){
-			switchProjector();
+			text = "";
+			//updateMessage(text);
 		}
 	}
 	
@@ -134,8 +115,9 @@ class HeadController extends PlayerController{
         cameraObject.GetComponent(MouseLook).canRotation = false;
 	}
 	
-	public function updateText(newText:String):void{
-		text = newText;
+	public function updateMessage(newMessage:String):void{
+		text = newMessage;
+		Debug.Log("text = " + text);
 		var textToTexture:TextToTexture = new TextToTexture(customFont, fontCountX, fontCountY, perCharacterKerning, false);
 		var textWidthPlusTrailingBuffer:int = textToTexture.CalcTextWidthPlusTrailingBuffer(text, decalTextureSize, characterSize);
 		var posX:int = (decalTextureSize - textWidthPlusTrailingBuffer) / 2;
@@ -147,58 +129,6 @@ class HeadController extends PlayerController{
 	
 	public function switchProjector():void{
 		headProjectorContainer.active = !headProjectorContainer.active;
+		//Debug.Log("headProjectorContainer.active = " + headProjectorContainer.active);
 	}
-	
-	public function OnGUI():void{
-		//return;
-		if (!this.IsVisible || PhotonNetwork.connectionStateDetailed != PeerState.Joined){
-			return;
-		}
-		if (core == null || core.isBody || (!core.isBody && !core.isHead)) {
-			return;
-		}
-		
-		if (Event.current.type == EventType.KeyDown){
-			if(Event.current.keyCode == KeyCode.KeypadEnter || Event.current.keyCode == KeyCode.Return){
-				//if (!String.IsNullOrEmpty(this.inputLine)){
-				Debug.Log("this.inputLine = " + this.inputLine);
-				photonView.RPC("UpdateMessage", PhotonTargets.All, this.inputLine);
-				this.inputLine = "";
-				if(!this.isActive){
-					GUI.FocusControl("");
-					this.isActive = true;
-				}
-				else{
-					GUI.FocusControl("ChatInput");
-					this.isActive = false;
-				}
-				return; // printing the now modified list would result in an error. to avoid this, we just skip this single frame
-			}
-			else{
-				if(this.isActive){
-					photonView.RPC("UpdateMessage", PhotonTargets.All, this.inputLine);
-				}
-			}
-		}
-		
-		GUI.SetNextControlName("");
-		GUILayout.BeginArea(this.GuiRect);
-		
-		scrollPos = GUILayout.BeginScrollView(scrollPos);
-		GUILayout.FlexibleSpace();
-		GUILayout.EndScrollView();
-		
-		GUILayout.BeginHorizontal();
-		GUI.SetNextControlName("ChatInput");
-		inputLine = GUILayout.TextField(inputLine);
-		if (GUILayout.Button("Send", GUILayout.ExpandWidth(false)))
-		{
-			photonView.RPC("UpdateMessage", PhotonTargets.All, inputLine);
-			inputLine = "";
-			GUI.FocusControl("");
-		}
-		GUILayout.EndHorizontal();
-		GUILayout.EndArea();
-	}
-	
 }

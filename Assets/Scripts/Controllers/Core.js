@@ -15,10 +15,6 @@ class Core extends Photon.MonoBehaviour{
 	var bodyStartPosition:Transform;
 	var headStartPosition:Transform;
 	
-	var headController:HeadController;
-	
-	var customFont:Font;
-	
 	var fastStart = false;
 	
 	public var body:GameObject;
@@ -27,6 +23,8 @@ class Core extends Photon.MonoBehaviour{
 	private var timeAction = 0f;
 	private var data:GameDataController;
 	private var initedPrefabs:int = 0;
+	private var message:String = "";
+	private var isActivePrint:boolean = false;
 	
 	var bodyCorrectPlayerRot:Quaternion = Quaternion.identity;
 
@@ -53,7 +51,6 @@ class Core extends Photon.MonoBehaviour{
 		if(!fastStart){
 			data.StartLevel(PhotonNetwork.otherPlayers[0].ToString());
 		}
-		headController = headPrefab.GetComponent(HeadController);
 	}
 	
 	function OnGUI()
@@ -104,8 +101,7 @@ class Core extends Photon.MonoBehaviour{
     	return initedPrefabs == 2;
     }
     
-    function OnJoinedLobby()
-    {
+    function OnJoinedLobby(){
     	if(fastStart){
 			PhotonNetwork.CreateRoom("solo" + Random.Range(1, 99999), true, true, 2);
 			data.StartLevel("test_bot&" + data.player.userId);
@@ -163,6 +159,24 @@ class Core extends Photon.MonoBehaviour{
 //	  		}
 	  		if(CanDisconnection()){
 	  			RPCDisconnection();
+	  		}
+	  		/* print message */
+	  		if(Input.GetButtonDown("Chat")){
+				head.GetComponent(HeadController).switchProjector();
+				if(isHead){
+					message = "";
+					isActivePrint = !isActivePrint;
+				}
+			}
+	  		if(isHead){
+				if(Input.inputString != "" && Input.inputString != "\n"){
+				//Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return)){
+					if(isActivePrint){
+						message += Input.inputString;
+						//message += "\n";
+						photonView.RPC("UpdateMessage", PhotonTargets.All, message);
+					}
+				}
 	  		}
 	  	}
     }
@@ -230,12 +244,7 @@ class Core extends Photon.MonoBehaviour{
     }
     
     @RPC
-	public function UpdateMessage(newLine:String, info:PhotonMessageInfo){
-		if(newLine != ""){
-			headController.updateText(newLine);
-		}
-		else{
-			headController.switchProjector();
-		}
+	public function UpdateMessage(message:String, info:PhotonMessageInfo):void{
+		head.GetComponent(HeadController).updateMessage(message);
 	}
 }
