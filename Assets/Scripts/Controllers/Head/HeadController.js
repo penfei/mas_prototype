@@ -9,13 +9,10 @@ class HeadController extends PlayerController{
 	var fontCountX = 10;
 	var fontCountY = 10;
 	var text:String = "";
-	var textPlacementY = 615;
 	var perCharacterKerning:PerCharacterKerning[]; 
-	var lineSpacing = 1;
-	var useSharedMaterial = true;
+	var lineSpacing:float = 1;
 	var decalTextureSize = 1024;
 	var characterSize = 1;
-	var maxMugTextWidth = 280;
 	
 	override protected function PlayerStart(){
 		super.PlayerStart();
@@ -117,13 +114,18 @@ class HeadController extends PlayerController{
 	public function updateMessage(newMessage:String):void{
 		text = newMessage;
 		Debug.Log("text = " + text);
-		var textToTexture:TextToTexture = new TextToTexture(customFont, fontCountX, fontCountY, perCharacterKerning, false);
+		var textToTexture:TextToTexture = new TextToTexture(customFont, fontCountX, fontCountY, perCharacterKerning, true);
 		var textWidthPlusTrailingBuffer:int = textToTexture.CalcTextWidthPlusTrailingBuffer(text, decalTextureSize, characterSize);
-		var posX:int = (decalTextureSize - textWidthPlusTrailingBuffer) / 2;
-		if(posX < 0){
-			posX = 0;
-		}
-		headProjector.material.SetTexture("_ShadowTex", textToTexture.CreateTextToTexture(text, posX, textPlacementY, decalTextureSize, characterSize, lineSpacing));
+		var textHeightOffset:int = textToTexture.CalcTextHeightOffset(text, characterSize, lineSpacing);
+	    var posX:int = (decalTextureSize - textWidthPlusTrailingBuffer) / 2;
+	    var posY:int = decalTextureSize / 2 + textHeightOffset;
+	    if(posX < 0){
+	    	posX = 0;
+	    }
+	    if(posY < 0){
+	    	posY = 0;
+	    }
+		headProjector.material.SetTexture("_ShadowTex", textToTexture.CreateTextToTexture(text, posX, posY, decalTextureSize, characterSize, lineSpacing));
 	}
 	
 	public function switchProjector():void{

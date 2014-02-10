@@ -71,29 +71,17 @@ public class TextToTexture
         {
             letter = text[n];
             nextCharacterSpecial = false;
-
-            if (letter == '\\' && supportSpecialCharacters)
-            {
-                nextCharacterSpecial = true;
-                if (n + 1 < text.Length)
-                {
-                    n++;
-                    letter = text[n];
-                    if (letter == 'n' || letter == 'r') //new line or return
-                    {
-                        textPosY -= fontItemHeight * lineSpacing;
-                        textPosX = textPlacementX;
-                    }
-                    else if (letter == 't')
-                    {
-                        textPosX += fontItemWidth * GetKerningValue(' ') * 5; //5 spaces
-                    }
-                    else if (letter == '\\')
-                    {
-                        nextCharacterSpecial = false; //this allows for printing of \
-                    }
-                }
-            }
+			if ((letter == '\n' || letter == '\r') && supportSpecialCharacters)
+			{
+				nextCharacterSpecial = true;
+				textPosY -= fontItemHeight * lineSpacing;
+				textPosX = textPlacementX;
+			}
+			if (letter == '\t' && supportSpecialCharacters)
+			{
+				nextCharacterSpecial = true;
+				textPosX += fontItemWidth * GetKerningValue(' ') * 5; //5 spaces
+			}
 
             if (!nextCharacterSpecial && customFont.HasCharacter(letter))
             {
@@ -123,23 +111,53 @@ public class TextToTexture
     {
         char letter;
         float width = 0;
+		float w = 0;
         int fontItemWidth = (int)((fontTexture.width / fontCountX) * characterSize);
 
         for (int n = 0; n < text.Length; n++)
         {
             letter = text[n];
-            if (n < text.Length - 1)
-            {
-                width+= fontItemWidth * GetKerningValue(letter);
-            }
-            else //last letter ignore kerning for buffer
-            {
-                width += fontItemWidth;
-            }
+			if ((letter == '\n' || letter == '\r'))
+			{
+				if(w > width){
+					width = w;
+					w = 0;
+				}
+			} else {
+	            if (n < text.Length - 1)
+	            {
+	                w+= fontItemWidth * GetKerningValue(letter);
+	            }
+	            else //last letter ignore kerning for buffer
+	            {
+	                w += fontItemWidth;
+	            }
+			}
         }
+		if(w > width){
+			width = w;
+		}
 
         return (int)width;
     }
+
+	public int CalcTextHeightOffset(string text,float characterSize,float lineSpacing)
+	{
+		char letter;
+		int fontItemHeight = (int)((fontTexture.height / fontCountY) * characterSize);
+		float height = -(fontItemHeight * lineSpacing) / 2;
+		
+		for (int n = 0; n < text.Length; n++)
+		{
+			letter = text[n];
+			if ((letter == '\n' || letter == '\r'))
+			{
+				height += (fontItemHeight * lineSpacing) / 2;
+			}
+		}
+		
+		return (int)height;
+	}
 
     //look for a faster way of calculating this
     private Color[] changeDimensions(Color[] originalColors, int originalWidth, int originalHeight, int newWidth, int newHeight)

@@ -517,9 +517,8 @@ MonoBehaviour:
   fontCountX: 10
   fontCountY: 10
   text: lolololo
-  textPlacementY: 615
   perCharacterKerning:
-  - First: 
+  - First: ' '
     Second: .187999994
   - First: '!'
     Second: .207000002
@@ -709,11 +708,9 @@ MonoBehaviour:
     Second: .261999995
   - First: ~
     Second: .397000015
-  lineSpacing: 2
-  useSharedMaterial: 1
+  lineSpacing: .800000012
   decalTextureSize: 1024
   characterSize: 1
-  maxMugTextWidth: 280
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1

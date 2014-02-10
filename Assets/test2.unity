@@ -1915,6 +1915,7 @@ Prefab:
     - {fileID: 11400008, guid: 4571bb26ef97ccf40997919a9d214240, type: 2}
     - {fileID: 11400006, guid: 4571bb26ef97ccf40997919a9d214240, type: 2}
     - {fileID: 11400004, guid: 4571bb26ef97ccf40997919a9d214240, type: 2}
+    - {fileID: 11400010, guid: 4571bb26ef97ccf40997919a9d214240, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 4571bb26ef97ccf40997919a9d214240, type: 2}
   m_RootGameObject: {fileID: 1314095737}
   m_IsPrefabParent: 0
@@ -9982,10 +9983,10 @@ MonoBehaviour:
   customFont: {fileID: 12800000, guid: 4719be448080f5d428532f9b1b93e10e, type: 2}
   fontCountX: 10
   fontCountY: 10
-  text: lolololo
+  text: "hello\r\nasd"
   textPlacementY: 615
   perCharacterKerning:
-  - First: 
+  - First: ' '
     Second: .187999994
   - First: '!'
     Second: .207000002
@@ -10175,11 +10176,9 @@ MonoBehaviour:
     Second: .261999995
   - First: ~
     Second: .397000015
-  lineSpacing: 2
-  useSharedMaterial: 1
+  lineSpacing: .800000012
   decalTextureSize: 1024
   characterSize: 1
-  maxMugTextWidth: 280
   core: {fileID: 1314095737}
   target: {fileID: 488732285}
   rotationOffset: .0199999996
@@ -12476,7 +12475,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1190925537}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .68999958, y: -1.41999996, z: -2.64000034}
+  m_LocalPosition: {x: .689999998, y: 0, z: -2.6400001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1666509464}
@@ -13754,7 +13753,6 @@ GameObject:
   - 4: {fileID: 1314095740}
   - 114: {fileID: 1314095739}
   - 131: {fileID: 1314095742}
-  - 114: {fileID: 1314095743}
   - 114: {fileID: 1314095738}
   - 131: {fileID: 1314095741}
   - 96: {fileID: 1314095745}
@@ -13930,27 +13928,6 @@ GUITexture:
   m_RightBorder: 0
   m_TopBorder: 0
   m_BottomBorder: 0
---- !u!114 &1314095743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400010, guid: 4571bb26ef97ccf40997919a9d214240,
-    type: 2}
-  m_PrefabInternal: {fileID: 193724498}
-  m_GameObject: {fileID: 1314095737}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6292b45380befaf4e94245563cf3eae9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GuiRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 250
-    height: 300
-  IsVisible: 1
-  AlignBottom: 0
-  messages: []
 --- !u!96 &1314095745
 TrailRenderer:
   m_ObjectHideFlags: 0
