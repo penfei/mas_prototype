@@ -162,6 +162,7 @@ class Core extends Photon.MonoBehaviour{
 	  		}
 	  		/* print message */
 	  		if(Input.GetButtonDown("Chat")){
+	  			Debug.Log("enter fuck");
 				head.GetComponent(HeadController).switchProjector();
 				if(isHead){
 					message = "";
@@ -172,8 +173,19 @@ class Core extends Photon.MonoBehaviour{
 				if(Input.inputString != "" && Input.inputString != "\n"){
 				//Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return)){
 					if(isActivePrint){
-						message += Input.inputString;
-						//message += "\n";
+						for (var c : char in Input.inputString) {
+							if (c == "\b"[0]) {
+								if (message.Length != 0){
+									message = message.Substring(0, message.Length - 1);
+								}
+							}
+							//else if (c == "\n"[0] || c == "\r"[0]) {// "\n" for Mac, "\r" for windows.
+							//	print ("User entered his name: " + guiText.text);
+							//}
+							else {
+								message += c;
+							}
+						}
 						photonView.RPC("UpdateMessage", PhotonTargets.All, message);
 					}
 				}

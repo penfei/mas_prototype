@@ -32,7 +32,6 @@ class HeadController extends PlayerController{
 	    if(headProjectorContainer != null){
 			headProjectorContainer.active = false;
 			text = "";
-			//updateMessage(text);
 		}
 	}
 	
@@ -129,6 +128,5 @@ class HeadController extends PlayerController{
 	
 	public function switchProjector():void{
 		headProjectorContainer.active = !headProjectorContainer.active;
-		//Debug.Log("headProjectorContainer.active = " + headProjectorContainer.active);
 	}
 }

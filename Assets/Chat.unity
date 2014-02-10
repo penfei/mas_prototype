@@ -514,8 +514,8 @@ MonoBehaviour:
   isBody: 0
   isConnected: 0
   actionTimeOffset: 2
-  bodyPrefab: {fileID: 400318, guid: 892f3455ec71acd4fa3eec7710a3feb4, type: 2}
-  headPrefab: {fileID: 400008, guid: 035306f70d6fd18468e5f857cd8f665f, type: 2}
+  bodyPrefab: {fileID: 400318, guid: cbc75fb8b446816448fe2627a8e0678e, type: 2}
+  headPrefab: {fileID: 400016, guid: 1f390c5d9244c5b49a091aa651f7d71e, type: 2}
   bodyStartPosition: {fileID: 162480745}
   headStartPosition: {fileID: 1395307615}
   fastStart: 0
@@ -3361,11 +3361,11 @@ Prefab:
     - target: {fileID: 11400002, guid: 4571bb26ef97ccf40997919a9d214240, type: 2}
       propertyPath: bodyPrefab
       value: 
-      objectReference: {fileID: 400318, guid: 892f3455ec71acd4fa3eec7710a3feb4, type: 2}
+      objectReference: {fileID: 400318, guid: cbc75fb8b446816448fe2627a8e0678e, type: 2}
     - target: {fileID: 11400002, guid: 4571bb26ef97ccf40997919a9d214240, type: 2}
       propertyPath: headPrefab
       value: 
-      objectReference: {fileID: 400008, guid: 035306f70d6fd18468e5f857cd8f665f, type: 2}
+      objectReference: {fileID: 400016, guid: 1f390c5d9244c5b49a091aa651f7d71e, type: 2}
     - target: {fileID: 11400002, guid: 4571bb26ef97ccf40997919a9d214240, type: 2}
       propertyPath: customFont
       value: 
