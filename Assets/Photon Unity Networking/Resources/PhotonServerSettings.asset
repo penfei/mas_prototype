@@ -35,4 +35,5 @@ MonoBehaviour:
   - CheckingQuest
   - CheckingItem
   - UpdateMessage
+  - RPCStartGesture
   DisableAutoOpenWizard: 0

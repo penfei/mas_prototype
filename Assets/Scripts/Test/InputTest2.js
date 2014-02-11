@@ -52,7 +52,6 @@ function Start () {
 	    if(posY < 0){
 	    	posY = 0;
 	    }
-//	    posY = (decalTextureSize ) / 2;
 	    
 		headProjector.material.SetTexture("_ShadowTex", textToTexture.CreateTextToTexture(text, posX, posY, decalTextureSize, characterSize, lineSpacing));
 	}

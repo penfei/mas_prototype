@@ -68,7 +68,7 @@ class AnimationController extends Photon.MonoBehaviour{
 			gesture = glyphname;
 			gestureTime = Time.time;
 			anim.SetBool("Gesture", true);
-			anim.SetBool("GestureWave", gesture == "Circle");
+			anim.SetBool("GestureWave", gesture == "V");
 		}
 	}
 		

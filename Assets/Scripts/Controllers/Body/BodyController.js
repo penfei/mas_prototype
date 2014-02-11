@@ -94,6 +94,7 @@ class BodyController extends PlayerController{
 		
 		if(Input.GetMouseButtonUp(0) && core.head != null){
 			gestures.Recognize();
+			core.StartGesture(gestures.match.glyphname);
 		}
         
         motor.inputLeftHand = Input.GetButton("LeftHandAction");
@@ -122,6 +123,10 @@ class BodyController extends PlayerController{
         	var GUIPosition:Rect = new Rect(15,Screen.height - 100,800,100);
 			GUI.Label(GUIPosition, gestures.matchStroke);
 		}
+	}
+	
+	function StartGesture(gesture:String){
+		animationController.StartGesture(gesture);
 	}
 	
 	private function checkUp():boolean{

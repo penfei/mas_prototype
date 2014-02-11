@@ -259,4 +259,13 @@ class Core extends Photon.MonoBehaviour{
 	public function UpdateMessage(message:String, info:PhotonMessageInfo):void{
 		head.GetComponent(HeadController).updateMessage(message);
 	}
+	
+	public function StartGesture(gesture:String):void{
+		photonView.RPC("RPCStartGesture", PhotonTargets.All, gesture);
+	}
+	
+	@RPC
+	public function RPCStartGesture(gesture:String, info:PhotonMessageInfo):void{
+		body.GetComponent(BodyController).StartGesture(gesture);
+	}
 }
