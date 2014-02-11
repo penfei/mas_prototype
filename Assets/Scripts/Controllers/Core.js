@@ -162,15 +162,17 @@ class Core extends Photon.MonoBehaviour{
 	  		}
 	  		/* print message */
 	  		if(Input.GetButtonDown("Chat")){
-	  			Debug.Log("enter fuck");
-				head.GetComponent(HeadController).switchProjector();
 				if(isHead){
 					message = "";
 					isActivePrint = !isActivePrint;
+					if(isActivePrint){
+						photonView.RPC("UpdateMessage", PhotonTargets.All, message);
+					}
 				}
+				head.GetComponent(HeadController).switchProjector();
 			}
 	  		if(isHead){
-				if(Input.inputString != "" && Input.inputString != "\n"){
+				if(Input.inputString != "" && Input.inputString != "`"){
 				//Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return)){
 					if(isActivePrint){
 						for (var c : char in Input.inputString) {

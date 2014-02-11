@@ -114,8 +114,9 @@ class HeadController extends PlayerController{
 	public function updateMessage(newMessage:String):void{
 		text = newMessage;
 		Debug.Log("text = " + text);
-		var textToTexture:TextToTexture = new TextToTexture(customFont, fontCountX, fontCountY, perCharacterKerning, true);
+		var textToTexture:TextToTexture = new TextToTexture(customFont, fontCountX, fontCountY, perCharacterKerning, true, decalTextureSize - 100);
 		var textWidthPlusTrailingBuffer:int = textToTexture.CalcTextWidthPlusTrailingBuffer(text, decalTextureSize, characterSize);
+		text = textToTexture.getTextChanged();
 		var textHeightOffset:int = textToTexture.CalcTextHeightOffset(text, characterSize, lineSpacing);
 	    var posX:int = (decalTextureSize - textWidthPlusTrailingBuffer) / 2;
 	    var posY:int = decalTextureSize / 2 + textHeightOffset;

@@ -41,7 +41,7 @@ function Start () {
 	if(headProjectorContainer != null){
 		headProjectorContainer.active = false;
 		text = "heall\nasdas\nasdas\nasdas";
-		var textToTexture:TextToTexture = new TextToTexture(customFont, fontCountX, fontCountY, perCharacterKerning, true);
+		var textToTexture:TextToTexture = new TextToTexture(customFont, fontCountX, fontCountY, perCharacterKerning, true, decalTextureSize - 100);
 	    var textWidthPlusTrailingBuffer:int = textToTexture.CalcTextWidthPlusTrailingBuffer(text, decalTextureSize, characterSize);
 	    var textHeightOffset:int = textToTexture.CalcTextHeightOffset(text, characterSize, lineSpacing);
 	    var posX:int = (decalTextureSize - textWidthPlusTrailingBuffer) / 2;

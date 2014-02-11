@@ -41,7 +41,10 @@ public class TextToTexture
     private float[] kerningValues;
     private bool supportSpecialCharacters;
 
-    public TextToTexture(Font customFont, int fontCountX, int fontCountY,PerCharacterKerning[] perCharacterKerning,bool supportSpecialCharacters)
+	private string textChanged;
+	private int maxWidth;
+
+    public TextToTexture(Font customFont, int fontCountX, int fontCountY,PerCharacterKerning[] perCharacterKerning,bool supportSpecialCharacters,int maxWidth)
     {
         this.customFont = customFont;
         fontTexture = (Texture2D)customFont.material.mainTexture;
@@ -49,7 +52,12 @@ public class TextToTexture
         this.fontCountY = fontCountY;
         kerningValues = GetCharacterKerningValuesFromPerCharacterKerning(perCharacterKerning);
         this.supportSpecialCharacters = supportSpecialCharacters;
+		this.maxWidth = maxWidth;
     }
+
+	public string getTextChanged(){
+		return textChanged;
+	}
 
     //placementX and Y - placement within texture size, texture size = textureWidth and textureHeight (square)
     public Texture2D CreateTextToTexture(string text, int textPlacementX, int textPlacementY, int textureSize, float characterSize, float lineSpacing)
@@ -109,11 +117,15 @@ public class TextToTexture
     //trailing buffer is to allow for area where the character might be at the end
     public int CalcTextWidthPlusTrailingBuffer(string text,int decalTextureSize,float characterSize)
     {
+		textChanged = "";
+		float tempWidth = 0;
+		float letterWidth = 0;
         char letter;
         float width = 0;
 		float w = 0;
         int fontItemWidth = (int)((fontTexture.width / fontCountX) * characterSize);
 
+		Debug.Log ("==================");
         for (int n = 0; n < text.Length; n++)
         {
             letter = text[n];
@@ -123,16 +135,29 @@ public class TextToTexture
 					width = w;
 					w = 0;
 				}
+				letterWidth = 0;
 			} else {
 	            if (n < text.Length - 1)
 	            {
-	                w+= fontItemWidth * GetKerningValue(letter);
+					letterWidth = fontItemWidth * GetKerningValue(letter);
 	            }
 	            else //last letter ignore kerning for buffer
 	            {
-	                w += fontItemWidth;
+					letterWidth = fontItemWidth;
 	            }
+				w += letterWidth;
+				letterWidth = fontItemWidth * GetKerningValue(letter);
 			}
+			tempWidth += letterWidth;
+			Debug.Log(tempWidth + ", " + letterWidth + ", " + (letter == '\n' || letter == '\r'));
+			if(tempWidth > maxWidth){
+				textChanged += "\n";
+				tempWidth = 0;
+			}
+			if(letter == '\n' || letter == '\r'){
+				tempWidth = 0;
+			}
+			textChanged += letter;
         }
 		if(w > width){
 			width = w;
