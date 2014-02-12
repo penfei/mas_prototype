@@ -13,7 +13,6 @@ var customFont:Font;
 var fontCountX = 10;
 var fontCountY = 10;
 var text:String = "lolololo";
-var textPlacementY = 615;
 var perCharacterKerning:PerCharacterKerning[]; 
 var lineSpacing:float = 1;
 var decalTextureSize = 1024;

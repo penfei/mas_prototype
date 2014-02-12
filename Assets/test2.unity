@@ -9984,7 +9984,6 @@ MonoBehaviour:
   fontCountX: 10
   fontCountY: 10
   text: "hello\r\nasd"
-  textPlacementY: 615
   perCharacterKerning:
   - First: ' '
     Second: .187999994
@@ -10177,7 +10176,7 @@ MonoBehaviour:
   - First: ~
     Second: .397000015
   lineSpacing: .800000012
-  decalTextureSize: 1024
+  decalTextureSize: 512
   characterSize: 1
   core: {fileID: 1314095737}
   target: {fileID: 488732285}

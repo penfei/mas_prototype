@@ -709,7 +709,7 @@ MonoBehaviour:
   - First: ~
     Second: .397000015
   lineSpacing: .800000012
-  decalTextureSize: 1024
+  decalTextureSize: 512
   characterSize: 1
 --- !u!114 &11400010
 MonoBehaviour:
