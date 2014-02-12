@@ -26,10 +26,7 @@ class Core extends Photon.MonoBehaviour{
 	
 	/* message */
 	private var message:String = "";
-	private var previousMessage:String = "";
 	private var isActivePrint:boolean = false;
-	private var frequencyUpdateMessage:float = 0.5;
-	private var currentTimeUpdateMessage:float = 0;
 	
 	var bodyCorrectPlayerRot:Quaternion = Quaternion.identity;
 
@@ -56,7 +53,6 @@ class Core extends Photon.MonoBehaviour{
 		if(!fastStart){
 			data.StartLevel(PhotonNetwork.otherPlayers[0].ToString());
 		}
-		currentTimeUpdateMessage = frequencyUpdateMessage;
 	}
 	
 	function OnGUI()
@@ -181,7 +177,6 @@ class Core extends Photon.MonoBehaviour{
 	  		if(isHead){
 				if(Input.inputString != "" && Input.inputString != "`"){
 					if(isActivePrint){
-						previousMessage = message;
 						for (var c : char in Input.inputString) {
 							if (c == "\b"[0]) {
 								if (message.Length != 0){
@@ -192,23 +187,9 @@ class Core extends Photon.MonoBehaviour{
 								message += c;
 							}
 						}
-						//photonView.RPC("UpdateMessage", PhotonTargets.All, message);
+						photonView.RPC("UpdateMessage", PhotonTargets.All, message);
 					}
 				}
-	  		}
-	  		if(currentTimeUpdateMessage <= 0){
-	  			currentTimeUpdateMessage = frequencyUpdateMessage;
-	  			if(isActivePrint){
-	  				Debug.Log("previousMessage = " + previousMessage + ", message = " + message);
-	  				if(previousMessage != message){
-	  					Debug.Log("update message");
-	  					photonView.RPC("UpdateMessage", PhotonTargets.All, message);
-	  					previousMessage = message;
-	  				}
-	  			}
-	  		}
-	  		else{
-	  			currentTimeUpdateMessage -= Time.deltaTime;
 	  		}
 	  	}
     }
@@ -276,8 +257,8 @@ class Core extends Photon.MonoBehaviour{
     }
     
     @RPC
-	public function UpdateMessage(message:String, info:PhotonMessageInfo):void{
-		head.GetComponent(HeadController).updateMessage(message);
+	public function UpdateMessage(mes:String, info:PhotonMessageInfo):void{
+		head.GetComponent(HeadController).updateMessage(mes);
 	}
 	
 	@RPC

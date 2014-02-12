@@ -39,10 +39,11 @@ function Start () {
 	activateCharacterController(false);
 	if(headProjectorContainer != null){
 		headProjectorContainer.active = false;
-		text = "heall\nasdas\nasdas\nasdas";
-		var textToTexture:TextToTexture = new TextToTexture(customFont, fontCountX, fontCountY, perCharacterKerning, true, decalTextureSize - 100);
+		text = "heafdsfdsdasdasll nasdasnasdasnasdasnasdas";
+		var textToTexture:TextToTexture = new TextToTexture(customFont, fontCountX, fontCountY, perCharacterKerning, true, 200);
 	    var textWidthPlusTrailingBuffer:int = textToTexture.CalcTextWidthPlusTrailingBuffer(text, decalTextureSize, characterSize);
 	    var textHeightOffset:int = textToTexture.CalcTextHeightOffset(text, characterSize, lineSpacing);
+	    text = textToTexture.getTextChanged();
 	    var posX:int = (decalTextureSize - textWidthPlusTrailingBuffer) / 2;
 	    var posY:int = decalTextureSize / 2 + textHeightOffset;
 	    if(posX < 0){
@@ -97,8 +98,14 @@ function Update () {
 			}
 			
 			motor.inputMoveDirection = transform.rotation * directionVector;
-			motor.inputX = Input.GetAxis("Horizontal") && !isMouseDown;
-            motor.inputY = Input.GetAxis("Vertical") && !isMouseDown;
+			if(!isMouseDown){
+				motor.inputX = Input.GetAxis("Horizontal");
+            	motor.inputY = Input.GetAxis("Vertical");
+			} else {
+				motor.inputX = 0;
+            	motor.inputY = 0;
+			}
+			
 			motor.inputJump = Input.GetButton("Jump") && !isMouseDown;
 			if(animationController.IsSneakState() && !Input.GetButton("Sneak") && checkUp()){
 				motor.inputSneak = true;

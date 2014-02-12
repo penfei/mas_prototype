@@ -4847,8 +4847,8 @@ Projector:
   m_FarClipPlane: 100
   m_FieldOfView: 60
   m_AspectRatio: 1
-  m_Orthographic: 1
-  m_OrthographicSize: 5
+  m_Orthographic: 0
+  m_OrthographicSize: 2.5
   m_Material: {fileID: 2100000, guid: 78c0a732ad112a541100162a44295342, type: 2}
   m_IgnoreLayers:
     serializedVersion: 2
@@ -12474,7 +12474,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1190925537}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .689999998, y: 0, z: -2.6400001}
+  m_LocalPosition: {x: .689999998, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1666509464}
@@ -12490,8 +12490,8 @@ Projector:
   m_FarClipPlane: 100
   m_FieldOfView: 60
   m_AspectRatio: 1
-  m_Orthographic: 1
-  m_OrthographicSize: 5
+  m_Orthographic: 0
+  m_OrthographicSize: 2.5
   m_Material: {fileID: 2100000, guid: acb777d5fb9c91547b6579753e4d935f, type: 2}
   m_IgnoreLayers:
     serializedVersion: 2
@@ -15027,7 +15027,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1426903866}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .175787926, y: .713074923, z: -12.394763}
+  m_LocalPosition: {x: 8.7847929, y: .983832598, z: -12.394763}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1227287366}
