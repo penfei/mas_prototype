@@ -23,8 +23,13 @@ class Core extends Photon.MonoBehaviour{
 	private var timeAction = 0f;
 	private var data:GameDataController;
 	private var initedPrefabs:int = 0;
+	
+	/* message */
 	private var message:String = "";
+	private var previousMessage:String = "";
 	private var isActivePrint:boolean = false;
+	private var frequencyUpdateMessage:float = 0.5;
+	private var currentTimeUpdateMessage:float = 0;
 	
 	var bodyCorrectPlayerRot:Quaternion = Quaternion.identity;
 
@@ -51,6 +56,7 @@ class Core extends Photon.MonoBehaviour{
 		if(!fastStart){
 			data.StartLevel(PhotonNetwork.otherPlayers[0].ToString());
 		}
+		currentTimeUpdateMessage = frequencyUpdateMessage;
 	}
 	
 	function OnGUI()
@@ -168,29 +174,41 @@ class Core extends Photon.MonoBehaviour{
 					if(isActivePrint){
 						photonView.RPC("UpdateMessage", PhotonTargets.All, message);
 					}
+					head.GetComponent(HeadController).switchProjector();
+					photonView.RPC("SwitchProjector", PhotonTargets.Others);
 				}
-				head.GetComponent(HeadController).switchProjector();
 			}
 	  		if(isHead){
 				if(Input.inputString != "" && Input.inputString != "`"){
-				//Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return)){
 					if(isActivePrint){
+						previousMessage = message;
 						for (var c : char in Input.inputString) {
 							if (c == "\b"[0]) {
 								if (message.Length != 0){
 									message = message.Substring(0, message.Length - 1);
 								}
 							}
-							//else if (c == "\n"[0] || c == "\r"[0]) {// "\n" for Mac, "\r" for windows.
-							//	print ("User entered his name: " + guiText.text);
-							//}
 							else {
 								message += c;
 							}
 						}
-						photonView.RPC("UpdateMessage", PhotonTargets.All, message);
+						//photonView.RPC("UpdateMessage", PhotonTargets.All, message);
 					}
 				}
+	  		}
+	  		if(currentTimeUpdateMessage <= 0){
+	  			currentTimeUpdateMessage = frequencyUpdateMessage;
+	  			if(isActivePrint){
+	  				Debug.Log("previousMessage = " + previousMessage + ", message = " + message);
+	  				if(previousMessage != message){
+	  					Debug.Log("update message");
+	  					photonView.RPC("UpdateMessage", PhotonTargets.All, message);
+	  					previousMessage = message;
+	  				}
+	  			}
+	  		}
+	  		else{
+	  			currentTimeUpdateMessage -= Time.deltaTime;
 	  		}
 	  	}
     }
@@ -260,6 +278,11 @@ class Core extends Photon.MonoBehaviour{
     @RPC
 	public function UpdateMessage(message:String, info:PhotonMessageInfo):void{
 		head.GetComponent(HeadController).updateMessage(message);
+	}
+	
+	@RPC
+	public function SwitchProjector(info:PhotonMessageInfo):void{
+		head.GetComponent(HeadController).switchProjector();
 	}
 	
 	public function StartGesture(gesture:String):void{

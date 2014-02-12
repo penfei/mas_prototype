@@ -36,4 +36,5 @@ MonoBehaviour:
   - CheckingItem
   - UpdateMessage
   - RPCStartGesture
+  - SwitchProjector
   DisableAutoOpenWizard: 0

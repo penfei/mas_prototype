@@ -124,8 +124,7 @@ public class TextToTexture
         float width = 0;
 		float w = 0;
         int fontItemWidth = (int)((fontTexture.width / fontCountX) * characterSize);
-
-		Debug.Log ("==================");
+		
         for (int n = 0; n < text.Length; n++)
         {
             letter = text[n];
@@ -149,7 +148,7 @@ public class TextToTexture
 				letterWidth = fontItemWidth * GetKerningValue(letter);
 			}
 			tempWidth += letterWidth;
-			Debug.Log(tempWidth + ", " + letterWidth + ", " + (letter == '\n' || letter == '\r'));
+			//Debug.Log(tempWidth + ", " + letterWidth + ", " + (letter == '\n' || letter == '\r'));
 			if(tempWidth > maxWidth){
 				textChanged += "\n";
 				tempWidth = 0;
