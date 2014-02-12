@@ -125,6 +125,10 @@ class BodyController extends PlayerController{
 		}
 	}
 	
+	override public function CanConnection():boolean{
+		return leftHandController.CanConnection();
+	}
+	
 	function StartGesture(gesture:String){
 		animationController.StartGesture(gesture);
 	}

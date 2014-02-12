@@ -19,14 +19,11 @@ class Core extends Photon.MonoBehaviour{
 	
 	public var body:GameObject;
 	public var head:GameObject;
+	public var playerController:PlayerController;
 	
 	private var timeAction = 0f;
 	private var data:GameDataController;
 	private var initedPrefabs:int = 0;
-	
-	/* message */
-	private var message:String = "";
-	private var isActivePrint:boolean = false;
 	
 	var bodyCorrectPlayerRot:Quaternion = Quaternion.identity;
 
@@ -97,6 +94,12 @@ class Core extends Photon.MonoBehaviour{
     
     function PlayerInit(){
 		initedPrefabs++;
+		if(isHead){
+			playerController = head.GetComponent(PlayerController);
+		}
+		if(isBody){
+			playerController = body.GetComponent(PlayerController);
+		}
     }
     
     function isInited():boolean{
@@ -162,46 +165,15 @@ class Core extends Photon.MonoBehaviour{
 	  		if(CanDisconnection()){
 	  			RPCDisconnection();
 	  		}
-	  		/* print message */
-	  		if(Input.GetButtonDown("Chat")){
-				if(isHead){
-					message = "";
-					isActivePrint = !isActivePrint;
-					if(isActivePrint){
-						photonView.RPC("UpdateMessage", PhotonTargets.All, message);
-					}
-					head.GetComponent(HeadController).switchProjector();
-					photonView.RPC("SwitchProjector", PhotonTargets.Others);
-				}
-			}
-	  		if(isHead){
-				if(Input.inputString != "" && Input.inputString != "`"){
-					if(isActivePrint){
-						for (var c : char in Input.inputString) {
-							if (c == "\b"[0]) {
-								if (message.Length != 0){
-									message = message.Substring(0, message.Length - 1);
-								}
-							}
-							else {
-								message += c;
-							}
-						}
-						photonView.RPC("UpdateMessage", PhotonTargets.All, message);
-					}
-				}
-	  		}
 	  	}
     }
     
     public function CanConnection():boolean{
-   		if(!isBody) return false;
-    	return !isConnected 
-    	&& Time.time > timeAction + actionTimeOffset && body.GetComponent(BodyController).leftHandController.CanConnection();
+    	return !isConnected && Time.time > timeAction + actionTimeOffset && playerController.CanConnection();
     }
     
     public function CanDisconnection():boolean{
-    	return isConnected && Input.GetButton("Disconnection") && Time.time > timeAction + actionTimeOffset;
+    	return isConnected && playerController.CanDisconnection() && Time.time > timeAction + actionTimeOffset;
     }
     
     public function RPCConnection(){
@@ -256,9 +228,17 @@ class Core extends Photon.MonoBehaviour{
    		head.GetComponent(CharacterController).enabled = true;
     }
     
+    public function RPCUpdateMessage(mes:String):void{
+		photonView.RPC("UpdateMessage", PhotonTargets.All, mes);
+	}
+    
     @RPC
 	public function UpdateMessage(mes:String, info:PhotonMessageInfo):void{
 		head.GetComponent(HeadController).updateMessage(mes);
+	}
+	
+	public function RPCSwitchProjector():void{
+		photonView.RPC("SwitchProjector", PhotonTargets.Others);
 	}
 	
 	@RPC

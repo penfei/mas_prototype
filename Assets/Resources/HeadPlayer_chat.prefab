@@ -516,7 +516,6 @@ MonoBehaviour:
   customFont: {fileID: 12800000, guid: 4719be448080f5d428532f9b1b93e10e, type: 2}
   fontCountX: 10
   fontCountY: 10
-  text: lolololo
   perCharacterKerning:
   - First: ' '
     Second: .187999994
@@ -708,7 +707,7 @@ MonoBehaviour:
     Second: .261999995
   - First: ~
     Second: .397000015
-  lineSpacing: .800000012
+  lineSpacing: .899999976
   decalTextureSize: 512
   characterSize: 1
 --- !u!114 &11400010

@@ -28,6 +28,14 @@ class PlayerController extends Photon.MonoBehaviour{
 		PlayerAwake();
 	}
 	
+	public function CanConnection():boolean{
+		return false;
+	}
+	
+	public function CanDisconnection():boolean{
+		return Input.GetButton("Disconnection");
+	}
+	
 	protected function PlayerAwake(){
 		motor = GetComponent(CharacterMotor);
 		core = GameObject.Find("Administration").GetComponent(Core);

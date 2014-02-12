@@ -12,7 +12,7 @@ var headProjectorContainer:GameObject;
 var customFont:Font;
 var fontCountX = 10;
 var fontCountY = 10;
-var text:String = "lolololo";
+var text:String = "";
 var perCharacterKerning:PerCharacterKerning[]; 
 var lineSpacing:float = 1;
 var decalTextureSize = 1024;
@@ -27,6 +27,8 @@ var cam:Camera;
 var match:HyperGlyphResult;
 var distance:float = 10f;
 
+private var textToTexture:TextToTexture;
+
 private var isMouseDown = false;
 
 function Start () {
@@ -39,21 +41,7 @@ function Start () {
 	activateCharacterController(false);
 	if(headProjectorContainer != null){
 		headProjectorContainer.active = false;
-		text = "heafdsfdsdasdasll nasdasnasdasnasdasnasdas";
-		var textToTexture:TextToTexture = new TextToTexture(customFont, fontCountX, fontCountY, perCharacterKerning, true, 200);
-	    var textWidthPlusTrailingBuffer:int = textToTexture.CalcTextWidthPlusTrailingBuffer(text, decalTextureSize, characterSize);
-	    var textHeightOffset:int = textToTexture.CalcTextHeightOffset(text, characterSize, lineSpacing);
-	    text = textToTexture.getTextChanged();
-	    var posX:int = (decalTextureSize - textWidthPlusTrailingBuffer) / 2;
-	    var posY:int = decalTextureSize / 2 + textHeightOffset;
-	    if(posX < 0){
-	    	posX = 0;
-	    }
-	    if(posY < 0){
-	    	posY = 0;
-	    }
-	    
-		headProjector.material.SetTexture("_ShadowTex", textToTexture.CreateTextToTexture(text, posX, posY, decalTextureSize, characterSize, lineSpacing));
+		textToTexture = new TextToTexture(customFont, fontCountX, fontCountY, perCharacterKerning, true, 200, 4);
 	}
 }
 
@@ -85,8 +73,24 @@ function Update () {
 	}
 	
 	if(Input.GetButtonDown("Chat")){
+		text = "";
+		updateMessage();
 		headProjectorContainer.active = !headProjectorContainer.active;
 	}
+	
+	if(Input.inputString != "" && Input.inputString != "`" && headProjectorContainer.active){
+	  	for (var c : char in Input.inputString) {
+			if (c == "\b"[0]) {
+				if (text.Length != 0){
+					text = text.Substring(0, text.Length - 1);
+				}
+			}
+			else {
+				text += c;
+			}
+		}
+		updateMessage();
+	 }
 	
 	var directionVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 			if (directionVector != Vector3.zero) {
@@ -118,6 +122,21 @@ function Update () {
 
             leftHandController.gamerActive = motor.inputLeftHand;       
 }
+
+function updateMessage():void{
+		var t:String = textToTexture.getFormatText(text, characterSize);
+		var textWidthPlusTrailingBuffer:int = textToTexture.CalcTextWidthPlusTrailingBuffer(t, decalTextureSize, characterSize);
+		var textHeightOffset:int = textToTexture.CalcTextHeightOffset(t, characterSize, lineSpacing);
+	    var posX:int = (decalTextureSize - textWidthPlusTrailingBuffer) / 2;
+	    var posY:int = decalTextureSize / 2 + textHeightOffset;
+	    if(posX < 0){
+	    	posX = 0;
+	    }
+	    if(posY < 0){
+	    	posY = 0;
+	    }
+		headProjector.material.SetTexture("_ShadowTex", textToTexture.CreateTextToTexture(t, posX, posY, decalTextureSize, characterSize, lineSpacing));
+	}
 
 function activateCharacterController(value:boolean){
 	target.GetComponent(CharacterMotor).enabledScript = value;

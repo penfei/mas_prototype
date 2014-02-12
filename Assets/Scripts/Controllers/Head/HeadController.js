@@ -8,13 +8,14 @@ class HeadController extends PlayerController{
 	var customFont:Font;
 	var fontCountX = 10;
 	var fontCountY = 10;
-	var text:String = "";
 	var perCharacterKerning:PerCharacterKerning[]; 
 	var lineSpacing:float = 1;
 	var decalTextureSize = 1024;
 	var characterSize = 1;
 	
 	private var textToTexture:TextToTexture;
+	private var message:String = "";
+	private var isActivePrint:boolean = false;
 	
 	override protected function PlayerStart(){
 		super.PlayerStart();
@@ -23,7 +24,7 @@ class HeadController extends PlayerController{
 		core.PlayerInit();
 		cameraObject.GetComponent(AudioListener).enabled = true;
 		
-		textToTexture = new TextToTexture(customFont, fontCountX, fontCountY, perCharacterKerning, true, 200);
+		textToTexture = new TextToTexture(customFont, fontCountX, fontCountY, perCharacterKerning, true, 200, 4);
 		
 		if (!photonView.isMine){
 	    	GetComponent(SphereCollider).enabled = false;
@@ -32,7 +33,6 @@ class HeadController extends PlayerController{
 	    
 	    if(headProjectorContainer != null){
 			headProjectorContainer.active = false;
-			text = "";
 		}
 	}
 	
@@ -57,10 +57,6 @@ class HeadController extends PlayerController{
 	
 	override protected function PlayerFixedUpdate() {
 		super.PlayerFixedUpdate();
-//		if(photonView.isMine && core.body != null){
-//	    	var con:LeftHandController = core.body.GetComponent(BodyController).leftHandController;
-//	    	GetComponent(ImpulsController).AddImpulse(con.gameObject, con.CanPulling() && con.targetFirst && con.inRadius && !core.isConnected);
-//		} 
 	}
 	
 	override protected function PlayerLateUpdate() {
@@ -106,6 +102,29 @@ class HeadController extends PlayerController{
 		} else {
 			cameraObject.GetComponent(MouseLook).axes = 0;
 		}
+		
+		if(Input.GetButtonDown("Chat")){
+			message = "";
+			isActivePrint = !isActivePrint;
+			if(isActivePrint){
+				core.RPCUpdateMessage(message);
+			}
+			switchProjector();
+			core.RPCSwitchProjector();
+		}
+		if(Input.inputString != "" && Input.inputString != "`" && isActivePrint){
+	  		for (var c : char in Input.inputString) {
+				if (c == "\b"[0]) {
+					if (message.Length != 0){
+						message = message.Substring(0, message.Length - 1);
+					}
+				}
+				else {
+					message += c;
+				}
+			}
+			core.RPCUpdateMessage(message);
+	  	}
 	}
 	
 	override protected function PlayerUpdateOther() {
@@ -116,10 +135,10 @@ class HeadController extends PlayerController{
 	}
 	
 	public function updateMessage(newMessage:String):void{
-		text = newMessage;
-		Debug.Log("text = " + text);
+		message = newMessage;
+		Debug.Log("text = " + message);
+		var text:String = textToTexture.getFormatText(message, characterSize);
 		var textWidthPlusTrailingBuffer:int = textToTexture.CalcTextWidthPlusTrailingBuffer(text, decalTextureSize, characterSize);
-		text = textToTexture.getTextChanged();
 		var textHeightOffset:int = textToTexture.CalcTextHeightOffset(text, characterSize, lineSpacing);
 	    var posX:int = (decalTextureSize - textWidthPlusTrailingBuffer) / 2;
 	    var posY:int = decalTextureSize / 2 + textHeightOffset;
@@ -130,6 +149,10 @@ class HeadController extends PlayerController{
 	    	posY = 0;
 	    }
 		headProjector.material.SetTexture("_ShadowTex", textToTexture.CreateTextToTexture(text, posX, posY, decalTextureSize, characterSize, lineSpacing));
+	}
+	
+	override public function CanDisconnection():boolean{
+		return Input.GetButton("Disconnection") && !isActivePrint;
 	}
 	
 	public function switchProjector():void{

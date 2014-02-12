@@ -10175,7 +10175,7 @@ MonoBehaviour:
     Second: .261999995
   - First: ~
     Second: .397000015
-  lineSpacing: .800000012
+  lineSpacing: .899999976
   decalTextureSize: 512
   characterSize: 1
   core: {fileID: 1314095737}
