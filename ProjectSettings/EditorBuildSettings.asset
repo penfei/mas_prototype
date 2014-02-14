@@ -11,5 +11,7 @@ EditorBuildSettings:
     path: Assets/Tutorial.unity
   - enabled: 0
     path: Assets/HeadTest.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Chat.unity
+  - enabled: 1
+    path: Assets/LevelFactory.unity

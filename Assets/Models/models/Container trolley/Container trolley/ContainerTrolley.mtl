@@ -1,0 +1,59 @@
+newmtl Material__219
+d 1
+Ns 0.95
+Ni 0
+Ka 0 0 0
+Kd 0.992157 0.992157 0.992157
+Ks 0.992157 0.992157 0.992157
+Km 0.02
+map_Kd /Maps/ArchM_73_17_Diff.jpg
+
+newmtl Material__220
+d 1
+Ns 0.95
+Ni 0
+Ka 0 0 0
+Kd 0.992157 0.992157 0.992157
+Ks 0.494118 0.494118 0.494118
+Km 0.02
+map_Kd /Maps/ArchM_73_17_Diff_troly.jpg
+
+newmtl Material__224
+d 1
+Ns 0.95
+Ni 0
+Ka 0 0 0
+Kd 0.992157 0.992157 0.992157
+Ks 0.494118 0.494118 0.494118
+Km 0.02
+map_Kd /Maps/ArchM_73_17_Diff_troly.jpg
+
+newmtl Material__223
+d 1
+Ns 0.95
+Ni 0
+Ka 0 0 0
+Kd 0 0 0
+Ks 0.956863 0.956863 0.956863
+Km 0.02
+
+newmtl Material__222
+d 1
+Ns 0.95
+Ni 0
+Ka 0 0 0
+Kd 0.968627 0.968627 0.968627
+Ks 0.537255 0.537255 0.537255
+Km 0.02
+map_Kd /Maps/ArchM_73_17_Rim.jpg
+
+newmtl Material__221
+d 1
+Ns 0.95
+Ni 0
+Ka 0 0 0
+Kd 0.968627 0.968627 0.968627
+Ks 0.537255 0.537255 0.537255
+Km 0.02
+map_Kd /Maps/ArchM_73_17_Rim.jpg
+
