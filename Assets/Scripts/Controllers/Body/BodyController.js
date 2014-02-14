@@ -29,9 +29,9 @@ class BodyController extends PlayerController{
 		motor.canControl = false;
 		GetComponent(Animator).applyRootMotion = photonView.isMine;
 		core.body = gameObject;
-		core.PlayerInit();
 		gameObject.GetComponent(MouseLook).canRotation = false;
 		cameraObject.GetComponent(MouseLook).canRotation = false;
+		core.PlayerInit();
 	}
 	
 	override protected function PlayerStreamMe(stream:PhotonStream, info:PhotonMessageInfo) {

@@ -20,6 +20,7 @@ class Core extends Photon.MonoBehaviour{
 	public var body:GameObject;
 	public var head:GameObject;
 	public var playerController:PlayerController;
+	public var eventInit:Broadcaster;
 	
 	private var timeAction = 0f;
 	private var data:GameDataController;
@@ -30,6 +31,7 @@ class Core extends Photon.MonoBehaviour{
 	function Awake()
     {
     	data = GetComponent(GameDataController);
+    	eventInit = new Broadcaster();
 		if (!PhotonNetwork.connected && !fastStart)
         {
             Application.LoadLevel(Levels.Menu);
@@ -81,7 +83,6 @@ class Core extends Photon.MonoBehaviour{
     {
     	isHead = true;
 		PhotonNetwork.Instantiate(this.headPrefab.name, headStartPosition.position, headStartPosition.rotation, 0);
-		GameObject.Find("Camera").active = false;
     }
     
     @RPC
@@ -89,7 +90,6 @@ class Core extends Photon.MonoBehaviour{
     {
     	isBody = true;
 		PhotonNetwork.Instantiate(this.bodyPrefab.name, bodyStartPosition.position, bodyStartPosition.rotation, 0);
-		GameObject.Find("Camera").active = false;
     }
     
     function PlayerInit(){
@@ -99,6 +99,9 @@ class Core extends Photon.MonoBehaviour{
 		}
 		if(isBody){
 			playerController = body.GetComponent(PlayerController);
+		}
+		if(isInited()){
+			eventInit.broadcast();
 		}
     }
     

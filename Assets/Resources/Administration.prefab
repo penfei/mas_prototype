@@ -68,13 +68,14 @@ MonoBehaviour:
   isBody: 0
   isConnected: 0
   actionTimeOffset: 2
-  bodyPrefab: {fileID: 400318, guid: 4f5aaf80e1565be4fabe878e2e4cd9e7, type: 2}
+  bodyPrefab: {fileID: 400318, guid: 113861770754f2641b826f919aa83b8e, type: 2}
   headPrefab: {fileID: 400016, guid: 1f390c5d9244c5b49a091aa651f7d71e, type: 2}
   bodyStartPosition: {fileID: 0}
   headStartPosition: {fileID: 0}
   fastStart: 0
   body: {fileID: 0}
   head: {fileID: 0}
+  playerController: {fileID: 0}
   bodyCorrectPlayerRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!114 &11400004
 MonoBehaviour:

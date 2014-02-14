@@ -21,7 +21,6 @@ class HeadController extends PlayerController{
 		super.PlayerStart();
 		motor.enabledScript = false;
 		core.head = gameObject;
-		core.PlayerInit();
 		cameraObject.GetComponent(AudioListener).enabled = true;
 		
 		textToTexture = new TextToTexture(customFont, fontCountX, fontCountY, perCharacterKerning, true, 200, 4);
@@ -34,6 +33,8 @@ class HeadController extends PlayerController{
 	    if(headProjectorContainer != null){
 			headProjectorContainer.active = false;
 		}
+		
+		core.PlayerInit();
 	}
 	
 	override protected function PlayerStreamMe(stream:PhotonStream, info:PhotonMessageInfo) {
