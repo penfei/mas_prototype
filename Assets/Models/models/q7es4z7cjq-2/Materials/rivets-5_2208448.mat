@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: tileWood_rough_DFF
+  m_Name: rivets-5_2208448
   m_Shader: {fileID: 7, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
@@ -17,12 +17,12 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: b0eb1af2a3313674fa04f9f778cc3dd0, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
+          m_Texture: {fileID: 2800000, guid: 07f4c2e3592ccef4f95ec2b270eee0ae, type: 3}
+          m_Scale: {x: 2.08333325, y: .793650806}
+          m_Offset: {x: -0, y: -.793650806}
     m_Floats: {}
     m_Colors:
       data:
         first:
           name: _Color
-        second: {r: 1, g: 1, b: 1, a: 1}
+        second: {r: .0918367356, g: .039959494, b: .039959494, a: 1}

@@ -13053,7 +13053,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100008, guid: c0296af355f0ba147841b06edde309d7, type: 3}
       propertyPath: m_Name
-      value: hoose
+      value: house
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c0296af355f0ba147841b06edde309d7, type: 3}
@@ -13201,7 +13201,7 @@ GameObject:
   - 4: {fileID: 1196863772}
   - 95: {fileID: 1196863773}
   m_Layer: 0
-  m_Name: hoose
+  m_Name: house
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
