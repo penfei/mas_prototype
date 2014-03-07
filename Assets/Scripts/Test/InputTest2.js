@@ -3,7 +3,7 @@ private var motor : CharacterMotor;
 private var leftHandController:LeftHandController;
 private var anim:Animator;
 private var animationController:AnimationController;
-private var character:CharacterController;
+private var capsule:CapsuleCollider;
 private var layerMask = 10 | 11;
 var headCamera:GameObject;
 var headProjector:Projector;
@@ -37,7 +37,7 @@ function Start () {
 	leftHandController = GetComponentInChildren(LeftHandController);
 	anim = GetComponent(Animator);
 	animationController = GetComponent(AnimationController);
-	character = GetComponent(CharacterController);
+	capsule = GetComponent(CapsuleCollider);
 	activateCharacterController(false);
 	if(headProjectorContainer != null){
 		headProjectorContainer.active = false;
@@ -58,18 +58,18 @@ function Update () {
 		animationController.StartGesture(match.glyphname);
 		isMouseDown = false;
 	}
-	
+
 	motor.canControl = ((Input.GetButton("Jump") && !animationController.IsJumpState()) || !motor.IsGrounded()) && !isMouseDown;
 	anim.applyRootMotion = !motor.canControl && !isMouseDown;
 	GetComponent(MouseLook).enabled = !isMouseDown;
 	headCamera.GetComponent(MouseLook).enabled = !isMouseDown;
 	
 	if(animationController.IsSneakState()){
-		character.height = 1.6;
-		character.center.y = 0.75;
+//		capsule.height = 1.6;
+//		capsule.center.y = 0.75;
 	} else {
-		character.height = 1.9;
-		character.center.y = 0.9;
+//		capsule.height = 1.9;
+//		capsule.center.y = 0.9;
 	}
 	
 	if(Input.GetButtonDown("Chat")){
@@ -101,7 +101,7 @@ function Update () {
 				directionVector = directionVector * directionLength;	
 			}
 			
-			motor.inputMoveDirection = transform.rotation * directionVector;
+//			motor.inputMoveDirection = transform.rotation * directionVector;
 			if(!isMouseDown){
 				motor.inputX = Input.GetAxis("Horizontal");
             	motor.inputY = Input.GetAxis("Vertical");

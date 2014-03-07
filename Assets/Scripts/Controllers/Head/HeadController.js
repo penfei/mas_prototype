@@ -58,15 +58,15 @@ class HeadController extends PlayerController{
 	
 	override protected function PlayerFixedUpdate() {
 		super.PlayerFixedUpdate();
-	}
-	
-	override protected function PlayerLateUpdate() {
-		super.PlayerLateUpdate();
-	
+		
 		if(core.isConnected){
 			cameraObject.transform.position = core.body.GetComponent(BodyController).boneForHeadCamera.transform.position;
 			cameraObject.transform.localEulerAngles.y = core.body.transform.localEulerAngles.y;
 		}
+	}
+	
+	override protected function PlayerLateUpdate() {
+		super.PlayerLateUpdate();
 	}
 	
 	override protected function PlayerLateUpdateMe() {

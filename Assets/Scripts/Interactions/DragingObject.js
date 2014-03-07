@@ -41,6 +41,19 @@ function Update () {
 	}
 }
 
+function FixedUpdate () {
+	if(body != null && leftHandController != null){
+		if(inHand && canChangePhotonObject()){
+			if(rigidbody != null){
+				rigidbody.velocity = Vector3.Lerp(rigidbody.velocity, Vector3.zero, Time.deltaTime * 15);
+				rigidbody.angularVelocity = Vector3.Lerp(rigidbody.angularVelocity, Vector3.zero, Time.deltaTime * 15);
+			}
+			
+			transform.position = Vector3.Lerp(transform.position, getTarget(), Time.deltaTime * 15);
+		}
+	}
+}
+
 function SetInHand () {
 	leftHandController.hasObject = true;
 	inHand = true;
@@ -107,6 +120,7 @@ function ObjectUpdate () {
 	if(gameObject == leftHandController.targetObject){
 		inActive = true;
 	}
+//	Physics.IgnoreCollision(body.collider, collider, inActive);
 	if(rigidbody != null){
 		rigidbody.useGravity = !inActive && canChangeObject();
 	}
@@ -136,12 +150,6 @@ function ObjectUpdate () {
 			GetComponent(ImpulsController).AddImpulseForward(body);
 		}
 	}
-	if(inHand && canChangePhotonObject()){
-		if(rigidbody != null){
-			rigidbody.velocity = Vector3.Lerp(rigidbody.velocity, Vector3.zero, Time.deltaTime * 15);
-			rigidbody.angularVelocity = Vector3.Lerp(rigidbody.angularVelocity, Vector3.zero, Time.deltaTime * 15);
-		}
-		transform.position = Vector3.Lerp(transform.position, getTarget(), Time.deltaTime * 10);
-	}
+	
 }
 @script AddComponentMenu ("Trigger/DragingObject")

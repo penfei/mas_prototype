@@ -10,11 +10,13 @@ class BodyController extends PlayerController{
 	private var leftHandAction = false;
 	private var rightHandAction = false;
 	private var layerMask = 10 | 11;
+	private var capsule:CapsuleCollider;
 	
 	override protected function PlayerAwake(){
 		super.PlayerAwake();
 		leftHandController = GetComponentInChildren(LeftHandController);
 		animationController = GetComponent(AnimationController);
+		capsule = GetComponent(CapsuleCollider);
 		
 		if (photonView.isMine)
 	    {
@@ -27,6 +29,7 @@ class BodyController extends PlayerController{
 		super.PlayerStart();
 		motor.enabledScript = photonView.isMine;
 		motor.canControl = false;
+		rigidbody.isKinematic = !photonView.isMine;
 		GetComponent(Animator).applyRootMotion = photonView.isMine;
 		core.body = gameObject;
 		gameObject.GetComponent(MouseLook).canRotation = false;
@@ -60,6 +63,7 @@ class BodyController extends PlayerController{
 		super.PlayerLateUpdateOther();
 		
       	transform.position = Vector3.Lerp(transform.position, correctPlayerPos, Time.deltaTime * smooth);
+      		    
         if(!core.isConnected){
            rotationObject.transform.rotation = Quaternion.Lerp(rotationObject.transform.rotation, correctPlayerRot, Time.deltaTime * smooth);
         }
@@ -71,17 +75,16 @@ class BodyController extends PlayerController{
 		cameraObject.active = false;
 		
 		if(animationController.IsSneakState()){
-			character.height = 1.6;
-			character.center.y = 0.75;
+			capsule.height = 1.6;
+			capsule.center.y = 0.75;
 		} else {
-			character.height = 1.9;
-			character.center.y = 0.9;
+			capsule.height = 1.9;
+			capsule.center.y = 0.9;
 		}
 		
 		if(animationController.IsSneakState() && !motor.inputSneak && checkUp()){
 			motor.inputSneak = true;
 		} 
-//		gameObject.GetComponent(CharacterMotor).canControl = photonView.isMine;
 	}
 	
 	override protected function PlayerUpdateMe() {

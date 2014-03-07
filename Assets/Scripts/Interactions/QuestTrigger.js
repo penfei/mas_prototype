@@ -25,7 +25,7 @@ class QuestTrigger extends MonoBehaviour{
 
 	function OnTriggerEnter (other:Collider)
     {
-        if(other.gameObject.tag == "BodyCollider"){
+        if(other.gameObject.tag == Tags.body){
         	StartChecking(InitializerType.OnEnter, core.isBody);
         }
         if(other.gameObject.tag == Tags.head){
@@ -35,7 +35,7 @@ class QuestTrigger extends MonoBehaviour{
     
     function OnTriggerExit (other:Collider)
     {
-    	if(other.gameObject.tag == "BodyCollider"){
+    	if(other.gameObject.tag == Tags.body){
         	StartChecking(InitializerType.OnExit, core.isBody);
         }
         if(other.gameObject.tag == Tags.head){

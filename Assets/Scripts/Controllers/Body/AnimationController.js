@@ -18,6 +18,7 @@ class AnimationController extends Photon.MonoBehaviour{
 	private var v:float = 0f;
 	private var h:float = 0f;
 	private var d:float = 0f;
+	private var vy:float = 0f;
 	
 	private var leftHandController:LeftHandController;
 	private var core:Core;
@@ -53,6 +54,10 @@ class AnimationController extends Photon.MonoBehaviour{
 			if(a.clip.name.Contains("Jump")) return true;
 		}
 		return false;
+	}
+	
+	public function IsRunState():boolean{
+		return anim.GetCurrentAnimatorStateInfo(0).IsName("RunUnited") || anim.GetCurrentAnimatorStateInfo(0).IsName("RunUnunited");
 	}
 	
 	public function IsSneakState():boolean{
@@ -101,7 +106,10 @@ class AnimationController extends Photon.MonoBehaviour{
 	){
 		v = Mathf.Lerp(v, vertical, Time.deltaTime * smooth);
 		h = Mathf.Lerp(h, horizontal, Time.deltaTime * smooth);
+//		vy = Mathf.Lerp(vy, motor.movement.velocity.y, Time.deltaTime * 5f);
 		
+		anim.SetFloat("VelocityY", motor.lastGroundY);
+//		anim.SetFloat("VelocityY", vy);
 		anim.SetBool("InAir", motor.inAir);
 		anim.SetFloat("Horizontal", h);
 		anim.SetFloat("Vertical", v);

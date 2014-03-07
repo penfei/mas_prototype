@@ -168,8 +168,9 @@ class LeftHandController extends MonoBehaviour{
 				HandToForward();
 			}
 		} else {
-			FindTargetRayCast();
-			HandToForward();
+//			FindTargetRayCast();
+			SetObjectToTarget(GameObject.Find("HeadPlayer_test"));
+//			HandToForward();
 		}
 	}
 	

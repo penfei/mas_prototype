@@ -1,0 +1,240 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 13.12.2010 19:26:32
+
+newmtl stone14
+	Ns 22.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.1620 0.1620 0.1620
+	Ke 0.0000 0.0000 0.0000
+	map_Ka textures\9.tif
+	map_Kd textures\9.tif
+
+newmtl stone13
+	Ns 20.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.1080 0.1080 0.1080
+	Ke 0.0000 0.0000 0.0000
+	map_Ka textures\13.tif
+	map_Kd textures\13.tif
+
+newmtl stone1
+	Ns 19.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0360 0.0360 0.0360
+	Ke 0.0000 0.0000 0.0000
+	map_Ka textures\1.tif
+	map_Kd textures\1.tif
+
+newmtl stone3
+	Ns 28.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.1080 0.1080 0.1080
+	Ke 0.0000 0.0000 0.0000
+	map_Ka textures\3.tif
+	map_Kd textures\3.tif
+
+newmtl stone5
+	Ns 29.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0720 0.0720 0.0720
+	Ke 0.0000 0.0000 0.0000
+	map_Ka textures\5.tif
+	map_Kd textures\5.tif
+
+newmtl stone4
+	Ns 29.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.1260 0.1260 0.1260
+	Ke 0.0000 0.0000 0.0000
+	map_Ka textures\4.tif
+	map_Kd textures\4.tif
+
+newmtl Material__54
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka textures\Map__781_Cellular.tga
+	map_Kd textures\Map__781_Cellular.tga
+
+newmtl stone11
+	Ns 30.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.3600 0.3600 0.3600
+	Ke 0.0000 0.0000 0.0000
+	map_Ka textures\11.tif
+	map_Kd textures\11.tif
+
+newmtl stone9
+	Ns 32.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.1890 0.1890 0.1890
+	Ke 0.0000 0.0000 0.0000
+	map_Ka textures\9.tif
+	map_Kd textures\9.tif
+
+newmtl Material__56
+	Ns 25.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.1350 0.1350 0.1350
+	Ke 0.0000 0.0000 0.0000
+	map_Ka textures\10.tif
+	map_Kd textures\10.tif
+
+newmtl stone6
+	Ns 32.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.1260 0.1260 0.1260
+	Ke 0.0000 0.0000 0.0000
+	map_Ka textures\6.tif
+	map_Kd textures\6.tif
+
+newmtl stone2
+	Ns 27.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0720 0.0720 0.0720
+	Ke 0.0000 0.0000 0.0000
+	map_Ka textures\Map__785_Cellular.tga
+	map_Kd textures\Map__785_Cellular.tga
+
+newmtl stone7
+	Ns 51.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.2520 0.2520 0.2520
+	Ke 0.0000 0.0000 0.0000
+	map_Ka textures\Map__779_Cellular.tga
+	map_Kd textures\Map__779_Cellular.tga
+
+newmtl stone1_2_
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.0000 0.0000 0.0000
+	Ke 0.0000 0.0000 0.0000
+	map_Ka textures\1(2).tif
+	map_Kd textures\1(2).tif
+
+newmtl Material__62
+	Ns 15.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.1800 0.1800 0.1800
+	Ke 0.0000 0.0000 0.0000
+	map_Ka textures\3(2).tif
+	map_Kd textures\3(2).tif
+
+newmtl stone5_2
+	Ns 24.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.1440 0.1440 0.1440
+	Ke 0.0000 0.0000 0.0000
+	map_Ka textures\5(2).tif
+	map_Kd textures\5(2).tif
+
+newmtl stone16_2_
+	Ns 10.0000
+	Ni 1.5000
+	d 1.0000
+	Tr 0.0000
+	Tf 1.0000 1.0000 1.0000 
+	illum 2
+	Ka 0.5880 0.5880 0.5880
+	Kd 0.5880 0.5880 0.5880
+	Ks 0.2070 0.2070 0.2070
+	Ke 0.0000 0.0000 0.0000
+	map_Ka textures\11.tif
+	map_Kd textures\11.tif

@@ -204,7 +204,7 @@ class Core extends Photon.MonoBehaviour{
     	head.GetComponent(PlayerController).cameraObject.transform.rotation = Quaternion.identity;
 //    	head.GetComponent(PlayerController).cameraObject.transform.parent = body.GetComponent(BodyController).boneForHeadCamera.transform;
 		head.GetComponent(PlayerController).cameraObject.transform.parent = null;
-    	head.GetComponent(CharacterController).enabled = false;
+    	head.GetComponent(PlayerController).DetachRigidbody();
     }
     
     @RPC
@@ -228,7 +228,7 @@ class Core extends Photon.MonoBehaviour{
     	head.transform.parent = null;
     	head.GetComponent(PlayerController).cameraObject.transform.position = head.transform.position;
    		head.GetComponent(PlayerController).cameraObject.transform.parent = head.transform;
-   		head.GetComponent(CharacterController).enabled = true;
+   		head.GetComponent(PlayerController).AttachRigidbody();
     }
     
     public function RPCUpdateMessage(mes:String):void{

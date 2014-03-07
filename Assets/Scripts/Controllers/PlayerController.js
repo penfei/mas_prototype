@@ -1,6 +1,12 @@
 #pragma strict
 
 import Photon.MonoBehaviour;
+
+class State {
+	var timestamp:double;
+    var pos:Vector3;
+    var rot:Quaternion;
+}
  
 class PlayerController extends Photon.MonoBehaviour{
 	var cameraObject:GameObject;
@@ -22,7 +28,7 @@ class PlayerController extends Photon.MonoBehaviour{
 	protected var walk = false;
 	protected var inAir = false;
 	protected var core:Core;
-	protected var character:CharacterController;
+	protected var ping:float;
 	
 	function Awake () {
 		PlayerAwake();
@@ -40,7 +46,6 @@ class PlayerController extends Photon.MonoBehaviour{
 		motor = GetComponent(CharacterMotor);
 		core = GameObject.Find("Administration").GetComponent(Core);
 		rotationObject = GetComponent(MouseLook).target;
-		character = GetComponent(CharacterController);
 	}
 	
 	function Start(){
@@ -83,7 +88,9 @@ class PlayerController extends Photon.MonoBehaviour{
         sneak = stream.ReceiveNext();
         jump = stream.ReceiveNext();
         walk = stream.ReceiveNext();
-        inAir = stream.ReceiveNext();         
+        inAir = stream.ReceiveNext();
+        
+        ping = PhotonNetwork.time - info.timestamp;         
     }
     
     function FixedUpdate () {
@@ -130,6 +137,19 @@ class PlayerController extends Photon.MonoBehaviour{
 	
 	}
 	
+	public function AttachRigidbody() {
+		if(rigidbody == null){
+			gameObject.AddComponent(Rigidbody);
+		}
+		rigidbody.isKinematic = !photonView.isMine;
+		rigidbody.freezeRotation = true;
+	}
+	
+	public function DetachRigidbody() {
+		if(rigidbody != null)
+			Destroy(gameObject.GetComponent(Rigidbody));
+	}
+	
 	protected function PlayerUpdateMe() {
 		var directionVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 		if (directionVector != Vector3.zero) {
@@ -140,7 +160,7 @@ class PlayerController extends Photon.MonoBehaviour{
 			directionVector = directionVector * directionLength;	
 		}
 			
-		motor.inputMoveDirection = rotationObject.transform.rotation * directionVector;
+//		motor.inputMoveDirection = rotationObject.transform.rotation * directionVector;
 		motor.inputJump = Input.GetButton("Jump");
 		motor.inputSneak = Input.GetButton("Sneak");
         motor.inputX = Input.GetAxis("Horizontal");

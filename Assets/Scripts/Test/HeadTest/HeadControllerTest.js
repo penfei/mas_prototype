@@ -34,7 +34,7 @@ class HeadControllerTest extends PlayerController{
 			directionVector = directionVector * directionLength;	
 		}
 			
-		motor.inputMoveDirection = rotationObject.transform.rotation * directionVector;
+//		motor.inputMoveDirection = rotationObject.transform.rotation * directionVector;
 		motor.inputJump = Input.GetButton("Jump");
 		motor.inputSneak = Input.GetButton("Sneak");;
         motor.inputX = Input.GetAxis("Horizontal");

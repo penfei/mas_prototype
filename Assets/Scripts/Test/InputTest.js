@@ -33,7 +33,7 @@ function Update () {
 				directionVector = directionVector * directionLength;	
 			}
 			
-			motor.inputMoveDirection = transform.rotation * directionVector;
+//			motor.inputMoveDirection = transform.rotation * directionVector;
 			motor.inputX = Input.GetAxis("Horizontal");
             motor.inputY = Input.GetAxis("Vertical");
 			motor.inputJump = Input.GetButton("Jump");
@@ -45,9 +45,9 @@ function Update () {
             var crouch:boolean = motor.inputSneak;
             var walk:boolean = ((motor.inputX != 0f) || (motor.inputY!= 0f)) && !motor.inputWalk;
             
-            motor.movement.maxForwardSpeed = ((walk) ? ((crouch) ? crouchWalkSpeed : walkSpeed) : ((crouch) ? crouchRunSpeed : runSpeed));
-			motor.movement.maxBackwardsSpeed = ((walk) ? ((crouch) ? crouchWalkBackSpeed : walkBackSpeed) : ((crouch) ? crouchRunBackSpeed : runBackSpeed));
-			motor.movement.maxSidewaysSpeed = ((walk) ? ((crouch) ? crouchWalkStrafeSpeed : walkStrafeSpeed) : ((crouch) ? crouchRunStrafeSpeed : runStrafeSpeed));
+//          motor.movement.maxForwardSpeed = ((walk) ? ((crouch) ? crouchWalkSpeed : walkSpeed) : ((crouch) ? crouchRunSpeed : runSpeed));
+//			motor.movement.maxBackwardsSpeed = ((walk) ? ((crouch) ? crouchWalkBackSpeed : walkBackSpeed) : ((crouch) ? crouchRunBackSpeed : runBackSpeed));
+//			motor.movement.maxSidewaysSpeed = ((walk) ? ((crouch) ? crouchWalkStrafeSpeed : walkStrafeSpeed) : ((crouch) ? crouchRunStrafeSpeed : runStrafeSpeed));
 }
 
 function FixedUpdate () {
